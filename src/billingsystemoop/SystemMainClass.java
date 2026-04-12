@@ -2,19 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package carrentalsystemmain;
+package billingsystemoop;
 
 /**
  *
  * @author Mickey
  */
-public class CarRentalSystemMain {
-
-    /**
-     * @param args the command line arguments
-     */
+public class SystemMainClass {
     public static void main(String[] args) {
-        //All proj
+        HomePage hp = new HomePage();
+        hp.setVisible(true);
     }
     
 }
