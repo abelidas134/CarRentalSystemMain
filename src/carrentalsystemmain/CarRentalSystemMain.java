@@ -10,11 +10,9 @@ package carrentalsystemmain;
  */
 public class CarRentalSystemMain {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        //All proj
+        Homepage hp = new Homepage();
+        hp.setVisible(true);
     }
     
 }
