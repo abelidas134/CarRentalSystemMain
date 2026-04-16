@@ -15,6 +15,7 @@ public class CarRentalSystemMain {
      */
     public static void main(String[] args) {
         //All proj
+              new CarRentalSystemGUI();
     }
     
 }
