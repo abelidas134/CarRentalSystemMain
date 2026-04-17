@@ -4,14 +4,14 @@ import java.awt.*;
 import javax.swing.*;
 public class ford extends JFrame {
     
-    public ford(String status, String rate, String plate){
+    public ford(String name, String status, String rate, String plate){
         setTitle("Display");
         setSize(600,600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
         
-        JLabel lblmodel = new JLabel("MODEL: ");
+        JLabel lblmodel = new JLabel("MODEL: " + name);
         lblmodel.setBounds(330,90,300,40);
         lblmodel.setFont(new Font("Arial", Font.BOLD,15));
         
@@ -27,7 +27,7 @@ public class ford extends JFrame {
         lblavail.setBounds(330,180,300,40);
         lblavail.setFont(new Font("Arial", Font.BOLD,15));
         
-        JLabel lblcondi = new JLabel("CONDITION: ");
+        JLabel lblcondi = new JLabel("CONDITION: GOOD ");
         lblcondi.setBounds(330,210,300,40);
         lblcondi.setFont(new Font("Arial", Font.BOLD,15));
         

@@ -13,6 +13,7 @@ package carrentalsystemmain;
     // CHANGING AVAILABILITY
     
     new CarDisplayCh();
+    
               
         }
     }

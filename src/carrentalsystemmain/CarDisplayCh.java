@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import Cars.*;
 import javax.swing.table.DefaultTableModel;
+import Services.*;
 public class CarDisplayCh extends JFrame{
     public CarDisplayCh(){
     
@@ -51,11 +52,11 @@ public class CarDisplayCh extends JFrame{
 
         
         switch (name) {
-        case "Toyota Vios":     new toyota(status, rate, plate); break;
-        case "Honda Civic":     new honda(status, rate, plate);  break;
-        case "Ford Ranger":     new ford(status, rate, plate);   break;
-        case "Nissan Altima":   new nissan(status,rate, plate); break;
-        case "Hyundai Elantra": new hyundai(status, rate, plate);break;
+        case "Toyota Vios":     new toyota(name,status, rate, plate); break;
+        case "Honda Civic":     new honda(name,status, rate, plate);  break;
+        case "Ford Ranger":     new ford(name,status, rate, plate);   break;
+        case "Nissan Altima":   new nissan(name,status,rate, plate); break;
+        case "Hyundai Elantra": new hyundai(name,status, rate, plate);break;
     }
 });
        btnbook.addActionListener(e -> {
@@ -64,6 +65,18 @@ public class CarDisplayCh extends JFrame{
                JOptionPane.showMessageDialog(this,"Please select a vehicle first.", "No Selection", JOptionPane.WARNING_MESSAGE);
                return;
            }
+            String plate = (String)model.getValueAt(row, 0);
+            String name = (String)model.getValueAt(row, 1);
+            String rate = (String)model.getValueAt(row, 3);
+            
+        switch (name) {
+        case "Toyota Vios":     new Booking(name, plate, rate); break;
+        case "Honda Civic":     new Booking(name, plate, rate);  break;
+        case "Ford Ranger":     new Booking(name, plate, rate);   break;
+        case "Nissan Altima":   new Booking(name, plate, rate); break;
+        case "Hyundai Elantra": new Booking(name, plate, rate);break;
+    }
+
        });
         
         add(lblce);
