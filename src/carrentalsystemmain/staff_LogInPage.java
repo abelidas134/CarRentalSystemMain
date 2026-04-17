@@ -12,54 +12,56 @@ public class staff_LogInPage extends JFrame implements ActionListener{
     
     
     staff_LogInPage(){
-        setSize(1000,600);
+        setSize(600,600);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Staff Login Page");
+        setLocationRelativeTo(null);
+
         
-        lblTitle = new JLabel("Maintenace Service & Tracking");
-        lblTitle.setBounds(400,20,200,50);
+        lblTitle = new JLabel("Vehicle Maintenace & Service Tracking");
+        lblTitle.setBounds(200,20,500,50);
         add(lblTitle);
         
         lbllogin = new JLabel(">> Login <<");
-        lbllogin.setBounds(460,60,200,50);
+        lbllogin.setBounds(260,60,200,50);
         add(lbllogin);
         
         lblstaffID = new JLabel ("Staff ID: ");
-        lblstaffID.setBounds(330,150,200,30);
+        lblstaffID.setBounds(130,150,200,30);
         add(lblstaffID); 
         
         txtStaffID = new JTextField("  ");
-        txtStaffID.setBounds(395,150,200,30);
+        txtStaffID.setBounds(195,150,200,30);
         add(txtStaffID);
         
         lblstaffName = new JLabel ("Name: ");
-        lblstaffName.setBounds(330,190,200,30);
+        lblstaffName.setBounds(130,190,200,30);
         add(lblstaffName); 
         
         txtStafName = new JTextField("  ");
-        txtStafName.setBounds(395,190,200,30);
+        txtStafName.setBounds(195,190,200,30);
         add(txtStafName);
         
         
         lblstaffPassword = new JLabel ("Password: ");
-        lblstaffPassword.setBounds(330,230,200,30);
+        lblstaffPassword.setBounds(130,230,200,30);
         add(lblstaffPassword);
         
         txtstaffPassword = new JTextField("  ");
-        txtstaffPassword.setBounds(395,230,200,30);
+        txtstaffPassword.setBounds(195,230,200,30);
         add(txtstaffPassword);
         
         lblStatusLogin = new JLabel (" ");
-        lblStatusLogin.setBounds(390,350,300,30);
+        lblStatusLogin.setBounds(190,350,300,30);
         add(lblStatusLogin);
         
         btnClear = new JButton("Clear");
-        btnClear.setBounds(150,400,100,40);
+        btnClear.setBounds(100,400,100,40);
         add(btnClear);
         
         btnSubmit = new JButton("Submit");
-        btnSubmit.setBounds(700,400,100,40);
+        btnSubmit.setBounds(400,400,100,40);
         add(btnSubmit);
         
         

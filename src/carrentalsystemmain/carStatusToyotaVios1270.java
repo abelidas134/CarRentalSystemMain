@@ -19,6 +19,8 @@ public class carStatusToyotaVios1270 extends JFrame implements ActionListener{
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Toyota Vios 1270 Status");
+        setLocationRelativeTo(null);
+
         
         lblcarModelPlatenum = new JLabel("Toyota Vios 1270");
         lblcarModelPlatenum.setBounds(30,40,200,50);

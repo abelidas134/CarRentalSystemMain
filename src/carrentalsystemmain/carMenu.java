@@ -14,10 +14,11 @@ public class carMenu extends JFrame implements ActionListener{
     
     carMenu(){
         
-        setSize(1000,600);
+        setSize(600,600);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Car Selection");
+        setLocationRelativeTo(null);
         
         lblTitle = new JLabel(">> Select A Car <<");
         lblTitle.setBounds(430,20,200,50);
