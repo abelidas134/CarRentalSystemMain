@@ -8,7 +8,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 class CustomerOption extends JFrame implements ActionListener {
-    private JButton btnBook, btnBack, btnVehicle;
+    private JButton btnBook, btnBack, btnVehicle,btnBill;
     CustomerOption (){
         setTitle("CUSTOMER OPTIONS");
         setSize(600, 600);
@@ -23,6 +23,10 @@ class CustomerOption extends JFrame implements ActionListener {
         btnVehicle = new JButton("Available Vehicle");
         btnVehicle.setBounds(180, 275, 230, 50);
         add(btnVehicle);
+        
+        btnBill = new JButton("Payment");
+        btnBill.setBounds(180, 340, 230, 50);
+        add(btnBill);
         
         btnBack = new JButton ("Back");
         btnBack.setBounds(10,520,100,25);

@@ -88,10 +88,3 @@ class CarRentalSystemGUI extends JFrame {
         }
     }
 }
-
-public class BookingAndReservation {
-
-    public static void main(String[] args) {
-        new CarRentalSystemGUI();
-    }
-}

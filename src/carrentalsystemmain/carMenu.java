@@ -14,37 +14,38 @@ public class carMenu extends JFrame implements ActionListener{
     
     carMenu(){
         
-        setSize(1000,600);
+        setSize(600,600);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Car Selection");
+        setLocationRelativeTo(null);
         
         lblTitle = new JLabel(">> Select A Car <<");
-        lblTitle.setBounds(430,20,200,50);
+        lblTitle.setBounds(250,20,200,50);
         add(lblTitle);
         
         lblcarModel = new JLabel("Car Model");
-        lblcarModel.setBounds(235,150,200,50);
+        lblcarModel.setBounds(135,150,200,50);
         add(lblcarModel);
         
         String[] dbcarModels = {"Toyota Vios","Nissan GT-R"};
         dbtncarModel = new JComboBox <> (dbcarModels);
-        dbtncarModel.setBounds(170,210,200,40);
+        dbtncarModel.setBounds(100,210,200,40);
         add(dbtncarModel);
         
         lblplateNumber = new JLabel("Plate Number");
-        lblplateNumber.setBounds(640,150,200,50);
+        lblplateNumber.setBounds(440,150,200,50);
         add(lblplateNumber);
         
         
         String [] dbplatenumbers = {"NCT 1270", "TRP 4567"};
         dbtnplateNumber = new JComboBox <>(dbplatenumbers);
-        dbtnplateNumber.setBounds(590,210,200,50);
+        dbtnplateNumber.setBounds(340,210,200,50);
         add(dbtnplateNumber);
        
         
         enterbtn = new JButton("Enter");
-        enterbtn.setBounds(390,400,200,40);
+        enterbtn.setBounds(190,400,200,40);
         add(enterbtn);
         
         enterbtn.addActionListener(this);

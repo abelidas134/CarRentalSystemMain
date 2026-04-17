@@ -35,7 +35,7 @@ class CustomerPage extends JFrame implements ActionListener {
         lblUserName.setBounds(175,185, 100,100);
         add(lblUserName);
         
-        txtUserName = new JTextField ();
+        txtUserName = new JTextField (" ");
         txtUserName.setBounds(275,220,150,30);
         add(txtUserName);
         
@@ -43,7 +43,7 @@ class CustomerPage extends JFrame implements ActionListener {
         lblPassword.setBounds(175,225,100,100);
         add(lblPassword);
         
-        txtPassword = new JTextField ();
+        txtPassword = new JTextField (" ");
         txtPassword.setBounds(275,260,150,30);
         add(txtPassword);
         

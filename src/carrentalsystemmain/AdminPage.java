@@ -28,7 +28,7 @@ class AdminPage extends JFrame implements ActionListener {
         lblUserName.setBounds(190,175, 100,100);
         add(lblUserName);
         
-        txtUserName = new JTextField ();
+        txtUserName = new JTextField (" ");
         txtUserName.setBounds(290,210,150,30);
         add(txtUserName);
         
@@ -36,7 +36,7 @@ class AdminPage extends JFrame implements ActionListener {
         lblPassword.setBounds(190,215,100,100);
         add(lblPassword);
         
-        txtPassword = new JTextField ();
+        txtPassword = new JTextField (" ");
         txtPassword.setBounds(290,250,150,30);
         add(txtPassword);
         
