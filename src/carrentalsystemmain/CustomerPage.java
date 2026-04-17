@@ -66,7 +66,8 @@ class CustomerPage extends JFrame implements ActionListener {
             String userName = txtUserName.getText().trim();
             String pass = txtPassword.getText().trim();
             if(userName.matches("user123")&&pass.matches("0000")){
-                //C
+                CustomerOption co = new CustomerOption();
+                co.setVisible(true);
             }
         } else if (e.getSource()==btnBack){
             Homepage hp = new Homepage();

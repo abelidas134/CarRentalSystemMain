@@ -179,7 +179,7 @@ public class CustomerForm extends JFrame implements Searchable{
         btnClear.addActionListener(e -> clearFields());
 
         btnBack.addActionListener(e -> {
-            HomePageCusRecMan hp = new HomePageCusRecMan();
+            AdminOption hp = new AdminOption();
             hp.setVisible(true);
             this.dispose();
         });
