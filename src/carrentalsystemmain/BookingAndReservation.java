@@ -18,6 +18,7 @@ class CarRentalSystemGUI extends JFrame {
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
+        setLocationRelativeTo(null);
 
         JLabel nameLabel = new JLabel("Customer Name:");
         nameField = new JTextField(20);

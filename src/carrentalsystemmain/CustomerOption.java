@@ -36,7 +36,8 @@ class CustomerOption extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==btnBook){
-            //
+            CarRentalSystemGUI book = new CarRentalSystemGUI();
+            book.setVisible(true);
         } else if (e.getSource()==btnVehicle){
             //
         } else if (e.getSource()==btnBack){
