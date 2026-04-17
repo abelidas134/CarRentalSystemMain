@@ -34,6 +34,7 @@ class CustomerOption extends JFrame implements ActionListener {
         
         btnBook.addActionListener(this);
         btnVehicle.addActionListener(this);
+        btnBill.addActionListener(this);
         btnBack.addActionListener(this);
     }
 
@@ -43,8 +44,12 @@ class CustomerOption extends JFrame implements ActionListener {
             CarRentalSystemGUI book = new CarRentalSystemGUI();
             book.setVisible(true);
         } else if (e.getSource()==btnVehicle){
-            //
-        } else if (e.getSource()==btnBack){
+            CarDisplayCh ch = new CarDisplayCh();
+            ch.setVisible(true);
+        } else if (e.getSource()==btnBill){
+            HomePageBilling hpBill = new HomePageBilling();
+            hpBill.setVisible(true);
+        }else if (e.getSource()==btnBack){
             Homepage hp = new Homepage();
             hp.setVisible(true);
         }
