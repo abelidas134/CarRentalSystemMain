@@ -12,12 +12,12 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-class HomePage extends JFrame implements ActionListener {
+class HomePageBilling extends JFrame implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
     private JButton btnEnter;
     
-    HomePage (){
+    HomePageBilling (){
         setSize(600,600);
         setTitle("Billing System");
         setLayout(null);

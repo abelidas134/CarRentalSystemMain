@@ -10,7 +10,7 @@ package billingsystemoop;
  */
 public class SystemMainClass {
     public static void main(String[] args) {
-        HomePage hp = new HomePage();
+        HomePageBilling hp = new HomePageBilling();
         hp.setVisible(true);
     }
     
