@@ -34,9 +34,6 @@ public class AdminOption extends JFrame implements ActionListener{
         if (e.getSource()==btnCustomer){
             CustomerForm cf = new CustomerForm();
             cf.setVisible(true);
-        }else if (e.getSource()==btnMaintenance){
-            staff_LogInPage lp = new staff_LogInPage();
-            lp.setVisible(true);
         }else if (e.getSource()==btnBack){
             AdminPage ap = new AdminPage();
             ap.setVisible(true);
