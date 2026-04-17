@@ -58,7 +58,8 @@ class AdminPage extends JFrame implements ActionListener {
             String userName = txtUserName.getText().trim();
             String pass = txtPassword.getText().trim();
             if (userName.matches("admin123")&&pass.matches("0000")){
-                //customer
+                HomePageCusRecMan hp_cusRecMan = new HomePageCusRecMan();
+                hp_cusRecMan.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid account!","ERROR",JOptionPane.ERROR_MESSAGE);
             }

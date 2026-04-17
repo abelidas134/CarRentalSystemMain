@@ -1,13 +1,13 @@
-    package CusRecMan;
+    package carrentalsystemmain;
 
-public class CustomerPage {  
+public class CustomerPageCusRecMan {  
     private int id;
     private String name;
     private String phone;
     private String license;
     private String address;
 
-    public CustomerPage(int id, String name, String phone, String license, String address) {
+    public CustomerPageCusRecMan(int id, String name, String phone, String license, String address) {
         this.id = id;
         this.name = name;
         this.phone = phone;
