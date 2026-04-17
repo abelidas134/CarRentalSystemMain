@@ -15,7 +15,6 @@ class Homepage extends JFrame implements ActionListener {
     private JLabel lblHome;
     private JButton btnAdmin;
     private JButton btnCustomer;
-    private JButton btnSubmit;
     
     Homepage(){
         setSize(1000,600);
@@ -25,15 +24,36 @@ class Homepage extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         
         lblHome = new JLabel ("Welcome Back!");
-        lblHome.setBounds(250,150,150,100);
+        lblHome.setBounds(425,150,150,100);
         add(lblHome);
+        
+        lblHome = new JLabel ("Log in to manage your car rentals and get on the road!");
+        lblHome.setBounds(325,175,500,100);
+        add(lblHome);
+        
+        btnAdmin = new JButton ("ADMIN");
+        btnAdmin.setBounds(275,275,175,50);
+        add(btnAdmin);
+        
+        btnCustomer = new JButton ("CUSTOMER");
+        btnCustomer.setBounds(500,275,175,50);
+        add(btnCustomer);
+        
+        btnAdmin.addActionListener(this);
+        btnCustomer.addActionListener(this);
         
     }
     
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if (e.getSource()==btnAdmin){
+            AdminPage ap = new AdminPage();
+            ap.setVisible(true);
+        } else if (e.getSource()==btnCustomer){
+            CustomerPage cp = new CustomerPage();
+            cp.setVisible(true);
+        }
     }
     
     
