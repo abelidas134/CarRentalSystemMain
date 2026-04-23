@@ -56,7 +56,7 @@ public class carMenu extends JFrame implements ActionListener{
         {
            String selectedCar = (String) dbtncarModel.getSelectedItem();
            String selectedPlate = (String) dbtnplateNumber.getSelectedItem();
-          
+          //for the status, palaging carStatus + MODEL + plate number (wala na ung letters)
            if (selectedCar.equals("Toyota Vios")&& selectedPlate.equals("NCT 1270"))
            {
                dispose();
@@ -66,7 +66,10 @@ public class carMenu extends JFrame implements ActionListener{
            
            else if (selectedCar.equals("Nissan GT-R")&& selectedPlate.equals("TRP 4567"))
            {
-               // classssss
+               // classssss carStatusNissanGTR4567
+               dispose();
+               carStatusNissanGTR4567 csNissan4567 = new carStatusNissanGTR4567();
+               csNissan4567.setVisible(true);
            }
            
            else 

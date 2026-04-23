@@ -4,19 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class carStatusToyotaVios1270 extends JFrame implements ActionListener{
+
+public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
     JLabel lblcarModelPlatenum, lbl2ndHeadStatus, lblReports;
     JButton btnback, btnUpdateStats;
     
-    carStatusToyotaVios1270(){
-        
-        
+    carStatusNissanGTR4567(){
         setSize(600,600);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Toyota Vios 1270 Status");
+        setTitle("Nissan GT-R TRP 4567 Status");
         
-        lblcarModelPlatenum = new JLabel("Toyota Vios 1270");
+        lblcarModelPlatenum = new JLabel("Nissan GT-R TRP 4567");
         lblcarModelPlatenum.setBounds(30,40,200,50);
         add(lblcarModelPlatenum);
         
@@ -47,7 +46,6 @@ public class carStatusToyotaVios1270 extends JFrame implements ActionListener{
         
         btnback.addActionListener(this);
         btnUpdateStats.addActionListener(this);
-        
     }
     @Override
     public void actionPerformed(ActionEvent j) {
@@ -57,7 +55,6 @@ public class carStatusToyotaVios1270 extends JFrame implements ActionListener{
             carMenu cm = new carMenu();
             cm.setVisible(true);
         }
-        
     }
     
 }
