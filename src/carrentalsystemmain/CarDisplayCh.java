@@ -2,7 +2,6 @@ package carrentalsystemmain;
 
 import javax.swing.*;
 import java.awt.*;
-import Cars.*;
 import javax.swing.table.DefaultTableModel;
 import Services.*;
 public class CarDisplayCh extends JFrame{
@@ -29,15 +28,20 @@ public class CarDisplayCh extends JFrame{
         DefaultTableModel model = new DefaultTableModel(data, column);
         JTable table = new JTable(model);
         table.setRowHeight(35);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
         table.setFont(new Font("Arial", Font.PLAIN, 14));
-        
+       
         JScrollPane spane = new JScrollPane(table);
-        spane.setBounds(50, 150, 900, 198);
-        
+        spane.setBounds(200, 150, 600, 200);
+       
         JButton btndetails = new JButton("View Details");
-        btndetails.setBounds(250, 400, 200, 50);
+        btndetails.setBounds(425, 400, 150, 40);
         JButton btnbook = new JButton("Book Vehicle");
-        btnbook.setBounds(550, 400, 200, 50);
+        btnbook.setBounds(650, 400, 150, 40);
+        JButton btncancel = new JButton("Cancel");
+        btncancel.setBounds(200,400,150,40);
+        
+        btncancel.addActionListener(e -> dispose());
 
         btndetails.addActionListener(e -> {
             int row = table.getSelectedRow();
@@ -50,15 +54,8 @@ public class CarDisplayCh extends JFrame{
             String status = (String)model.getValueAt(row, 2);
             String rate = (String)model.getValueAt(row, 3);
 
-        
-        switch (name) {
-        case "Toyota Vios":     new toyota(name,status, rate, plate); break;
-        case "Honda Civic":     new honda(name,status, rate, plate);  break;
-        case "Ford Ranger":     new ford(name,status, rate, plate);   break;
-        case "Nissan Altima":   new nissan(name,status,rate, plate); break;
-        case "Hyundai Elantra": new hyundai(name,status, rate, plate);break;
-    }
-});
+                new CarDetails(name,status, rate, plate);
+           });
        btnbook.addActionListener(e -> {
            int row = table.getSelectedRow();
            if (row == -1) {
@@ -69,20 +66,14 @@ public class CarDisplayCh extends JFrame{
             String name = (String)model.getValueAt(row, 1);
             String rate = (String)model.getValueAt(row, 3);
             
-        switch (name) {
-        case "Toyota Vios":     new Booking(name, plate, rate); break;
-        case "Honda Civic":     new Booking(name, plate, rate);  break;
-        case "Ford Ranger":     new Booking(name, plate, rate);   break;
-        case "Nissan Altima":   new Booking(name, plate, rate); break;
-        case "Hyundai Elantra": new Booking(name, plate, rate);break;
-    }
-
-       });
+                new Booking(name, plate, rate, row, model);
+           });
         
         add(lblce);
         add(spane);
         add(btndetails);
         add(btnbook);
+        add(btncancel);
         
         setVisible(true);
         
