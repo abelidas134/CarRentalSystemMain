@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package billingsystemoop;
+package carrentalsystemmain;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,8 +48,10 @@ class HomePageBilling extends JFrame implements ActionListener {
         if (e.getSource()==btnEnter){
             String resNoText = txtResNo.getText().trim();
             if (resNoText.matches("0000")){
-                MonthPage mp = new MonthPage();
-                mp.setVisible(true);
+//                MonthPage mp = new MonthPage();
+//                mp.setVisible(true);
+                   bill b = new bill();
+                   b.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Reservation number is not recorded. Try again!","Error",JOptionPane.ERROR_MESSAGE);
             }
