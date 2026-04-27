@@ -36,11 +36,11 @@ public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
         
         //
         btnback = new JButton("Back");
-        btnback.setBounds(30,400,100,40);
+        btnback.setBounds(30,480,100,40);
         add(btnback);
         
         btnUpdateStats = new JButton("UPDATE STATUS");
-        btnUpdateStats.setBounds(415,400,140,40);
+        btnUpdateStats.setBounds(415,480,140,40);
         add(btnUpdateStats);
         
         
@@ -50,11 +50,18 @@ public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent j) {
          if (j.getSource() == btnback) 
-        {
-            dispose();
-            carMenu cm = new carMenu();
-            cm.setVisible(true);
-        }
+            {
+                dispose();
+                carMenu cm = new carMenu();
+                cm.setVisible(true);
+            }
+         
+         else if(j.getSource() == btnUpdateStats)
+            {
+                dispose();
+                updatingPageStatusNissanGTR4567 updStatNissan4567 = new updatingPageStatusNissanGTR4567();
+                updStatNissan4567.setVisible(true);
+            }
     }
     
 }

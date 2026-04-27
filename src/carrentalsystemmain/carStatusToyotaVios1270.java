@@ -24,8 +24,8 @@ public class carStatusToyotaVios1270 extends JFrame implements ActionListener{
         lbl2ndHeadStatus.setBounds(30,60,200,50);
         add(lbl2ndHeadStatus);
         
-        lbl2ndHeadStatus = new JLabel("--- Undermaintenace chuchcuhcuhc");
-        lbl2ndHeadStatus.setBounds(30,80,300,90);
+        lbl2ndHeadStatus = new JLabel("--- Undermaintenace This will update in the database as well as here");
+        lbl2ndHeadStatus.setBounds(30,80,300,0);
         add(lbl2ndHeadStatus);
         
         
@@ -37,11 +37,11 @@ public class carStatusToyotaVios1270 extends JFrame implements ActionListener{
         
         //
         btnback = new JButton("Back");
-        btnback.setBounds(30,400,100,40);
+        btnback.setBounds(30,480,100,40);
         add(btnback);
         
         btnUpdateStats = new JButton("UPDATE STATUS");
-        btnUpdateStats.setBounds(415,400,140,40);
+        btnUpdateStats.setBounds(415,480,140,40);
         add(btnUpdateStats);
         
         
@@ -57,6 +57,14 @@ public class carStatusToyotaVios1270 extends JFrame implements ActionListener{
             carMenu cm = new carMenu();
             cm.setVisible(true);
         }
+         
+         else if(j.getSource() == btnUpdateStats)
+        {
+            dispose();
+            updatingPageStatusToyotaVios1270 updStatToyota1270 = new updatingPageStatusToyotaVios1270();
+            updStatToyota1270.setVisible(true);
+        }
+         
         
     }
     
