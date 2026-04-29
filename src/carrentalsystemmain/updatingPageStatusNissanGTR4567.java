@@ -44,7 +44,7 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
         
         //
         lblupdatedText = new JLabel(" ");
-        lblupdatedText.setBounds(250,300, 400, 30);
+        lblupdatedText.setBounds(200,300, 400, 30);
         add(lblupdatedText);
         
         
@@ -64,6 +64,7 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
         
         btnback.addActionListener(this);
         btnSubmit.addActionListener(this);
+        btnReports.addActionListener(this);
     }
     
     @Override
@@ -75,10 +76,17 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
             csNissan4567.setVisible(true);
         }
        
+       else if (j.getSource() == btnReports) 
+        {
+            dispose();
+           nissan4567_HistoryReports nsn4567 = new nissan4567_HistoryReports();
+           nsn4567.setVisible(true);
+        }
+       
        else if (j.getSource()== btnSubmit){
-            if (rbtnAvailable.isSelected() || rbtnRented.isSelected()) 
+            if (rbtnAvailable.isSelected()) 
             {
-            lblupdatedText.setText("Updated Status");
+            lblupdatedText.setText("Updated Status to AVAILABLE");
             } 
             else if (rbtnReserved.isSelected())
                 {
@@ -90,6 +98,12 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
                 {
                     dispose();
                 //WINDOW FOR Undermaintenance
+                }
+            
+            else if (rbtnRented.isSelected())
+                {
+                    dispose();
+                //WINDOW FOR RENTED
                 }
             }
        }

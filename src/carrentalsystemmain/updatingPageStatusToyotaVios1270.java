@@ -45,7 +45,7 @@ public class updatingPageStatusToyotaVios1270 extends JFrame implements ActionLi
         
         //
         lblupdatedText = new JLabel(" ");
-        lblupdatedText.setBounds(250,300, 400, 30);
+        lblupdatedText.setBounds(200,300, 400, 30);
         add(lblupdatedText);
         
         
@@ -65,6 +65,7 @@ public class updatingPageStatusToyotaVios1270 extends JFrame implements ActionLi
         
         btnback.addActionListener(this);
         btnSubmit.addActionListener(this);
+        btnReports.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent j) {
@@ -75,21 +76,35 @@ public class updatingPageStatusToyotaVios1270 extends JFrame implements ActionLi
             csToyota1270.setVisible(true);
         }
         
+        else if (j.getSource() == btnReports) 
+        {
+           dispose();
+           toyota1270_HistoryReports tyt1270History = new toyota1270_HistoryReports();
+           tyt1270History.setVisible(true);
+        }
+        
         else if (j.getSource()== btnSubmit){
-            if (rbtnAvailable.isSelected() || rbtnRented.isSelected()) 
+            if (rbtnAvailable.isSelected()) 
             {
-            lblupdatedText.setText("Updated Status");
+            lblupdatedText.setText("Updated Status to AVAILABLE");
             } 
             else if (rbtnReserved.isSelected())
                 {
                     dispose();
-                //WINDOW FOR REServed
+                    toyota1270_ReservedUpdate tyt1270_reserved = new toyota1270_ReservedUpdate();
+                    tyt1270_reserved.setVisible(true);
                 }
             
             else if (rbtnUnderMaintenance.isSelected())
                 {
                     dispose();
                 //WINDOW FOR Undermaintenance
+                }
+            
+            else if (rbtnRented.isSelected())
+                {
+                    dispose();
+                //WINDOW FOR RENTED
                 }
         }
     }

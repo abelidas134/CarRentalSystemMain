@@ -6,7 +6,7 @@ import javax.swing.*;
 
 
 public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
-    JLabel lblcarModelPlatenum, lbl2ndHeadStatus, lblReports;
+    JLabel lblcarModelPlatenum, lbl2ndHeadStatus, lblCurrentReports ;
     JButton btnback, btnUpdateStats;
     
     carStatusNissanGTR4567(){
@@ -23,9 +23,9 @@ public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
         lbl2ndHeadStatus.setBounds(30,60,200,50);
         add(lbl2ndHeadStatus);
         
-        lbl2ndHeadStatus = new JLabel("--- Undermaintenace chuchcuhcuhc");
-        lbl2ndHeadStatus.setBounds(30,80,300,90);
-        add(lbl2ndHeadStatus);
+        lblCurrentReports = new JLabel("--- Undermaintenace This will update in the database as well as here");
+        lblCurrentReports.setBounds(30, 100, 500, 30);
+        add(lblCurrentReports);
         
         
 //        lbl2ndHeadStatus = new JLabel("--- Undermaintenace "
