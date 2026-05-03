@@ -91,7 +91,8 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
             else if (rbtnReserved.isSelected())
                 {
                     dispose();
-                //WINDOW FOR REServed
+                    nissan4567_ReservedUpdate nssn1270_reserved = new nissan4567_ReservedUpdate();
+                    nssn1270_reserved.setVisible(true);
                 }
             
             else if (rbtnUnderMaintenance.isSelected())
@@ -103,7 +104,8 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
             else if (rbtnRented.isSelected())
                 {
                     dispose();
-                //WINDOW FOR RENTED
+                 nissan4567_RentedUpdate nssn4567_rented = new nissan4567_RentedUpdate();
+                 nssn4567_rented.setVisible(true);
                 }
             }
        }

@@ -24,8 +24,12 @@ public class CarRentalSystemMain {
 //           toyota1270_HistoryReports tyt1270History = new toyota1270_HistoryReports();
 //           tyt1270History.setVisible(true);
 
-            toyota1270_ReservedUpdate tyt1270_reserved = new toyota1270_ReservedUpdate();
-            tyt1270_reserved.setVisible(true);
+//            toyota1270_ReservedUpdate tyt1270_reserved = new toyota1270_ReservedUpdate();
+//            tyt1270_reserved.setVisible(true);
+
+//            toyota1270_RentedUpdate tyt1270_rented = new toyota1270_RentedUpdate();
+//            tyt1270_rented.setVisible(true);
+            
 // NISSAN -------------------------------------------------------------------------------
 //               carStatusNissanGTR4567 csNissan4567 = new carStatusNissanGTR4567();
 //               csNissan4567.setVisible(true);
@@ -37,6 +41,11 @@ public class CarRentalSystemMain {
 //           nissan4567_HistoryReports nsn4567 = new nissan4567_HistoryReports();
 //           nsn4567.setVisible(true);
 
+//            nissan4567_ReservedUpdate nssn1270_reserved = new nissan4567_ReservedUpdate();
+//            nssn1270_reserved.setVisible(true);
+
+            nissan4567_RentedUpdate nssn4567_rented = new nissan4567_RentedUpdate();
+            nssn4567_rented.setVisible(true);
            
 
     }
