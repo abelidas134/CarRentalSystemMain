@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class CarDetails extends JFrame {
-    public CarDetails (String name, String status, String rate, String plate){
+    public CarDetails (String id ,String name, String status, String rate, String plate){
         
         setTitle("Details");
         setSize(600,600);
@@ -21,10 +21,10 @@ public class CarDetails extends JFrame {
         sep.setBounds(50, 60, 500, 2);
         
         Container pane = getContentPane();
-        
+                   
         int k = 100, v = 300, y = 80, h = 30, gap = 35;
         
-        addRow("VEHICLE ID:","V001", k, v, y, pane, h); y += gap;
+        addRow("VEHICLE ID:", id , k, v, y, pane, h); y += gap;
         addRow("MODEL:", name, k, v, y, pane, h); y += gap;
         addRow("PLATE NUMBER:", plate, k, v, y, pane, h); y += gap;
         addRow("RATE:", rate, k, v, y, pane, h); y += gap;
@@ -58,4 +58,4 @@ public class CarDetails extends JFrame {
         pane.add(lblval);
     
 }
-}
+    }
