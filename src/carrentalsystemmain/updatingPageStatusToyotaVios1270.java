@@ -98,7 +98,8 @@ public class updatingPageStatusToyotaVios1270 extends JFrame implements ActionLi
             else if (rbtnUnderMaintenance.isSelected())
                 {
                     dispose();
-                    
+                    toyota1270_MaintenanceUpdate tyt1270_maintenance = new toyota1270_MaintenanceUpdate();
+                    tyt1270_maintenance.setVisible(true);
                 }
             
             else if (rbtnRented.isSelected())

@@ -98,7 +98,8 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
             else if (rbtnUnderMaintenance.isSelected())
                 {
                     dispose();
-                //WINDOW FOR Undermaintenance
+                    nissan4567_MaintenanceUpdate nssn4567_maintenance = new nissan4567_MaintenanceUpdate();
+                    nssn4567_maintenance.setVisible(true);
                 }
             
             else if (rbtnRented.isSelected())

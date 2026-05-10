@@ -4,8 +4,8 @@ public class CarRentalSystemMain {
 
   
    public static void main(String[] args) {
-//        staff_LogInPage slp = new staff_LogInPage();
-//        slp.setVisible(true);
+        staff_LogInPage slp = new staff_LogInPage();
+        slp.setVisible(true);
         
         // CHECKING GUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
@@ -29,6 +29,9 @@ public class CarRentalSystemMain {
 
 //            toyota1270_RentedUpdate tyt1270_rented = new toyota1270_RentedUpdate();
 //            tyt1270_rented.setVisible(true);
+
+//            toyota1270_MaintenanceUpdate tyt1270_maintenance = new toyota1270_MaintenanceUpdate();
+//            tyt1270_maintenance.setVisible(true);
             
 // NISSAN -------------------------------------------------------------------------------
 //               carStatusNissanGTR4567 csNissan4567 = new carStatusNissanGTR4567();
@@ -44,9 +47,11 @@ public class CarRentalSystemMain {
 //            nissan4567_ReservedUpdate nssn1270_reserved = new nissan4567_ReservedUpdate();
 //            nssn1270_reserved.setVisible(true);
 
-            nissan4567_RentedUpdate nssn4567_rented = new nissan4567_RentedUpdate();
-            nssn4567_rented.setVisible(true);
-           
+//            nissan4567_RentedUpdate nssn4567_rented = new nissan4567_RentedUpdate();
+//            nssn4567_rented.setVisible(true);
+
+//            nissan4567_MaintenanceUpdate nssn4567_maintenance = new nissan4567_MaintenanceUpdate();
+//            nssn4567_maintenance.setVisible(true);
 
     }
 
