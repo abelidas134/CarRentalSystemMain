@@ -48,6 +48,8 @@ public class CarDisplayCh extends JFrame{
         btnbook.setBounds(650, 400, 150, 40);
         JButton btncancel = new JButton("Cancel");
         btncancel.setBounds(200,400,150,40);
+        JButton btnstaff = new JButton("Staff?");
+        btnstaff.setBounds(800, 500, 150, 30);
         
         btncancel.addActionListener(e -> dispose());
 
@@ -78,12 +80,15 @@ public class CarDisplayCh extends JFrame{
             
                 new Booking(id,name, plate, rate, row, model);
            });
-        
+       
+      btnstaff.addActionListener(e -> new Staff(model));
+               
         add(lblce);
         add(spane);
         add(btndetails);
         add(btnbook);
         add(btncancel);
+        add(btnstaff);
         
         setVisible(true);
         
