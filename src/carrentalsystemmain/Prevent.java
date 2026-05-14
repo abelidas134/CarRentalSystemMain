@@ -1,15 +1,12 @@
-package prevention;
+package carrentalsystemmain;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
-import static java.awt.Component.LEFT_ALIGNMENT;
-import java.awt.event.*;
 import java.time.*;
 import java.time.format.*;
 import java.util.*;
 import java.util.List;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Prevent extends JFrame {
 
@@ -25,7 +22,6 @@ public class Prevent extends JFrame {
             this.from = from; this.to = to;
         }
 
-        // double prevention
         boolean conflictsWith(String otherCar, LocalDate otherFrom, LocalDate otherTo) {
             if (!this.car.equals(otherCar)) return false;
             return !otherTo.isBefore(this.from) && !otherFrom.isAfter(this.to);
@@ -52,154 +48,151 @@ public class Prevent extends JFrame {
     private JTextField customerField;
     private JSpinner fromSpinner, toSpinner;
     private DefaultTableModel tableModel;
+    private JTable table;
     private JLabel statusLabel;
 
     public Prevent() {
         setTitle("Car Rental – Double Booking Prevention");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 800);
-        setMinimumSize(new Dimension(720, 480));
+        setResizable(false);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(new Color(245, 245, 247));
-        setLayout(new BorderLayout(0, 0));
+        setLayout(null);
 
-        add(buildHeader(), BorderLayout.NORTH);
-        add(buildMain(),   BorderLayout.CENTER);
+        buildHeader();
+        buildForm();
+        buildTable();
 
-        // My Demo reservation
-        addBookingDirect("Toyota Vios – KO3AN0",  "Maria Santos",  LocalDate.now().plusDays(1),  LocalDate.now().plusDays(4));
-        addBookingDirect("Honda City – H3KAO9",   "Juan dela Cruz", LocalDate.now().plusDays(3), LocalDate.now().plusDays(7));
+        addBookingDirect("Toyota Vios – KO3AN0",  "Maria Santos",   LocalDate.now().plusDays(1), LocalDate.now().plusDays(4));
+        addBookingDirect("Honda City – H3KAO9",    "Juan dela Cruz", LocalDate.now().plusDays(3), LocalDate.now().plusDays(7));
     }
 
-    // Header 
-    private JPanel buildHeader() {
-        JPanel p = new JPanel(new BorderLayout());
-        p.setBackground(new Color(30, 30, 40));
-        p.setBorder(BorderFactory.createEmptyBorder(18, 24, 18, 24));
+    private void buildHeader() {
+        JPanel header = new JPanel();
+        header.setLayout(null);
+        header.setBounds(0, 0, 1000, 60);
+        header.setBackground(new Color(30, 30, 40));
 
         JLabel title = new JLabel("Car Rental Booking");
         title.setFont(new Font("SansSerif", Font.BOLD, 20));
         title.setForeground(Color.WHITE);
+        title.setBounds(24, 8, 400, 26);
 
         JLabel sub = new JLabel("Double-booking prevention system");
         sub.setFont(new Font("SansSerif", Font.PLAIN, 13));
         sub.setForeground(new Color(160, 160, 180));
+        sub.setBounds(24, 34, 400, 18);
 
-        JPanel text = new JPanel(new GridLayout(2, 1, 0, 2));
-        text.setOpaque(false);
-        text.add(title);
-        text.add(sub);
-        p.add(text, BorderLayout.WEST);
-        return p;
+        header.add(title);
+        header.add(sub);
+        add(header);
     }
 
-    // Main 
-    private JSplitPane buildMain() {
-        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, buildForm(), buildTable());
-        split.setDividerLocation(320);
-        split.setDividerSize(6);
-        split.setBorder(null);
-        split.setBackground(new Color(245, 245, 247));
-        return split;
-    }
-
-    // Booking form 
-    private JPanel buildForm() {
-        JPanel wrapper = new JPanel(new BorderLayout());
-        wrapper.setBackground(new Color(245, 245, 247));
-        wrapper.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 10));
-
+    private void buildForm() {
         JPanel card = new JPanel();
-        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setLayout(null);
+        card.setBounds(20, 80, 300, 660);
         card.setBackground(Color.WHITE);
-        card.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(220, 220, 225), 1, true),
-            BorderFactory.createEmptyBorder(20, 20, 20, 20)
-        ));
+        card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 225), 1));
 
-        card.add(sectionLabel("New Booking"));
-        card.add(Box.createVerticalStrut(16));
+        JLabel secLabel = new JLabel("New Booking");
+        secLabel.setFont(new Font("SansSerif", Font.BOLD, 15));
+        secLabel.setForeground(new Color(30, 30, 50));
+        secLabel.setBounds(16, 16, 268, 22);
+        card.add(secLabel);
 
-        // Car selection and car information
-        card.add(fieldLabel("Vehicle"));
-        card.add(Box.createVerticalStrut(4));
+        // Vehicle
+        JLabel vehicleLbl = new JLabel("Vehicle");
+        vehicleLbl.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        vehicleLbl.setForeground(new Color(100, 100, 120));
+        vehicleLbl.setBounds(16, 54, 268, 16);
+        card.add(vehicleLbl);
+
         carCombo = new JComboBox<>(CARS);
-        styleCombo(carCombo);
+        carCombo.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        carCombo.setBounds(16, 72, 268, 30);
         card.add(carCombo);
-        card.add(Box.createVerticalStrut(14));
 
-        // Customer info
-        card.add(fieldLabel("Customer Name"));
-        card.add(Box.createVerticalStrut(4));
+        // Customer Name
+        JLabel custLbl = new JLabel("Customer Name");
+        custLbl.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        custLbl.setForeground(new Color(100, 100, 120));
+        custLbl.setBounds(16, 118, 268, 16);
+        card.add(custLbl);
+
         customerField = new JTextField();
-        styleField(customerField);
+        customerField.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        customerField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(210, 210, 220), 1),
+            BorderFactory.createEmptyBorder(4, 8, 4, 8)));
+        customerField.setBounds(16, 136, 268, 30);
         card.add(customerField);
-        card.add(Box.createVerticalStrut(14));
 
-        // From date or date of pick up
-        card.add(fieldLabel("From Date"));
-        card.add(Box.createVerticalStrut(4));
+        // From Date
+        JLabel fromLbl = new JLabel("From Date");
+        fromLbl.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        fromLbl.setForeground(new Color(100, 100, 120));
+        fromLbl.setBounds(16, 182, 268, 16);
+        card.add(fromLbl);
+
         fromSpinner = dateSpinner(LocalDate.now());
+        fromSpinner.setBounds(16, 200, 268, 30);
         card.add(fromSpinner);
-        card.add(Box.createVerticalStrut(14));
 
-        // To date ot till when 
-        card.add(fieldLabel("To Date"));
-        card.add(Box.createVerticalStrut(4));
+        // To Date
+        JLabel toLbl = new JLabel("To Date");
+        toLbl.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        toLbl.setForeground(new Color(100, 100, 120));
+        toLbl.setBounds(16, 246, 268, 16);
+        card.add(toLbl);
+
         toSpinner = dateSpinner(LocalDate.now().plusDays(1));
+        toSpinner.setBounds(16, 264, 268, 30);
         card.add(toSpinner);
-        card.add(Box.createVerticalStrut(20));
 
         // Status label
         statusLabel = new JLabel(" ");
         statusLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
-        statusLabel.setAlignmentX(LEFT_ALIGNMENT);
+        statusLabel.setBounds(16, 308, 268, 32);
         card.add(statusLabel);
-        card.add(Box.createVerticalStrut(10));
 
-        // Buttons
-        JPanel btnRow = new JPanel(new GridLayout(1, 2, 8, 0));
-        btnRow.setOpaque(false);
-        btnRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 38));
-        btnRow.setAlignmentX(LEFT_ALIGNMENT);
-
+        // Check Availability button
         JButton checkBtn = new JButton("Check Availability");
-        styleButton(checkBtn, new Color(60, 100, 200), Color.BLACK);
+        styleButton(checkBtn, new Color(60, 100, 200), Color.WHITE);
+        checkBtn.setBounds(16, 348, 128, 34);
         checkBtn.addActionListener(e -> checkAvailability());
+        card.add(checkBtn);
 
+        // Book button
         JButton bookBtn = new JButton("Book");
-        styleButton(bookBtn, new Color(34, 160, 100), Color.BLACK);
+        styleButton(bookBtn, new Color(34, 160, 100), Color.WHITE);
+        bookBtn.setBounds(152, 348, 132, 34);
         bookBtn.addActionListener(e -> submitBooking());
+        card.add(bookBtn);
 
-        btnRow.add(checkBtn);
-        btnRow.add(bookBtn);
-        card.add(btnRow);
-
-        // Cancel button (
-        card.add(Box.createVerticalStrut(10));
+        // Cancel Selected Booking button
         JButton cancelBtn = new JButton("Cancel Selected Booking");
-        styleButton(cancelBtn, new Color(200, 60, 60), Color.BLACK);
-        cancelBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 34));
-        cancelBtn.setAlignmentX(LEFT_ALIGNMENT);
+        styleButton(cancelBtn, new Color(200, 60, 60), Color.WHITE);
+        cancelBtn.setBounds(16, 394, 268, 34);
         cancelBtn.addActionListener(e -> cancelSelected());
         card.add(cancelBtn);
 
-        wrapper.add(card, BorderLayout.CENTER);
-        return wrapper;
+        add(card);
     }
 
-    
-    private JPanel buildTable() {
-        JPanel wrapper = new JPanel(new BorderLayout());
-        wrapper.setBackground(new Color(245, 245, 247));
-        wrapper.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 20));
+    private void buildTable() {
+        JLabel heading = new JLabel("Active Bookings");
+        heading.setFont(new Font("SansSerif", Font.BOLD, 15));
+        heading.setForeground(new Color(40, 40, 60));
+        heading.setBounds(340, 80, 300, 24);
+        add(heading);
 
         String[] cols = {"ID", "Vehicle", "Customer", "From", "To"};
         tableModel = new DefaultTableModel(cols, 0) {
             public boolean isCellEditable(int r, int c) { return false; }
         };
 
-        JTable table = new JTable(tableModel);
+        table = new JTable(tableModel);
         table.setFont(new Font("SansSerif", Font.PLAIN, 13));
         table.setRowHeight(30);
         table.setShowGrid(false);
@@ -209,25 +202,20 @@ public class Prevent extends JFrame {
         table.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 12));
         table.getTableHeader().setBackground(new Color(240, 240, 245));
         table.getTableHeader().setForeground(new Color(80, 80, 100));
-        table.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(210, 210, 220)));
+        table.getTableHeader().setBorder(
+            BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(210, 210, 220)));
         table.setDefaultRenderer(Object.class, new StripedRenderer());
 
-        int[] widths = {40, 200, 130, 110, 110};
+        int[] widths = {36, 190, 130, 110, 110};
         for (int i = 0; i < widths.length; i++)
             table.getColumnModel().getColumn(i).setPreferredWidth(widths[i]);
 
         JScrollPane scroll = new JScrollPane(table);
+        scroll.setBounds(340, 110, 635, 630);
         scroll.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 225), 1));
         scroll.getViewport().setBackground(Color.WHITE);
 
-        JLabel heading = new JLabel("Active Bookings");
-        heading.setFont(new Font("SansSerif", Font.BOLD, 15));
-        heading.setForeground(new Color(40, 40, 60));
-        heading.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-
-        wrapper.add(heading, BorderLayout.NORTH);
-        wrapper.add(scroll,  BorderLayout.CENTER);
-        return wrapper;
+        add(scroll);
     }
 
     private List<Booking> findConflicts(String car, LocalDate from, LocalDate to) {
@@ -239,10 +227,9 @@ public class Prevent extends JFrame {
     }
 
     private void checkAvailability() {
-        String car = (String) carCombo.getSelectedItem();
+        String car     = (String) carCombo.getSelectedItem();
         LocalDate from = spinnerDate(fromSpinner);
         LocalDate to   = spinnerDate(toSpinner);
-
         if (!validateDates(from, to)) return;
 
         List<Booking> conflicts = findConflicts(car, from, to);
@@ -292,11 +279,6 @@ public class Prevent extends JFrame {
     }
 
     private void cancelSelected() {
-        // find selected row in table — we need to match to the backing list by ID
-        Component c = ((JSplitPane) getContentPane().getComponent(1)).getRightComponent();
-        JScrollPane scroll = (JScrollPane) ((JPanel) c).getComponent(1);
-        JTable table = (JTable) scroll.getViewport().getView();
-
         int row = table.getSelectedRow();
         if (row < 0) {
             setStatus("Select a booking in the table first.", new Color(200, 130, 0));
@@ -308,7 +290,6 @@ public class Prevent extends JFrame {
         setStatus("Booking #" + id + " cancelled.", new Color(100, 100, 120));
     }
 
-    
     private boolean validateDates(LocalDate from, LocalDate to) {
         if (!to.isAfter(from)) {
             setStatus("Return date must be after pickup date.", new Color(200, 130, 0));
@@ -336,43 +317,8 @@ public class Prevent extends JFrame {
         Date date = Date.from(initial.atStartOfDay(ZoneId.systemDefault()).toInstant());
         SpinnerDateModel model = new SpinnerDateModel(date, null, null, Calendar.DAY_OF_MONTH);
         JSpinner spinner = new JSpinner(model);
-        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner, "MMM dd, yyyy");
-        spinner.setEditor(editor);
-        spinner.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
-        spinner.setAlignmentX(LEFT_ALIGNMENT);
+        spinner.setEditor(new JSpinner.DateEditor(spinner, "MMM dd, yyyy"));
         return spinner;
-    }
-
-    private JLabel sectionLabel(String text) {
-        JLabel l = new JLabel(text);
-        l.setFont(new Font("SansSerif", Font.BOLD, 15));
-        l.setForeground(new Color(30, 30, 50));
-        l.setAlignmentX(LEFT_ALIGNMENT);
-        return l;
-    }
-
-    private JLabel fieldLabel(String text) {
-        JLabel l = new JLabel(text);
-        l.setFont(new Font("SansSerif", Font.PLAIN, 12));
-        l.setForeground(new Color(100, 100, 120));
-        l.setAlignmentX(LEFT_ALIGNMENT);
-        return l;
-    }
-
-    private void styleField(JTextField field) {
-        field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
-        field.setAlignmentX(LEFT_ALIGNMENT);
-        field.setFont(new Font("SansSerif", Font.PLAIN, 13));
-        field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(210, 210, 220), 1, true),
-            BorderFactory.createEmptyBorder(4, 8, 4, 8)
-        ));
-    }
-
-    private void styleCombo(JComboBox combo) {
-        combo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
-        combo.setAlignmentX(LEFT_ALIGNMENT);
-        combo.setFont(new Font("SansSerif", Font.PLAIN, 13));
     }
 
     private void styleButton(JButton btn, Color bg, Color fg) {
@@ -380,12 +326,11 @@ public class Prevent extends JFrame {
         btn.setForeground(fg);
         btn.setFont(new Font("SansSerif", Font.BOLD, 13));
         btn.setFocusPainted(false);
-        btn.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        btn.setBorderPainted(false);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btn.setOpaque(true);
     }
 
-   
     static class StripedRenderer extends DefaultTableCellRenderer {
         public Component getTableCellRendererComponent(
                 JTable t, Object val, boolean sel, boolean focus, int row, int col) {
@@ -395,6 +340,10 @@ public class Prevent extends JFrame {
             return this;
         }
     }
-}
 
-   
+    public static void main(String[] args) {
+        try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
+        catch (Exception ignored) {}
+        SwingUtilities.invokeLater(() -> new Prevent().setVisible(true));
+    }
+}
