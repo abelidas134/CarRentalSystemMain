@@ -16,6 +16,7 @@ class HomePageBilling extends JFrame implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
     private JButton btnEnter;
+    private String resNoText;
     
     HomePageBilling (){
         setSize(600,600);
@@ -45,15 +46,27 @@ class HomePageBilling extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==btnEnter){
-            String resNoText = txtResNo.getText().trim();
-            if (resNoText.matches("0000")){
-//                MonthPage mp = new MonthPage();
-//                mp.setVisible(true);
-                   bill b = new bill();
-                   b.setVisible(true);
+        if (e.getSource() == btnEnter) {
+
+            resNoText = txtResNo.getText().trim();
+
+            if (resNoText == null || resNoText.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Please enter a reservation number!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (resNoText.equals("0000")) {
+                bill b = new bill(resNoText);
+                b.setVisible(true);
+                this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Reservation number is not recorded. Try again!","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Reservation number is not recorded. Try again!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }

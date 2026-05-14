@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package carrentalsystemmain;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-/**
- *
- * @author Mickey
- */
 public class bill extends JFrame implements ActionListener {
     private JPanel panelBill,panelPick, panelDrop;
     private JLabel lblSec, lblPick, lblDrop,lblYear, lblMonth, lblDay;
@@ -23,6 +15,7 @@ public class bill extends JFrame implements ActionListener {
     private Integer[] feb29 = new Integer[29];
     private Integer[] month30 = new Integer[30];
     private Integer[] month31 = new Integer[31];
+    private String monthPickStmnt, monthDropStmnt, res;
     
     {
         for (int i=0;i<feb28.length;i++) feb28[i]=i+1;
@@ -31,8 +24,9 @@ public class bill extends JFrame implements ActionListener {
         for (int i=0;i<month31.length;i++) month31[i]=i+1;
     }
     
-    
-    bill(){
+    bill(String res){
+        this.res = res;
+        
         setSize (600,600);
         setTitle("Date Details");
         setLayout(null);
@@ -125,26 +119,105 @@ public class bill extends JFrame implements ActionListener {
         panelDrop.add(comboDayDrop);
         
         btnBack = new JButton ("Back");
-        btnBack.setBounds(10,510,75,30);
+        btnBack.setBounds(10,520,75,30);
         add(btnBack);
         
         btnContinue = new JButton ("Continue");
-        btnContinue.setBounds(475,510,100,30);
+        btnContinue.setBounds(475,520,100,30);
         add(btnContinue);
         
         btnBack.addActionListener(this);
         btnContinue.addActionListener(this);
-        
+        comboMonthPick.addActionListener(this);
+        comboMonthDrop.addActionListener(this);
+        txtYearPick.addActionListener(this);        
+        txtYearDrop.addActionListener(this);        
+    }
+    
+    public void monthPick() {
+        String m = ((String) comboMonthPick.getSelectedItem()).toLowerCase();
+        if (m.matches("january|march|may|july|august|october|december")) {
+            comboDayPick.setModel(new DefaultComboBoxModel<>(month31));
+        } else if (m.equals("february")) {
+            String y = txtYearPick.getText().trim();
+            if (y.matches("\\d+")) {
+                int year = Integer.parseInt(y);
+                boolean leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+                comboDayPick.setModel(new DefaultComboBoxModel<>(leap ? feb29 : feb28));
+            } else {
+                comboDayPick.setModel(new DefaultComboBoxModel<>(feb28));
+            }
+        } else {
+            comboDayPick.setModel(new DefaultComboBoxModel<>(month30));
+        }
+    }
+    
+    public void monthDrop() {
+        String m = ((String) comboMonthDrop.getSelectedItem()).toLowerCase();
+        if (m.matches("january|march|may|july|august|october|december")) {
+            comboDayDrop.setModel(new DefaultComboBoxModel<>(month31));
+        } else if (m.equals("february")) {
+            String y = txtYearDrop.getText().trim();
+            if (y.matches("\\d+")) {
+                int year = Integer.parseInt(y);
+                boolean leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+                comboDayDrop.setModel(new DefaultComboBoxModel<>(leap ? feb29 : feb28));
+            } else {
+                comboDayDrop.setModel(new DefaultComboBoxModel<>(feb28));
+            }
+        } else {
+            comboDayDrop.setModel(new DefaultComboBoxModel<>(month30));
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int dayPickSelected = (int) comboDayPick.getSelectedItem();
-        int dayDropSelected = (int) comboDayDrop.getSelectedItem();
-        
-        if(e.getSource()==btnBack){
-            HomePageBilling hp = new HomePageBilling();
-            hp.setVisible(true);
+        if (e.getSource() == comboMonthPick || e.getSource() == txtYearPick) {
+            monthPick();
+        } else if (e.getSource() == comboMonthDrop || e.getSource() == txtYearDrop) {
+            monthDrop();
+        } else if (e.getSource() == btnContinue) {
+
+            Integer dayPick = (Integer) comboDayPick.getSelectedItem();
+            Integer dayDrop = (Integer) comboDayDrop.getSelectedItem();
+
+            if (dayPick == null || dayDrop == null) {
+                JOptionPane.showMessageDialog(this,"Please select both pick-up and drop-off days!","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String y1 = txtYearPick.getText().trim();
+            String y2 = txtYearDrop.getText().trim();
+
+            if (!y1.matches("\\d+") || !y2.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this,"Enter valid years!","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int yearPick = Integer.parseInt(y1);
+            int yearDrop = Integer.parseInt(y2);
+
+            int monthPick = comboMonthPick.getSelectedIndex() + 1;
+            int monthDrop = comboMonthDrop.getSelectedIndex() + 1;
+
+            java.time.LocalDate d1 = java.time.LocalDate.of(yearPick, monthPick, dayPick);
+            java.time.LocalDate d2 = java.time.LocalDate.of(yearDrop, monthDrop, dayDrop);
+
+            long days = java.time.temporal.ChronoUnit.DAYS.between(d1, d2);
+
+            if (days < 1) {
+                JOptionPane.showMessageDialog(this,"Drop-off must be after pick-up!","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            monthPickStmnt = comboMonthPick.getSelectedItem() + ", " + dayPick + ", " + yearPick;
+            monthDropStmnt = comboMonthDrop.getSelectedItem() + ", " + dayDrop + ", " + yearDrop;
+
+            OutputPage op = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days);
+            op.setVisible(true);
+            this.dispose();
+        } else if (e.getSource() == btnBack) {
+            this.dispose();
         }
     }
 }
