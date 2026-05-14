@@ -11,9 +11,12 @@ public class Staff extends JFrame {
         setSize(600, 600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-
+        setLayout(null);
+                
+        //STATUS CHANGE
         JTabbedPane tabs = new JTabbedPane();
         tabs.setFont(new Font("Arial", Font.BOLD, 14));
+        tabs.setBounds(0, 0, 594, 560);
 
         JPanel vehiclePanel = new JPanel(null);
         JLabel lbltitle = new JLabel("VEHICLE MANAGEMENT");
@@ -56,8 +59,35 @@ public class Staff extends JFrame {
         vehiclePanel.add(btnStatus);
         vehiclePanel.add(btnback);
         
-        tabs.addTab("Vehicles", vehiclePanel);
+        //HISTORY   
+        JPanel historyPanel = new JPanel(null);
+        JLabel lbltitle2 = new JLabel("VEHICLE HISTORY");
+        lbltitle2.setFont(new Font("Arial", Font.BOLD, 16));
+        lbltitle2.setBounds(50, 20, 300, 30);
+               
+        historyPanel.add(lbltitle2);
+        
+        //MAINTENANCE       
+        JPanel maintenancePanel = new JPanel(null);
+        JLabel lbltitle3 = new JLabel("VEHICLE MAINTENANCE");
+        lbltitle3.setFont(new Font("Arial", Font.BOLD, 16));
+        lbltitle3.setBounds(50, 20, 300, 30);
        
+        maintenancePanel.add(lbltitle3);
+        
+        //SERVICE DUE
+        JPanel servicePanel = new JPanel(null);
+        JLabel lbltitle4 = new JLabel("VEHICLE SERVICE DUE");
+        lbltitle4.setFont(new Font("Arial", Font.BOLD, 16));
+        lbltitle4.setBounds(50, 20, 300, 30);
+        
+        servicePanel.add(lbltitle4);
+        
+        tabs.addTab("Vehicles", vehiclePanel);
+        tabs.addTab("History", historyPanel);
+        tabs.addTab("Maintenance", maintenancePanel);
+        tabs.addTab("Service Due", servicePanel);
+        
         add(tabs);
         setVisible(true);
     }
