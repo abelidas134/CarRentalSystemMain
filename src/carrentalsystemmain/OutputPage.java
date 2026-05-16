@@ -200,7 +200,8 @@ class OutputPage extends JFrame implements ActionListener{
             bill b = new bill(resNum);
             b.setVisible(true);
         } else if (e.getSource()==btnContinue){
-            
+            Payment pm = new Payment ();
+            pm.setVisible(true);
         }
     }
 }
