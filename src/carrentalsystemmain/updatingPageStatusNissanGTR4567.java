@@ -51,15 +51,15 @@ public class updatingPageStatusNissanGTR4567 extends JFrame implements ActionLis
         
         //BUTTONNSS
         btnReports = new JButton("History Reports");
-        btnReports.setBounds(30,430,180,40);
+        btnReports.setBounds(30,430,180,25);
         add(btnReports);
         
         btnback = new JButton("Back");
-        btnback.setBounds(30,480,100,40);
+        btnback.setBounds(30,480,100,25);
         add(btnback);
         
         btnSubmit = new JButton("Submit");
-        btnSubmit.setBounds(450,480,100,40);
+        btnSubmit.setBounds(450,480,100,25);
         add(btnSubmit);
         
         btnback.addActionListener(this);

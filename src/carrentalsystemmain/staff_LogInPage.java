@@ -55,11 +55,11 @@ public class staff_LogInPage extends JFrame implements ActionListener{
         add(lblStatusLogin);
         
         btnClear = new JButton("Clear");
-        btnClear.setBounds(150,400,100,40);
+        btnClear.setBounds(150,400,100,25);
         add(btnClear);
         
         btnSubmit = new JButton("Submit");
-        btnSubmit.setBounds(700,400,100,40);
+        btnSubmit.setBounds(700,400,100,25);
         add(btnSubmit);
         
         

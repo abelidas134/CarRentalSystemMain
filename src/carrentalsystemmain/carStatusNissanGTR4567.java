@@ -36,11 +36,11 @@ public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
         
         //
         btnback = new JButton("Back");
-        btnback.setBounds(30,480,100,40);
+        btnback.setBounds(30,480,100,25);
         add(btnback);
         
         btnUpdateStats = new JButton("UPDATE STATUS");
-        btnUpdateStats.setBounds(415,480,140,40);
+        btnUpdateStats.setBounds(415,480,140,25);
         add(btnUpdateStats);
         
         

@@ -35,7 +35,7 @@ public class nissan4567_HistoryReports extends JFrame implements ActionListener 
         
         
         btnback = new JButton("Back");
-        btnback.setBounds(250, 480, 100, 40);
+        btnback.setBounds(250, 480, 100, 25);
         add(btnback);
         
         btnback.addActionListener(this);

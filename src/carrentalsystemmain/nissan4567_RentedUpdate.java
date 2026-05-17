@@ -45,11 +45,11 @@ public class nissan4567_RentedUpdate extends JFrame implements ActionListener{
         add(txtCustomerUser);
         
         btnback = new JButton("Back");
-        btnback.setBounds(30,480,100,40);
+        btnback.setBounds(30,480,100,25);
         add(btnback);
         
         btnUpdate = new JButton("Update");
-        btnUpdate.setBounds(450,480,100,40);
+        btnUpdate.setBounds(450,480,100,25);
         add(btnUpdate);
         
         btnback.addActionListener(this);

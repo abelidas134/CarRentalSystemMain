@@ -44,7 +44,7 @@ public class carMenu extends JFrame implements ActionListener{
        
         
         enterbtn = new JButton("Enter");
-        enterbtn.setBounds(390,400,200,40);
+        enterbtn.setBounds(390,400,200,25);
         add(enterbtn);
         
         enterbtn.addActionListener(this);
