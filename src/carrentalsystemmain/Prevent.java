@@ -95,6 +95,11 @@ public class Prevent extends JFrame {
         card.setBackground(Color.WHITE);
         card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 225), 1));
 
+        JButton backBtn = new JButton("Back");
+        styleButton(backBtn, new Color(100, 100, 120), Color.WHITE);
+        backBtn.setBounds(16, 440, 268, 34);
+        card.add(backBtn);
+        
         JLabel secLabel = new JLabel("New Booking");
         secLabel.setFont(new Font("SansSerif", Font.BOLD, 15));
         secLabel.setForeground(new Color(30, 30, 50));
