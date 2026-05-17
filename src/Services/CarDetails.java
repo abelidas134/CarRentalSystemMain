@@ -39,6 +39,11 @@ public class CarDetails extends JFrame {
         
         btnclose.addActionListener(e -> dispose());
         
+        //BACK BUTTON
+       JButton btnBack = new JButton ("Back");
+       btnBack.setBounds(10,520,100,25);
+       add(btnBack);
+
         add(lbltitle);
         add(sep);
         add(btnclose);

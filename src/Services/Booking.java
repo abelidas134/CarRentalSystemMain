@@ -101,6 +101,10 @@ public class Booking extends JFrame {
     }
         });
         
+        //BACK BUTTON
+        JButton btnBack = new JButton ("Back");
+         btnBack.setBounds(10,520,100,25);
+        add(btnBack);
         
         add(lblmodel);
         add(lblplate);
