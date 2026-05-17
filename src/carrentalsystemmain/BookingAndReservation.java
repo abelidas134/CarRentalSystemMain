@@ -65,6 +65,11 @@ class CarRentalSystemGUI extends JFrame {
         setLayout(null);
         setResizable(false);
 
+        JButton backBtn = new JButton("Back");
+        backBtn.setBounds(420, 500, 160, 45); 
+        add(backBtn);
+
+
         JLabel titleLabel = new JLabel("BOOKING AND RESERVATION");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setBounds(320, 30, 500, 40);
