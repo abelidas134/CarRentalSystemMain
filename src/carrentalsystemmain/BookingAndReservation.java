@@ -66,7 +66,7 @@ class CarRentalSystemGUI extends JFrame {
         setResizable(false);
 
         JButton backBtn = new JButton("Back");
-        backBtn.setBounds(420, 500, 160, 45); 
+        backBtn.setBounds(20, 510, 100, 40);
         add(backBtn);
 
 
