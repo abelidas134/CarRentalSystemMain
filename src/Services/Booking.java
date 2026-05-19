@@ -58,7 +58,7 @@ public class Booking extends JFrame {
         txtdays.setFont(new Font("Arial", Font.PLAIN, 14));
                     
                 
-        JButton btnclose = new JButton("Cancel");
+        JButton btnclose = new JButton("Back");
         btnclose.setBounds(450,450,100,40);
         btnclose.addActionListener(e -> dispose());
         
@@ -101,11 +101,7 @@ public class Booking extends JFrame {
     }
         });
         
-        //BACK BUTTON
-        JButton btnBack = new JButton ("Back");
-         btnBack.setBounds(10,520,100,25);
-        add(btnBack);
-        
+               
         add(lblmodel);
         add(lblplate);
         add(lblrate);

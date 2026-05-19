@@ -34,16 +34,11 @@ public class CarDetails extends JFrame {
         addRow("NEXT SERVICE DUE:", "N/A", k, v, y, pane, h); y += gap;
         
                 
-        JButton btnclose = new JButton("Close");
+        JButton btnclose = new JButton("Back");
         btnclose.setBounds(450,450,100,40);
         
         btnclose.addActionListener(e -> dispose());
         
-        //BACK BUTTON
-       JButton btnBack = new JButton ("Back");
-       btnBack.setBounds(10,520,100,25);
-       add(btnBack);
-
         add(lbltitle);
         add(sep);
         add(btnclose);

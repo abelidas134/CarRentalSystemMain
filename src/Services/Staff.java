@@ -32,7 +32,7 @@ public class Staff extends JFrame {
         JButton btnStatus = new JButton("Change Status");
         btnStatus.setBounds(190, 260, 150, 30);
         
-        JButton btnback = new JButton("Cancel");
+        JButton btnback = new JButton("Back");
         btnback.setBounds(20,260,150,30);
         
         btnback.addActionListener(e -> dispose());
@@ -88,11 +88,7 @@ public class Staff extends JFrame {
         tabs.addTab("Maintenance", maintenancePanel);
         tabs.addTab("Service Due", servicePanel);
         
-        //BACK BUTTON
-        JButton btnBack = new JButton ("Back");
-         btnBack.setBounds(10,520,100,25);
-         add(btnBack);
-        
+                
         add(tabs);
         setVisible(true);
     }
