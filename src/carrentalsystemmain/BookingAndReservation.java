@@ -47,11 +47,7 @@ class CarRentalSystemGUI extends JFrame {
 
     static int reservationCounter = 1001;
 
-    JTextField nameField;
-    JTextField contactField;
-    JTextField carField;
-    JTextField daysField;
-
+    JTextField nameField, contactField, emailField, licenseField, addressField;
     JLabel statusLabel;
 
     public CarRentalSystemGUI() {
@@ -68,47 +64,58 @@ class CarRentalSystemGUI extends JFrame {
         JButton backBtn = new JButton("Back");
         backBtn.setBounds(20, 510, 100, 40);
         add(backBtn);
-
+        
+    backBtn.addActionListener(e -> {
+    dispose(); 
+    });
 
         JLabel titleLabel = new JLabel("BOOKING AND RESERVATION");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setBounds(320, 30, 500, 40);
 
-        JLabel nameLabel = new JLabel("Customer Name:");
+        JLabel nameLabel = new JLabel("Full Name:");
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        nameLabel.setBounds(220, 120, 180, 30);
+        nameLabel.setBounds(150, 120, 250, 30);
 
-        nameField = new JTextField();
+         nameField = new JTextField();
         nameField.setBounds(420, 120, 300, 35);
 
         JLabel contactLabel = new JLabel("Contact Number:");
         contactLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        contactLabel.setBounds(220, 190, 180, 30);
+        contactLabel.setBounds(150, 190, 250, 30);
 
-        contactField = new JTextField();
+         contactField = new JTextField();
         contactField.setBounds(420, 190, 300, 35);
 
-        JLabel carLabel = new JLabel("Car Model:");
-        carLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        carLabel.setBounds(220, 260, 180, 30);
+        JLabel emailLabel = new JLabel("Email Address (Optional)");
+        emailLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        emailLabel.setBounds(150, 260, 250, 30);
 
-        carField = new JTextField();
-        carField.setBounds(420, 260, 300, 35);
+          emailField = new JTextField();
+        emailField.setBounds(420, 260, 300, 35);
 
-        JLabel daysLabel = new JLabel("Rental Days:");
-        daysLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        daysLabel.setBounds(220, 330, 180, 30);
+        JLabel licenseLabel = new JLabel("Driver's License Number");
+        licenseLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        licenseLabel.setBounds(150, 330, 250, 30);
 
-        daysField = new JTextField();
-        daysField.setBounds(420, 330, 300, 35);
+          licenseField = new JTextField();
+        licenseField.setBounds(420, 330, 300, 35);
 
+        JLabel addressLabel = new JLabel("Driver's Address(Optional)");
+        addressLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        addressLabel.setBounds(150, 400, 250, 30);
+
+         addressField = new JTextField();
+        addressField.setBounds(420, 400, 300, 35);
+        
+        
         JButton reserveButton = new JButton("Reserve");
         reserveButton.setFont(new Font("Arial", Font.BOLD, 16));
-        reserveButton.setBounds(420, 420, 160, 45);
+        reserveButton.setBounds(420, 510, 160, 45);
 
         statusLabel = new JLabel("");
         statusLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        statusLabel.setBounds(390, 490, 300, 30);
+        statusLabel.setBounds(420, 470, 300, 30);
 
         reserveButton.addActionListener(e -> reserveCar());
 
@@ -120,12 +127,17 @@ class CarRentalSystemGUI extends JFrame {
         add(contactLabel);
         add(contactField);
 
-        add(carLabel);
-        add(carField);
+        add(licenseLabel);
+        add(licenseField);
 
-        add(daysLabel);
-        add(daysField);
+        add(emailLabel);
+        add(emailField);
 
+        add(addressLabel);
+        add(addressField);
+        
+        
+            
         add(reserveButton);
 
         add(statusLabel);
@@ -138,16 +150,23 @@ class CarRentalSystemGUI extends JFrame {
 
         String name = nameField.getText();
         String contact = contactField.getText();
-        String car = carField.getText();
-        String days = daysField.getText();
+        String email = emailField.getText();
+        String licensenum = licenseField.getText();
+        String address = addressField.getName();
 
         if (name.isEmpty() || contact.isEmpty()
-                || car.isEmpty() || days.isEmpty()) {
+                || licensenum.isEmpty()) {
 
-            statusLabel.setText("Please fill in all fields!");
+            statusLabel.setText("Please fill in the fields!");
             return;
         }
+if (email == null || email.trim().isEmpty()) {
+    email = "N/A";
+}
 
+if (address == null || address.trim().isEmpty()) {
+    address = "N/A";
+}
         String reservationNumber = "CR-" + reservationCounter++;
 
         String details =
@@ -155,8 +174,9 @@ class CarRentalSystemGUI extends JFrame {
                 + "Reservation Number : " + reservationNumber + "\n\n"
                 + "Customer Name      : " + name + "\n\n"
                 + "Contact Number     : " + contact + "\n\n"
-                + "Car Model          : " + car + "\n\n"
-                + "Rental Days        : " + days + "\n\n"
+                + "Email Address      : " + email + "\n\n"
+                + "Driver's Address   : " + address + "\n\n"
+                + "Driver's License Number  : " + licensenum + "\n\n"
                 + "Reservation Status : RESERVED";
 
         new ReservationDetailsFrame(details);
@@ -165,8 +185,7 @@ class CarRentalSystemGUI extends JFrame {
 
         nameField.setText("");
         contactField.setText("");
-        carField.setText("");
-        daysField.setText("");
+        licenseField.setText("");
     }
 }
 
