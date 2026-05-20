@@ -20,5 +20,13 @@ public class HomePage extends JFrame {
             cf.setVisible(true);
             this.dispose();
         });
+        
+        JButton btnBack = new JButton("Back to Main Menu");
+        btnBack.setBounds(200, 280, 180, 40);
+        add(btnBack);
+        
+        btnBack.addActionListener(e -> {
+            dispose();
+        });
     }
 }
