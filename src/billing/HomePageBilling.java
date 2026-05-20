@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package carrentalsystemmain;
+package billing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,12 +12,13 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-class HomePageBilling extends JFrame implements ActionListener {
+public class HomePageBilling extends JFrame implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
     private JButton btnEnter;
+    private String resNoText;
     
-    HomePageBilling (){
+    public HomePageBilling (){
         setSize(600,600);
         setTitle("Billing System");
         setLayout(null);
@@ -45,13 +46,27 @@ class HomePageBilling extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==btnEnter){
-            String resNoText = txtResNo.getText().trim();
-            if (resNoText.matches("0000")){
-                MonthPage mp = new MonthPage();
-                mp.setVisible(true);
+        if (e.getSource() == btnEnter) {
+
+            resNoText = txtResNo.getText().trim();
+
+            if (resNoText == null || resNoText.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Please enter a reservation number!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (resNoText.equals("0000")) {
+                bill b = new bill(resNoText);
+                b.setVisible(true);
+                this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Reservation number is not recorded. Try again!","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Reservation number is not recorded. Try again!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }

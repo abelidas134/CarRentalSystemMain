@@ -1,11 +1,11 @@
-package carrentalsystemmain;
+package customers;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class CustomerForm extends JFrame implements Searchable{
-    private ArrayList<CustomerPageCusRecMan> customerList = new ArrayList<>();
+public class CustomerForm extends JFrame implements Searchable {
+    private ArrayList<CustomerPage> customerList = new ArrayList<>();
 
     private JTextField txtId, txtName, txtPhone, txtLicense, txtAddress, txtSearch;
 
@@ -106,13 +106,13 @@ public class CustomerForm extends JFrame implements Searchable{
                 JOptionPane.showMessageDialog(this,"Missing fields: " + missing.substring(0, missing.length() - 2));
                    return;
 }        
-            for(CustomerPageCusRecMan c : customerList){
+            for(CustomerPage c : customerList){
                 if(c.getId() == id){
                     JOptionPane.showMessageDialog(this, "Customer with this ID already exists.");
                     return;
                 }
             }
-            CustomerPageCusRecMan c = new CustomerPageCusRecMan(
+            CustomerPage c = new CustomerPage(
                 id,
                 txtName.getText(),
                 txtPhone.getText(),
@@ -136,8 +136,8 @@ public class CustomerForm extends JFrame implements Searchable{
                 JOptionPane.showMessageDialog(this, "ID must be a number.");
                 return;
             }
-            CustomerPageCusRecMan found = null;
-            for(CustomerPageCusRecMan c : customerList){
+            CustomerPage found = null;
+            for(CustomerPage c : customerList){
                 if(c.getId() == id){
                     found = c;
                     break;
@@ -179,7 +179,7 @@ public class CustomerForm extends JFrame implements Searchable{
         btnClear.addActionListener(e -> clearFields());
 
         btnBack.addActionListener(e -> {
-            AdminOption hp = new AdminOption();
+            HomePage hp = new HomePage();
             hp.setVisible(true);
             this.dispose();
         });
@@ -199,11 +199,11 @@ public class CustomerForm extends JFrame implements Searchable{
                 JOptionPane.showMessageDialog(this, "Enter ID or Fullname to search before viewing.");
                 return;
             }
-            ArrayList<CustomerPageCusRecMan> results = searchResults(keyword);
+            ArrayList<CustomerPage> results = searchResults(keyword);
             if(results.isEmpty()){
                 JOptionPane.showMessageDialog(this, "No customer found.");
             } else if(results.size() == 1){
-                CustomerPageCusRecMan c = results.get(0);
+                CustomerPage c = results.get(0);
                 showCustomerDetails(c);
             } else {
                 String[] options = new String[results.size()];
@@ -215,8 +215,8 @@ public class CustomerForm extends JFrame implements Searchable{
                     JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                 if(choice != null){
                     int chosenId = Integer.parseInt(choice.split(" - ")[0]);
-                    CustomerPageCusRecMan chosen = null;
-                    for(CustomerPageCusRecMan c : results){
+                    CustomerPage chosen = null;
+                    for(CustomerPage c : results){
                         if(c.getId() == chosenId){
                             chosen = c;
                             break;
@@ -239,7 +239,7 @@ public class CustomerForm extends JFrame implements Searchable{
         txtSearch.setText("");
     }
 
-    private void showCustomerDetails(CustomerPageCusRecMan c){
+    private void showCustomerDetails(CustomerPage c){
         JOptionPane.showMessageDialog(this,
             "ID: " + c.getId() +
             "\nName: " + c.getName() +
@@ -251,14 +251,14 @@ public class CustomerForm extends JFrame implements Searchable{
 
     @Override
     public void search(String searchTerm){
-    ArrayList<CustomerPageCusRecMan> matchedCustomers = searchResults(searchTerm);
+    ArrayList<CustomerPage> matchedCustomers = searchResults(searchTerm);
     
     if(matchedCustomers.isEmpty()){
         JOptionPane.showMessageDialog(this, "No customer found.");
     } else {
         StringBuilder message = new StringBuilder("Found " + matchedCustomers.size() + " customer(s):\n");
         
-        for(CustomerPageCusRecMan customer : matchedCustomers){
+        for(CustomerPage customer : matchedCustomers){
             message.append(customer.getId())
                    .append(" - ")
                    .append(customer.getName())
@@ -269,9 +269,9 @@ public class CustomerForm extends JFrame implements Searchable{
     }
 }
 
-    private ArrayList<CustomerPageCusRecMan> searchResults(String keyword){
-        ArrayList<CustomerPageCusRecMan> results = new ArrayList<>();
-        for(CustomerPageCusRecMan c : customerList){
+    private ArrayList<CustomerPage> searchResults(String keyword){
+        ArrayList<CustomerPage> results = new ArrayList<>();
+        for(CustomerPage c : customerList){
             if(String.valueOf(c.getId()).equals(keyword) || c.getName().toLowerCase().contains(keyword.toLowerCase())){
                 results.add(c);
             }

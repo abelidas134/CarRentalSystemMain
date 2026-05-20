@@ -1,4 +1,4 @@
-package carrentalsystemmain;
+package customers;
 
 public interface Searchable {
     void search(String keyword);

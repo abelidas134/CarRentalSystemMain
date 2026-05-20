@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package carrentalsystemmain;
+package billing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -207,8 +207,8 @@ class MonthPage extends JFrame implements ActionListener {
                 if (daysTotal < 1) {
                     JOptionPane.showMessageDialog(this, "Drop-off day must be after pick-up day!", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    OutputPage op = new OutputPage(daysTotal); // pass total days
-                    op.setVisible(true);
+//                    OutputPage op = new OutputPage(daysTotal); 
+//                    op.setVisible(true);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Please select both pick-up and drop-off days!", "Error", JOptionPane.ERROR_MESSAGE);
