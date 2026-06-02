@@ -22,14 +22,14 @@ public class FoundationFrame extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         Color darkAzure = new Color(0, 95, 115);
         
-        ImageIcon bgIcon = new ImageIcon(CarRentalSystemMain.class.getResource("/img/secondBG.png"));
+        ImageIcon bgIcon = new ImageIcon(CarRentalSystemMain.class.getResource("/img/3rdBG.jpg"));
         JLabel background = new JLabel(bgIcon);
         background.setBounds(0, 0, 1366, 768);
         background.setLayout(null);
         add(background);
         
         AdminOption op = new AdminOption();
-        op.setBounds(775, 150, 550, 600);
+        op.setBounds(600, 100, 550, 600);
         op.setOpaque(false);
         background.add(op);
         

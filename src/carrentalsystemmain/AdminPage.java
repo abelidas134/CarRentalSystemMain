@@ -72,11 +72,21 @@ class AdminPage extends JPanel implements ActionListener {
             String userName = txtUserName.getText().trim();
             String pass = txtPassword.getText().trim();
             if (userName.matches("admin123")&&pass.matches("0000")){
+//                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+//                mainFrame.dispose();
+//                
+//                FoundationFrame ff = new FoundationFrame();
+//                ff.setVisible(true);
                 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                mainFrame.dispose();
-                
-                FoundationFrame ff = new FoundationFrame();
-                ff.setVisible(true);
+                Container c = mainFrame.getContentPane();
+                c.remove(this);
+
+                AdminOption ap = new AdminOption();
+                ap.setBounds(875, 175, 1366, 768);
+                c.add(ap);
+
+                mainFrame.revalidate();
+                mainFrame.repaint();
             } else {
                 lblMessage = new JLabel("Access Denied: Invalid credentials.");
                 lblMessage.setBounds(250, 350, 500, 100);

@@ -13,17 +13,33 @@ public class AdminOption extends JPanel implements ActionListener{
         setBounds(0,0,600, 600);
         setLayout(null);
         setOpaque(false);
-
+        Color darkAzure = new Color(0, 95, 115);
+        
         btnCustomer = new JButton("Customer Records");
-        btnCustomer.setBounds(180, 210, 230, 50);
+        btnCustomer.setBounds(300, 210, 230, 50);
+        btnCustomer.setFont(new Font("Poppins",Font.BOLD,15));
+        btnCustomer.setForeground(Color.WHITE);
+        btnCustomer.setBackground(darkAzure);
+        btnCustomer.setOpaque(true);
+        btnCustomer.setFocusPainted(false);
         add(btnCustomer);
         
         btnMaintenance = new JButton("Maintenance & Tracking");
-        btnMaintenance.setBounds(180, 275, 230, 50);
+        btnMaintenance.setBounds(300, 285, 230, 50);
+        btnMaintenance.setFont(new Font("Poppins",Font.BOLD,15));
+        btnMaintenance.setForeground(Color.WHITE);
+        btnMaintenance.setBackground(darkAzure);
+        btnMaintenance.setOpaque(true);
+        btnMaintenance.setFocusPainted(false);
         add(btnMaintenance);
         
         btnBack = new JButton ("Back");
-        btnBack.setBounds(10,520,100,25);
+        btnBack.setBounds(225,400,100,25);
+        btnBack.setFont(new Font("Poppins",Font.BOLD,15));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(darkAzure);
+        btnBack.setOpaque(true);
+        btnBack.setFocusPainted(false);
         add(btnBack);
         
         btnCustomer.addActionListener(this);
@@ -40,22 +56,30 @@ public class AdminOption extends JPanel implements ActionListener{
             staff_LogInPage lp = new staff_LogInPage();
             lp.setVisible(true);
         }else if (e.getSource()==btnBack){
-            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            currentFrame.dispose();
-            
-            JFrame mainFrame = new JFrame();
-            mainFrame.setSize(1366, 768);
-            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            mainFrame.setLocationRelativeTo(null);
-            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            
-            JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
-            background.setLayout(null);
+//            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+//            currentFrame.dispose();
+//            
+//            JFrame mainFrame = new JFrame();
+//            mainFrame.setSize(1366, 768);
+//            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            mainFrame.setLocationRelativeTo(null);
+//            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//            
+//            JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+//            background.setLayout(null);
+//            AdminPage ap = new AdminPage();
+//            ap.setBounds(875, 175, 1366, 768);
+//            background.add(ap);
+//            mainFrame.setContentPane(background);
+//            mainFrame.setVisible(true);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
             AdminPage ap = new AdminPage();
             ap.setBounds(875, 175, 1366, 768);
             background.add(ap);
-            mainFrame.setContentPane(background);
-            mainFrame.setVisible(true);
+            background.revalidate();
+            background.repaint();
         }
     }
 }

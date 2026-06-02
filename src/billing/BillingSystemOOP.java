@@ -11,7 +11,7 @@ public class BillingSystemOOP {
     static int ratePerDay = 2000;
     static int penaltyRate = 600;
     static int cleaningFee = 400;
-    static double damageFee = ratePerDay * 0.50; // 50% of daily rate
+    static double damageFee = ratePerDay * 0.50; 
     
     static double finalTotal, tax, subTotal;
     static int actualReturnDate = 0, expectedReturnDate = 0;
@@ -30,7 +30,7 @@ public class BillingSystemOOP {
             
             reservationStatus();
         } else {
-            System.out.println("❌ Reservation number not found. Try again!");
+            System.out.println("Reservation number not found. Try again!");
         }
         scan.close();
     }
@@ -52,24 +52,24 @@ public class BillingSystemOOP {
     public static int monthsPick(String monthPick, String monthDrop) {
         daysOfMonthPick = getDaysInMonth(monthPick);
         if (pickUp < 1 || pickUp > daysOfMonthPick) {
-            System.out.println("❌ Invalid pick-up day for " + monthPick + "!");
+            System.out.println("Invalid pick-up day for " + monthPick + "!");
             System.exit(1);
         }
         
         daysOfMonthDrop = getDaysInMonth(monthDrop);
         if (dropOff < 1 || dropOff > daysOfMonthDrop) {
-            System.out.println("❌ Invalid drop-off day for " + monthDrop + "!");
+            System.out.println("Invalid drop-off day for " + monthDrop + "!");
             System.exit(1);
         }
         
         daysRented = dropOff - pickUp + 1;
         
         if (daysRented < 1) {
-            System.out.println("❌ Drop-off must be after pick-up!");
+            System.out.println("Drop-off must be after pick-up!");
             System.exit(1);
         }
         
-        System.out.println("✅ Valid rental: " + pickUp + "-" + dropOff + " (" + daysRented + " days)");
+        System.out.println("Valid rental: " + pickUp + "-" + dropOff + " (" + daysRented + " days)");
         return daysRented;
     }
     public static int getDaysInMonth(String month) {
@@ -84,15 +84,12 @@ public class BillingSystemOOP {
                 year = scan.nextInt();
                 return isLeapYear(year) ? 29 : 28;
             default:
-                System.out.println("❌ Invalid month: " + month);
+                System.out.println("Invalid month: " + month);
                 System.exit(1);
                 return 0; 
         }
     }
     
-    /**
-     * Check if year is leap year
-     */
     public static boolean isLeapYear(int year) {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
@@ -103,16 +100,16 @@ public class BillingSystemOOP {
         switch (rStatus) {
             case "active":
             case "completed":
-                System.out.println("\n📋 Reservation Status: " + rStatus.toUpperCase());
+                System.out.println("\nReservation Status: " + rStatus.toUpperCase());
                 calculateBill();
                 generateInvoice();
                 break;
             case "cancelled":
-                System.out.println("❌ Reservation Status: Cancelled");
+                System.out.println("Reservation Status: Cancelled");
                 System.out.println("Thank you for trying with us!");
                 break;
             default:
-                System.out.println("❓ Unknown reservation status");
+                System.out.println("Unknown reservation status");
                 break;
         }
     }
@@ -126,7 +123,7 @@ public class BillingSystemOOP {
         double extraFees = cleaningFee + damageFee;
         
         subTotal = rentalCost + latePenalty + extraFees;
-        tax = subTotal * 0.12;  // 12% tax
+        tax = subTotal * 0.12;  
         finalTotal = subTotal + tax;
     }
     
