@@ -1,6 +1,7 @@
 
 package carrentalsystemmain;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -8,32 +9,43 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-class Homepage extends JFrame implements ActionListener {
+class Homepage extends JPanel implements ActionListener {
     private JLabel lblHome;
     private JButton btnAdmin;
     private JButton btnCustomer;
     
     Homepage(){
-        setSize(1000,600);
-        setTitle("Main Page");
+        setBounds(0,0,1000,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setOpaque(false);
         
-        lblHome = new JLabel ("Welcome Back!");
-        lblHome.setBounds(425,150,150,100);
+        lblHome = new JLabel ("Log in your Account");
+        lblHome.setBounds(350,150,250,100);
+        lblHome.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblHome);
         
         lblHome = new JLabel ("Log in to manage your car rentals and get on the road!");
-        lblHome.setBounds(325,175,500,100);
+        lblHome.setFont(new Font("Poppins",Font.PLAIN,14));
+        lblHome.setBounds(300,175,500,100);
         add(lblHome);
         
+        Color darkAzure = new Color(0, 95, 115);
         btnAdmin = new JButton ("ADMIN");
-        btnAdmin.setBounds(275,275,175,50);
+        btnAdmin.setFont(new Font("Poppins",Font.BOLD,20));
+        btnAdmin.setForeground(Color.WHITE);
+        btnAdmin.setBackground(darkAzure);
+        btnAdmin.setOpaque(true);
+        btnAdmin.setFocusPainted(false);
+        btnAdmin.setBounds(375,275,175,50);
         add(btnAdmin);
         
         btnCustomer = new JButton ("CUSTOMER");
-        btnCustomer.setBounds(500,275,175,50);
+        btnCustomer.setFont(new Font("Poppins",Font.BOLD,20));
+        btnCustomer.setForeground(Color.WHITE);
+        btnCustomer.setBackground(darkAzure);
+        btnCustomer.setOpaque(true);
+        btnCustomer.setFocusPainted(false);
+        btnCustomer.setBounds(375,360,175,50);
         add(btnCustomer);
         
         btnAdmin.addActionListener(this);
@@ -45,11 +57,28 @@ class Homepage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==btnAdmin){
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container c = mainFrame.getContentPane();
+            c.remove(this);
+            
             AdminPage ap = new AdminPage();
-            ap.setVisible(true);
+            ap.setBounds(875, 175, 1366, 768); 
+            c.add(ap);
+            
+            mainFrame.revalidate();
+            mainFrame.repaint();
+            
         } else if (e.getSource()==btnCustomer){
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container c = mainFrame.getContentPane();
+            c.remove(this);
+
             CustomerPage cp = new CustomerPage();
-            cp.setVisible(true);
+            cp.setBounds(875, 150, 1366, 768);
+            c.add(cp);
+
+            mainFrame.revalidate();
+            mainFrame.repaint();
         }
     }
     

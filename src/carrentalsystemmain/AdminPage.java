@@ -1,6 +1,7 @@
 
 package carrentalsystemmain;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -8,44 +9,57 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-class AdminPage extends JFrame implements ActionListener {
+class AdminPage extends JPanel implements ActionListener {
     private JLabel lblMessage, lblUserName, lblPassword;
-    private JTextField txtUserName, txtPassword;
+    private JTextField txtUserName;
     private JButton btnLogin, btnBack;
+    private JPasswordField txtPassword;
     
     AdminPage(){
-        setSize(600,600);
-        setTitle("Admin Account");
+        setBounds(0,0,600,600);
         setLayout(null);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setOpaque(false);
         
         lblMessage = new JLabel ("ADMIN ACCOUNT");
         lblMessage.setBounds(250, 125, 500,100);
+        lblMessage.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblMessage);
         
         lblUserName = new JLabel ("Username:");
-        lblUserName.setBounds(190,175, 100,100);
+        lblUserName.setBounds(190,190, 150,100);
+        lblUserName.setFont(new Font("Poppins",Font.BOLD,15));
         add(lblUserName);
         
         txtUserName = new JTextField (" ");
-        txtUserName.setBounds(290,210,150,30);
+        txtUserName.setBounds(310,225,200,40);
         add(txtUserName);
         
         lblPassword = new JLabel ("Password:");
-        lblPassword.setBounds(190,215,100,100);
+        lblPassword.setBounds(190,250,100,100);
+        lblPassword.setFont(new Font("Poppins",Font.BOLD,15));
         add(lblPassword);
         
-        txtPassword = new JTextField (" ");
-        txtPassword.setBounds(290,250,150,30);
+        txtPassword = new JPasswordField ("");
+        txtPassword.setBounds(310,285,200,40);
         add(txtPassword);
         
+        Color darkAzure = new Color(0, 95, 115);
         btnLogin = new JButton ("Log In");
-        btnLogin.setBounds(240,300,100,25);
+        btnLogin.setFont(new Font("Poppins",Font.BOLD,15));
+        btnLogin.setForeground(Color.WHITE);
+        btnLogin.setBackground(darkAzure);
+        btnLogin.setOpaque(true);
+        btnLogin.setFocusPainted(false);
+        btnLogin.setBounds(370,350,100,25);
         add(btnLogin);
         
         btnBack = new JButton ("Back");
-        btnBack.setBounds(10,520,100,25);
+        btnBack.setFont(new Font("Poppins",Font.BOLD,15));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(darkAzure);
+        btnBack.setOpaque(true);
+        btnBack.setFocusPainted(false);
+        btnBack.setBounds(225,350,100,25);
         add(btnBack);
         
         btnLogin.addActionListener(this);
@@ -58,14 +72,29 @@ class AdminPage extends JFrame implements ActionListener {
             String userName = txtUserName.getText().trim();
             String pass = txtPassword.getText().trim();
             if (userName.matches("admin123")&&pass.matches("0000")){
-                AdminOption ao = new AdminOption();
-                ao.setVisible(true);
+                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                mainFrame.dispose();
+                
+                FoundationFrame ff = new FoundationFrame();
+                ff.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid account!","ERROR",JOptionPane.ERROR_MESSAGE);
+                lblMessage = new JLabel("Access Denied: Invalid credentials.");
+                lblMessage.setBounds(250, 350, 500, 100);
+                lblMessage.setFont(new Font("Poppins", Font.CENTER_BASELINE, 13));
+                lblMessage.setForeground(Color.red);
+                add(lblMessage);
+                revalidate();
+                repaint();
             }
         } else if (e.getSource()==btnBack){
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
             Homepage hp = new Homepage();
-            hp.setVisible(true);
+            hp.setBounds(775, 150, 1366, 768);  
+            background.add(hp);
+            background.revalidate();
+            background.repaint();
         }
     }
     

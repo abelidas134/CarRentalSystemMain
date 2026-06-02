@@ -3,15 +3,16 @@ package carrentalsystemmain;
 import java.awt.event.*;
 import javax.swing.*;
 import customers.*;
+import java.awt.*;
 import serviceTracking.*;
-public class AdminOption extends JFrame implements ActionListener{
+
+public class AdminOption extends JPanel implements ActionListener{
     private JButton btnCustomer, btnBack, btnMaintenance;
+    
     public AdminOption() {
-        setTitle("ADMIN OPTIONS");
-        setSize(600, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setBounds(0,0,600, 600);
         setLayout(null);
+        setOpaque(false);
 
         btnCustomer = new JButton("Customer Records");
         btnCustomer.setBounds(180, 210, 230, 50);
@@ -39,8 +40,22 @@ public class AdminOption extends JFrame implements ActionListener{
             staff_LogInPage lp = new staff_LogInPage();
             lp.setVisible(true);
         }else if (e.getSource()==btnBack){
+            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            currentFrame.dispose();
+            
+            JFrame mainFrame = new JFrame();
+            mainFrame.setSize(1366, 768);
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            
+            JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+            background.setLayout(null);
             AdminPage ap = new AdminPage();
-            ap.setVisible(true);
+            ap.setBounds(875, 175, 1366, 768);
+            background.add(ap);
+            mainFrame.setContentPane(background);
+            mainFrame.setVisible(true);
         }
     }
 }
