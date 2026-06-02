@@ -11,7 +11,7 @@ public class BillingSystemOOP {
     static int ratePerDay = 2000;
     static int penaltyRate = 600;
     static int cleaningFee = 400;
-    static double damageFee = ratePerDay * 0.50; // 50% of daily rate
+    static double damageFee = ratePerDay * 0.50; 
     
     static double finalTotal, tax, subTotal;
     static int actualReturnDate = 0, expectedReturnDate = 0;
