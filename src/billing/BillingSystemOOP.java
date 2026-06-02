@@ -2,36 +2,28 @@ package billing;
 
 import java.util.*;
 
-/**
- * Car Rental Billing System - COMPLETE FIXED VERSION
- * @author Mickey (Fixed by AI Assistant)
- */
 public class BillingSystemOOP {
     static Scanner scan = new Scanner(System.in);
     
-    // Rental inputs
     static int daysRented, pickUp, dropOff, year;
     static String reservationNo, pickUpMonth, dropOffMonth;
     
-    // Billing constants
     static int ratePerDay = 2000;
     static int penaltyRate = 600;
     static int cleaningFee = 400;
     static double damageFee = ratePerDay * 0.50; // 50% of daily rate
     
-    // Billing variables
     static double finalTotal, tax, subTotal;
     static int actualReturnDate = 0, expectedReturnDate = 0;
     static String paymentStatus = "paid";
     
-    // Month validation
     static int daysOfMonthPick = 0, daysOfMonthDrop = 0;
     
     public static void main(String[] args) {
         System.out.print("Enter reservation number: ");
         reservationNo = scan.nextLine();
         
-        if (reservationNo.equals("0000")) { // Demo reservation
+        if (reservationNo.equals("0000")) { 
             getRentalDates();
             int rentalDays = monthsPick(pickUpMonth, dropOffMonth);
             System.out.println("Rental Days: " + rentalDays);
@@ -43,15 +35,13 @@ public class BillingSystemOOP {
         scan.close();
     }
     
-    /**
-     * Get pick-up and drop-off dates from user
-     */
+    
     public static void getRentalDates() {
         System.out.print("Pick-up Month: ");
         pickUpMonth = scan.nextLine().toLowerCase();
         System.out.print("Pick-up Day: ");
         pickUp = scan.nextInt();
-        scan.nextLine(); // Clear buffer
+        scan.nextLine(); 
         
         System.out.print("Drop-off Month: ");
         dropOffMonth = scan.nextLine().toLowerCase();
@@ -59,26 +49,19 @@ public class BillingSystemOOP {
         dropOff = scan.nextInt();
     }
     
-    /**
-     * Validate months and calculate rental days
-     * @return total rental days
-     */
     public static int monthsPick(String monthPick, String monthDrop) {
-        // ✅ VALIDATE PICK-UP MONTH & DAY
         daysOfMonthPick = getDaysInMonth(monthPick);
         if (pickUp < 1 || pickUp > daysOfMonthPick) {
             System.out.println("❌ Invalid pick-up day for " + monthPick + "!");
             System.exit(1);
         }
         
-        // ✅ VALIDATE DROP-OFF MONTH & DAY  
         daysOfMonthDrop = getDaysInMonth(monthDrop);
         if (dropOff < 1 || dropOff > daysOfMonthDrop) {
             System.out.println("❌ Invalid drop-off day for " + monthDrop + "!");
             System.exit(1);
         }
         
-        // ✅ CORRECT RENTAL DAYS: dropOff - pickUp + 1 (inclusive)
         daysRented = dropOff - pickUp + 1;
         
         if (daysRented < 1) {
@@ -89,10 +72,6 @@ public class BillingSystemOOP {
         System.out.println("✅ Valid rental: " + pickUp + "-" + dropOff + " (" + daysRented + " days)");
         return daysRented;
     }
-    
-    /**
-     * Get number of days in a month (handles leap year)
-     */
     public static int getDaysInMonth(String month) {
         switch (month) {
             case "january": case "march": case "may": case "july":
@@ -107,7 +86,7 @@ public class BillingSystemOOP {
             default:
                 System.out.println("❌ Invalid month: " + month);
                 System.exit(1);
-                return 0; // Unreachable
+                return 0; 
         }
     }
     
@@ -118,9 +97,6 @@ public class BillingSystemOOP {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
     
-    /**
-     * Process reservation based on status
-     */
     public static void reservationStatus() {
         String rStatus = "active"; // From reservation database
         
@@ -141,29 +117,19 @@ public class BillingSystemOOP {
         }
     }
     
-    /**
-     * Calculate complete bill with all fees
-     */
     public static void calculateBill() {
-        // ✅ DAILY RENTAL COST
         int rentalCost = ratePerDay * daysRented;
         
-        // ✅ LATE RETURN PENALTY (if applicable)
         int extraDays = Math.max(0, actualReturnDate - expectedReturnDate);
         int latePenalty = extraDays * penaltyRate;
         
-        // ✅ FIXED FEES
         double extraFees = cleaningFee + damageFee;
         
-        // ✅ TOTALS
         subTotal = rentalCost + latePenalty + extraFees;
         tax = subTotal * 0.12;  // 12% tax
         finalTotal = subTotal + tax;
     }
     
-    /**
-     * Print professional invoice
-     */
     public static void generateInvoice() {
         System.out.println("\n" + "═".repeat(50));
         System.out.println("                    CAR RENTAL INVOICE");
