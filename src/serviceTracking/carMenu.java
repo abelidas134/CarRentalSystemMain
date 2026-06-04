@@ -17,7 +17,7 @@ public class carMenu extends JPanel implements ActionListener{
     
     public carMenu(){
         
-        setBounds(0,0,1000,600);
+        setBounds(450,150,1000,600);
         setLayout(null);
         setOpaque(false);
         Color darkAzure = new Color(0, 95, 115);

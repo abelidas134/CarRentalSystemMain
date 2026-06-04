@@ -53,12 +53,12 @@ public class AdminOption extends JPanel implements ActionListener{
             JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
             current.dispose();
 
-            FoundationFrame ff = new FoundationFrame(new CustomerForm(),600, 100, 550, 600);
+            FoundationFrame ff = new FoundationFrame(new CustomerForm());
         }else if (e.getSource()==btnMaintenance){
             JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
             current.dispose();
 
-            FoundationFrame ff = new FoundationFrame(new carMenu(),10, 50, 1000, 600);
+            FoundationFrame ff = new FoundationFrame(new carMenu());
         }else if (e.getSource()==btnBack){
 //            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 //            currentFrame.dispose();

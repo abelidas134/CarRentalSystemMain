@@ -16,7 +16,7 @@ import javax.swing.*;
 public class FoundationFrame extends JFrame{
     private JButton btnBack, btnRecords, btnMaintenance;
     
-    public FoundationFrame(JPanel panel, int x, int y, int w, int h) {
+    public FoundationFrame(JPanel panel) {
         setSize(1366, 768);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -27,8 +27,6 @@ public class FoundationFrame extends JFrame{
         );
 
         background.setLayout(null);
-
-        panel.setBounds(600, 100, 550, 600);
         panel.setOpaque(false);
 
         background.add(panel);

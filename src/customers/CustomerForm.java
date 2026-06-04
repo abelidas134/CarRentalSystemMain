@@ -12,55 +12,56 @@ public class CustomerForm extends JPanel implements Searchable {
     private ArrayList<CustomerPage> customerList = new ArrayList<>();
 
     private JTextField txtId, txtName, txtPhone, txtLicense, txtAddress, txtSearch;
+    
 
     public CustomerForm() {
-        setSize(600, 400);
+        setBounds(575, 225, 1000, 1000);
         setLayout(null);
         setOpaque(false);
         Color darkAzure = new Color(0, 95, 115);
 
         JLabel lblId = new JLabel("Customer ID:");
-        lblId.setBounds(50, 70, 100, 25);
+        lblId.setBounds(50, 75, 200, 25);
         lblId.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblId);
         txtId = new JTextField();
-        txtId.setBounds(150, 70, 200,40);
+        txtId.setBounds(250, 70, 300,40);
         add(txtId);
 
         JLabel lblName = new JLabel("Full Name:");
-        lblName.setBounds(50, 100, 100, 25);
+        lblName.setBounds(50, 125, 200, 25);
         lblName.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblName);
         txtName = new JTextField();
-        txtName.setBounds(150, 100,200,40);
+        txtName.setBounds(250, 125,300,40);
         add(txtName);
 
         JLabel lblPhone = new JLabel("Phone Number:");
-        lblPhone.setBounds(50, 130, 100, 25);
+        lblPhone.setBounds(50, 180, 200, 25);
         lblPhone.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblPhone);
         txtPhone = new JTextField();
-        txtPhone.setBounds(150, 130, 200,40);
+        txtPhone.setBounds(250, 180, 300,40);
         add(txtPhone);
 
         JLabel lblLicense = new JLabel("Drivers License:");
-        lblLicense.setBounds(50, 160, 100, 25);
+        lblLicense.setBounds(50, 235, 200, 25);
         lblLicense.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblLicense);
         txtLicense = new JTextField();
-        txtLicense.setBounds(150, 160, 200,40);
+        txtLicense.setBounds(250, 235, 300,40);
         add(txtLicense);
 
         JLabel lblAddress = new JLabel("Address:");
-        lblAddress.setBounds(50, 190, 100, 25);
+        lblAddress.setBounds(50, 290, 200, 25);
         lblAddress.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblAddress);
         txtAddress = new JTextField();
-        txtAddress.setBounds(150, 190,200,40);
+        txtAddress.setBounds(250, 290,300,40);
         add(txtAddress);
 
         JButton btnAdd = new JButton("Add");
-        btnAdd.setBounds(320, 70, 100, 25);
+        btnAdd.setBounds(600, 75, 100, 25);
         btnAdd.setFont(new Font("Poppins",Font.BOLD,15));
         btnAdd.setForeground(Color.WHITE);
         btnAdd.setBackground(darkAzure);
@@ -69,7 +70,7 @@ public class CustomerForm extends JPanel implements Searchable {
         add(btnAdd);
 
         JButton btnUpdate = new JButton("Update");
-        btnUpdate.setBounds(320, 100, 100, 25);
+        btnUpdate.setBounds(600, 128, 100, 25);
         btnUpdate.setFont(new Font("Poppins",Font.BOLD,15));
         btnUpdate.setForeground(Color.WHITE);
         btnUpdate.setBackground(darkAzure);
@@ -78,7 +79,7 @@ public class CustomerForm extends JPanel implements Searchable {
         add(btnUpdate);
 
         JButton btnDelete = new JButton("Delete");
-        btnDelete.setBounds(320, 130, 100, 25);
+        btnDelete.setBounds(600, 188, 100, 25);
         btnDelete.setFont(new Font("Poppins",Font.BOLD,15));
         btnDelete.setForeground(Color.WHITE);
         btnDelete.setBackground(darkAzure);
@@ -87,7 +88,7 @@ public class CustomerForm extends JPanel implements Searchable {
         add(btnDelete);
 
         JButton btnClear = new JButton("Clear");
-        btnClear.setBounds(320, 160, 100, 25);
+        btnClear.setBounds(600, 238, 100, 25);
         btnClear.setFont(new Font("Poppins",Font.BOLD,15));
         btnClear.setForeground(Color.WHITE);
         btnClear.setBackground(darkAzure);
@@ -96,11 +97,11 @@ public class CustomerForm extends JPanel implements Searchable {
         add(btnClear);
 
         txtSearch = new JTextField();
-        txtSearch.setBounds(50, 20, 200,40);
+        txtSearch.setBounds(50, 5, 300,40);
         add(txtSearch);
 
         JButton btnSearch = new JButton("Search");
-        btnSearch.setBounds(270, 20, 100, 25);
+        btnSearch.setBounds(400, 7, 100, 25);
         btnSearch.setFont(new Font("Poppins",Font.BOLD,15));
         btnSearch.setForeground(Color.WHITE);
         btnSearch.setBackground(darkAzure);
@@ -109,7 +110,7 @@ public class CustomerForm extends JPanel implements Searchable {
         add(btnSearch);
 
         JButton btnView = new JButton("View");
-        btnView.setBounds(380, 20, 100, 25);
+        btnView.setBounds(550, 7, 100, 25);
         btnView.setFont(new Font("Poppins",Font.BOLD,15));
         btnView.setForeground(Color.WHITE);
         btnView.setBackground(darkAzure);
@@ -118,24 +119,28 @@ public class CustomerForm extends JPanel implements Searchable {
         add(btnView);
 
         JButton btnBack = new JButton("Back");
-        btnBack.setBounds(200, 280, 180, 40);
+        btnBack.setBounds(5, 475, 180, 40);
         btnBack.setFont(new Font("Poppins",Font.BOLD,15));
         btnBack.setForeground(Color.WHITE);
         btnBack.setBackground(darkAzure);
         btnBack.setOpaque(true);
         btnBack.setFocusPainted(false);
         add(btnBack);
-
+        
+        UIManager.put("OptionPane.background", Color.WHITE);
+        UIManager.put("Panel.background", Color.WHITE);
+        UIManager.put("OptionPane.messageFont",new Font("Poppins", Font.BOLD, 14));
+        
         btnAdd.addActionListener(e -> {
             if(txtId.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "ID cannot be empty.");
+                JOptionPane.showMessageDialog(null, "ID cannot be empty.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             int id;
             try {
                 id = Integer.parseInt(txtId.getText());
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "ID must be a number.");
+                JOptionPane.showMessageDialog(null, "ID must be a number.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             } 
            StringBuilder missing = new StringBuilder();
@@ -151,7 +156,7 @@ public class CustomerForm extends JPanel implements Searchable {
 }        
             for(CustomerPage c : customerList){
                 if(c.getId() == id){
-                    JOptionPane.showMessageDialog(this, "Customer with this ID already exists.");
+                    JOptionPane.showMessageDialog(null, "Customer with this ID already exists.","Error", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
@@ -163,20 +168,20 @@ public class CustomerForm extends JPanel implements Searchable {
                 txtAddress.getText()            
             );
             customerList.add(c);
-            JOptionPane.showMessageDialog(this, "Customer added.");
+            JOptionPane.showMessageDialog(null, "Customer added.","Successful", JOptionPane.PLAIN_MESSAGE);
             clearFields();
         });
 
         btnUpdate.addActionListener(e -> {
             if(txtId.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "ID is required to update.");
+                JOptionPane.showMessageDialog(null, "ID is required to update.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             int id;
             try {
                 id = Integer.parseInt(txtId.getText());
             } catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(this, "ID must be a number.");
+                JOptionPane.showMessageDialog(null, "ID must be a number.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             CustomerPage found = null;
@@ -187,35 +192,35 @@ public class CustomerForm extends JPanel implements Searchable {
                 }
             }
             if(found == null){
-                JOptionPane.showMessageDialog(this, "Customer not found.");
+                JOptionPane.showMessageDialog(null, "Customer not found.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             found.setName(txtName.getText());
             found.setPhone(txtPhone.getText());
             found.setLicense(txtLicense.getText());
             found.setAddress(txtAddress.getText());
-            JOptionPane.showMessageDialog(this, "Customer updated.");
+            JOptionPane.showMessageDialog(null, "Customer updated.","Updates", JOptionPane.PLAIN_MESSAGE);
             clearFields();
         });
 
         btnDelete.addActionListener(e -> {
             if(txtId.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "ID is required to delete.");
+                JOptionPane.showMessageDialog(null, "ID is required to delete.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             int id;
             try {
                 id = Integer.parseInt(txtId.getText());
             } catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(this, "ID must be a number.");
+                JOptionPane.showMessageDialog(null, "ID must be a number.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             boolean removed = customerList.removeIf(c -> c.getId() == id);
             if(removed){
-                JOptionPane.showMessageDialog(this, "Customer deleted.");
+                JOptionPane.showMessageDialog(null, "Customer deleted.","Error", JOptionPane.PLAIN_MESSAGE);
                 clearFields();
             } else {
-                JOptionPane.showMessageDialog(this, "Customer not found.");
+                JOptionPane.showMessageDialog(null, "Customer not found.","Error", JOptionPane.PLAIN_MESSAGE);
             }
         });
 
@@ -243,7 +248,7 @@ public class CustomerForm extends JPanel implements Searchable {
         btnSearch.addActionListener(e -> {
             String keyword = txtSearch.getText().trim();
             if(keyword.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Enter ID or Fullname to search.");
+                JOptionPane.showMessageDialog(null, "Enter ID or Fullname to search.","Error", JOptionPane.OK_OPTION);
                 return;
             }
             search(keyword);
@@ -252,12 +257,12 @@ public class CustomerForm extends JPanel implements Searchable {
         btnView.addActionListener(e -> {
             String keyword = txtSearch.getText().trim();
             if(keyword.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Enter ID or Fullname to search before viewing.");
+                JOptionPane.showMessageDialog(null, "Enter ID or Fullname to search before viewing.","Error", JOptionPane.OK_OPTION);
                 return;
             }
             ArrayList<CustomerPage> results = searchResults(keyword);
             if(results.isEmpty()){
-                JOptionPane.showMessageDialog(this, "No customer found.");
+                JOptionPane.showMessageDialog(null, "No customer found.","Error", JOptionPane.OK_OPTION);
             } else if(results.size() == 1){
                 CustomerPage c = results.get(0);
                 showCustomerDetails(c);
