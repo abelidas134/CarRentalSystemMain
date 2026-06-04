@@ -4,6 +4,7 @@
  */
 package carrentalsystemmain;
 
+import customers.CustomerForm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -15,28 +16,26 @@ import javax.swing.*;
 public class FoundationFrame extends JFrame{
     private JButton btnBack, btnRecords, btnMaintenance;
     
-    FoundationFrame(){
+    public FoundationFrame(JPanel panel, int x, int y, int w, int h) {
         setSize(1366, 768);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        Color darkAzure = new Color(0, 95, 115);
-        
-        ImageIcon bgIcon = new ImageIcon(CarRentalSystemMain.class.getResource("/img/3rdBG.jpg"));
-        JLabel background = new JLabel(bgIcon);
-        background.setBounds(0, 0, 1366, 768);
+
+        JLabel background = new JLabel(
+                new ImageIcon(
+                        CarRentalSystemMain.class.getResource("/img/3rdBG.jpg")
+                )
+        );
+
         background.setLayout(null);
-        add(background);
-        
-        AdminOption op = new AdminOption();
-        op.setBounds(600, 100, 550, 600);
-        op.setOpaque(false);
-        background.add(op);
-        
-        
+
+        panel.setBounds(600, 100, 550, 600);
+        panel.setOpaque(false);
+
+        background.add(panel);
+
         setContentPane(background);
-        
-          setVisible(true);
+
+        setVisible(true);
     }
     
 }

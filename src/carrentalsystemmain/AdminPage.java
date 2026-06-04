@@ -9,13 +9,13 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-class AdminPage extends JPanel implements ActionListener {
+public class AdminPage extends JPanel implements ActionListener {
     private JLabel lblMessage, lblUserName, lblPassword;
     private JTextField txtUserName;
     private JButton btnLogin, btnBack;
     private JPasswordField txtPassword;
     
-    AdminPage(){
+    public AdminPage(){
         setBounds(0,0,600,600);
         setLayout(null);
         setOpaque(false);
@@ -72,11 +72,6 @@ class AdminPage extends JPanel implements ActionListener {
             String userName = txtUserName.getText().trim();
             String pass = txtPassword.getText().trim();
             if (userName.matches("admin123")&&pass.matches("0000")){
-//                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//                mainFrame.dispose();
-//                
-//                FoundationFrame ff = new FoundationFrame();
-//                ff.setVisible(true);
                 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 Container c = mainFrame.getContentPane();
                 c.remove(this);

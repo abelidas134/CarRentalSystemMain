@@ -1,86 +1,129 @@
 package customers;
 
+import carrentalsystemmain.AdminOption;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import carrentalsystemmain.*;
 
-public class CustomerForm extends JFrame implements Searchable {
+public class CustomerForm extends JPanel implements Searchable {
     private ArrayList<CustomerPage> customerList = new ArrayList<>();
 
     private JTextField txtId, txtName, txtPhone, txtLicense, txtAddress, txtSearch;
 
     public CustomerForm() {
-        setTitle("Customer Management");
         setSize(600, 400);
         setLayout(null);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
 
         JLabel lblId = new JLabel("Customer ID:");
         lblId.setBounds(50, 70, 100, 25);
+        lblId.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblId);
         txtId = new JTextField();
-        txtId.setBounds(150, 70, 150, 25);
+        txtId.setBounds(150, 70, 200,40);
         add(txtId);
 
         JLabel lblName = new JLabel("Full Name:");
         lblName.setBounds(50, 100, 100, 25);
+        lblName.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblName);
         txtName = new JTextField();
-        txtName.setBounds(150, 100, 150, 25);
+        txtName.setBounds(150, 100,200,40);
         add(txtName);
 
         JLabel lblPhone = new JLabel("Phone Number:");
         lblPhone.setBounds(50, 130, 100, 25);
+        lblPhone.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblPhone);
         txtPhone = new JTextField();
-        txtPhone.setBounds(150, 130, 150, 25);
+        txtPhone.setBounds(150, 130, 200,40);
         add(txtPhone);
 
         JLabel lblLicense = new JLabel("Drivers License:");
         lblLicense.setBounds(50, 160, 100, 25);
+        lblLicense.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblLicense);
         txtLicense = new JTextField();
-        txtLicense.setBounds(150, 160, 150, 25);
+        txtLicense.setBounds(150, 160, 200,40);
         add(txtLicense);
 
         JLabel lblAddress = new JLabel("Address:");
         lblAddress.setBounds(50, 190, 100, 25);
+        lblAddress.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblAddress);
         txtAddress = new JTextField();
-        txtAddress.setBounds(150, 190, 150, 25);
+        txtAddress.setBounds(150, 190,200,40);
         add(txtAddress);
 
         JButton btnAdd = new JButton("Add");
         btnAdd.setBounds(320, 70, 100, 25);
+        btnAdd.setFont(new Font("Poppins",Font.BOLD,15));
+        btnAdd.setForeground(Color.WHITE);
+        btnAdd.setBackground(darkAzure);
+        btnAdd.setOpaque(true);
+        btnAdd.setFocusPainted(false);
         add(btnAdd);
 
         JButton btnUpdate = new JButton("Update");
         btnUpdate.setBounds(320, 100, 100, 25);
+        btnUpdate.setFont(new Font("Poppins",Font.BOLD,15));
+        btnUpdate.setForeground(Color.WHITE);
+        btnUpdate.setBackground(darkAzure);
+        btnUpdate.setOpaque(true);
+        btnUpdate.setFocusPainted(false);
         add(btnUpdate);
 
         JButton btnDelete = new JButton("Delete");
         btnDelete.setBounds(320, 130, 100, 25);
+        btnDelete.setFont(new Font("Poppins",Font.BOLD,15));
+        btnDelete.setForeground(Color.WHITE);
+        btnDelete.setBackground(darkAzure);
+        btnDelete.setOpaque(true);
+        btnDelete.setFocusPainted(false);
         add(btnDelete);
 
         JButton btnClear = new JButton("Clear");
         btnClear.setBounds(320, 160, 100, 25);
+        btnClear.setFont(new Font("Poppins",Font.BOLD,15));
+        btnClear.setForeground(Color.WHITE);
+        btnClear.setBackground(darkAzure);
+        btnClear.setOpaque(true);
+        btnClear.setFocusPainted(false);
         add(btnClear);
 
         txtSearch = new JTextField();
-        txtSearch.setBounds(50, 20, 200, 25);
+        txtSearch.setBounds(50, 20, 200,40);
         add(txtSearch);
 
         JButton btnSearch = new JButton("Search");
         btnSearch.setBounds(270, 20, 100, 25);
+        btnSearch.setFont(new Font("Poppins",Font.BOLD,15));
+        btnSearch.setForeground(Color.WHITE);
+        btnSearch.setBackground(darkAzure);
+        btnSearch.setOpaque(true);
+        btnSearch.setFocusPainted(false);
         add(btnSearch);
 
         JButton btnView = new JButton("View");
         btnView.setBounds(380, 20, 100, 25);
+        btnView.setFont(new Font("Poppins",Font.BOLD,15));
+        btnView.setForeground(Color.WHITE);
+        btnView.setBackground(darkAzure);
+        btnView.setOpaque(true);
+        btnView.setFocusPainted(false);
         add(btnView);
 
-        JButton btnBack = new JButton("Back to Main Menu");
+        JButton btnBack = new JButton("Back");
         btnBack.setBounds(200, 280, 180, 40);
+        btnBack.setFont(new Font("Poppins",Font.BOLD,15));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(darkAzure);
+        btnBack.setOpaque(true);
+        btnBack.setFocusPainted(false);
         add(btnBack);
 
         btnAdd.addActionListener(e -> {
@@ -179,9 +222,22 @@ public class CustomerForm extends JFrame implements Searchable {
         btnClear.addActionListener(e -> clearFields());
 
         btnBack.addActionListener(e -> {
-            HomePage hp = new HomePage();
-            hp.setVisible(true);
-            this.dispose();
+            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            currentFrame.dispose();
+            
+            JFrame mainFrame = new JFrame();
+            mainFrame.setSize(1366, 768);
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            
+            JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+            background.setLayout(null);
+            AdminOption ap = new AdminOption();
+            ap.setBounds(875, 175, 1366, 768);
+            background.add(ap);
+            mainFrame.setContentPane(background);
+            mainFrame.setVisible(true);
         });
 
         btnSearch.addActionListener(e -> {

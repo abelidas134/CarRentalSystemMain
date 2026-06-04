@@ -50,11 +50,15 @@ public class AdminOption extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==btnCustomer){
-            CustomerForm cf = new CustomerForm();
-            cf.setVisible(true);
+            JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+            current.dispose();
+
+            FoundationFrame ff = new FoundationFrame(new CustomerForm(),600, 100, 550, 600);
         }else if (e.getSource()==btnMaintenance){
-            staff_LogInPage lp = new staff_LogInPage();
-            lp.setVisible(true);
+            JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+            current.dispose();
+
+            FoundationFrame ff = new FoundationFrame(new carMenu(),10, 50, 1000, 600);
         }else if (e.getSource()==btnBack){
 //            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 //            currentFrame.dispose();

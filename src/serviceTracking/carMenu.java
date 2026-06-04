@@ -1,31 +1,35 @@
 package serviceTracking;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import carrentalsystemmain.*;
+import java.awt.Font;
 
 
-public class carMenu extends JFrame implements ActionListener{
+public class carMenu extends JPanel implements ActionListener{
     
     JLabel lblTitle, lblcarModel, lblplateNumber;
     JComboBox<String> dbtncarModel, dbtnplateNumber;
     JButton enterbtn, btnback;
     
     
-    carMenu(){
+    public carMenu(){
         
-        setSize(1000,600);
+        setBounds(0,0,1000,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Car Selection");
-        setLocationRelativeTo(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         lblTitle = new JLabel(">> Select A Car <<");
         lblTitle.setBounds(430,20,200,50);
+        lblTitle.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblTitle);
         
         lblcarModel = new JLabel("Car Model");
         lblcarModel.setBounds(235,150,200,50);
+        lblcarModel.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblcarModel);
         
         String[] dbcarModels = {"Toyota Vios","Nissan GT-R"};
@@ -35,6 +39,7 @@ public class carMenu extends JFrame implements ActionListener{
         
         lblplateNumber = new JLabel("Plate Number");
         lblplateNumber.setBounds(640,150,200,50);
+        lblplateNumber.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblplateNumber);
         
         
@@ -45,10 +50,20 @@ public class carMenu extends JFrame implements ActionListener{
        
         
         enterbtn = new JButton("Enter");
+        enterbtn.setFont(new Font("Poppins", Font.BOLD, 15));
+        enterbtn.setForeground(Color.WHITE);
+        enterbtn.setBackground(darkAzure);
+        enterbtn.setOpaque(true);
+        enterbtn.setFocusPainted(false);        
         enterbtn.setBounds(390,400,200,25);
         add(enterbtn);
         
         btnback = new JButton("Back");
+        btnback.setFont(new Font("Poppins", Font.BOLD, 15));
+        btnback.setForeground(Color.WHITE);
+        btnback.setBackground(darkAzure);
+        btnback.setOpaque(true);
+        btnback.setFocusPainted(false);
         btnback.setBounds(30,480,100,25);
         add(btnback);
         
@@ -65,7 +80,6 @@ public class carMenu extends JFrame implements ActionListener{
           //for the status, palaging carStatus + MODEL + plate number (wala na ung letters)
            if (selectedCar.equals("Toyota Vios")&& selectedPlate.equals("NCT 1270"))
            {
-               dispose();
                carStatusToyotaVios1270 csToyota1270 = new carStatusToyotaVios1270();
                csToyota1270.setVisible(true);
            }
@@ -73,7 +87,6 @@ public class carMenu extends JFrame implements ActionListener{
            else if (selectedCar.equals("Nissan GT-R")&& selectedPlate.equals("TRP 4567"))
            {
                // classssss carStatusNissanGTR4567
-               dispose();
                carStatusNissanGTR4567 csNissan4567 = new carStatusNissanGTR4567();
                csNissan4567.setVisible(true);
            }
@@ -86,7 +99,22 @@ public class carMenu extends JFrame implements ActionListener{
        }
        
        else if (j.getSource() == btnback){
-           dispose();
+            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            currentFrame.dispose();
+            
+            JFrame mainFrame = new JFrame();
+            mainFrame.setSize(1366, 768);
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            
+            JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+            background.setLayout(null);
+            AdminOption ap = new AdminOption();
+            ap.setBounds(875, 175, 1366, 768);
+            background.add(ap);
+            mainFrame.setContentPane(background);
+            mainFrame.setVisible(true);
        }
     }
     
