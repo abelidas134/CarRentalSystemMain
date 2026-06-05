@@ -80,7 +80,7 @@ public class CustomerOption extends JPanel implements ActionListener {
             Container background = mainFrame.getContentPane();
             background.remove(this);
             CustomerPage ap = new CustomerPage();
-            ap.setBounds(875, 175, 1366, 768);
+            ap.setBounds(950, 150, 1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();
