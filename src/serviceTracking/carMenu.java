@@ -22,13 +22,13 @@ public class carMenu extends JPanel implements ActionListener{
         setOpaque(false);
         Color darkAzure = new Color(0, 95, 115);
         
-        lblTitle = new JLabel(">> Select A Car <<");
+        lblTitle = new JLabel("Car Selection");
         lblTitle.setBounds(430,20,200,50);
         lblTitle.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblTitle);
         
         lblcarModel = new JLabel("Car Model");
-        lblcarModel.setBounds(235,150,200,50);
+        lblcarModel.setBounds(230,150,200,50);
         lblcarModel.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblcarModel);
         
@@ -38,7 +38,7 @@ public class carMenu extends JPanel implements ActionListener{
         add(dbtncarModel);
         
         lblplateNumber = new JLabel("Plate Number");
-        lblplateNumber.setBounds(640,150,200,50);
+        lblplateNumber.setBounds(635,150,200,50);
         lblplateNumber.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblplateNumber);
         
@@ -64,7 +64,7 @@ public class carMenu extends JPanel implements ActionListener{
         btnback.setBackground(darkAzure);
         btnback.setOpaque(true);
         btnback.setFocusPainted(false);
-        btnback.setBounds(30,480,100,25);
+        btnback.setBounds(30,480,180, 40);
         add(btnback);
         
         enterbtn.addActionListener(this);

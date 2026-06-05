@@ -60,22 +60,6 @@ public class AdminOption extends JPanel implements ActionListener{
 
             FoundationFrame ff = new FoundationFrame(new carMenu());
         }else if (e.getSource()==btnBack){
-//            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//            currentFrame.dispose();
-//            
-//            JFrame mainFrame = new JFrame();
-//            mainFrame.setSize(1366, 768);
-//            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            mainFrame.setLocationRelativeTo(null);
-//            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//            
-//            JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
-//            background.setLayout(null);
-//            AdminPage ap = new AdminPage();
-//            ap.setBounds(875, 175, 1366, 768);
-//            background.add(ap);
-//            mainFrame.setContentPane(background);
-//            mainFrame.setVisible(true);
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);

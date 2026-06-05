@@ -12,13 +12,13 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-class CustomerPage extends JPanel implements ActionListener {
+public class CustomerPage extends JPanel implements ActionListener {
     private JLabel lblMessage, lblUserName, lblPassword;
     private JTextField txtUserName;
     private JPasswordField txtPassword;
     private JButton btnLogin, btnBack;
     
-    CustomerPage(){
+    public CustomerPage(){
         setBounds(0,0,600,600);
         setLayout(null);
         setOpaque(false);
@@ -85,7 +85,7 @@ class CustomerPage extends JPanel implements ActionListener {
                 Container background = mainFrame.getContentPane();
                 background.remove(this);
                 CustomerOption oc = new CustomerOption();
-                oc.setBounds(775, 150, 1366, 768);
+                oc.setBounds(950, 150, 1366, 768);
                 background.add(oc);
                 background.revalidate();
                 background.repaint();

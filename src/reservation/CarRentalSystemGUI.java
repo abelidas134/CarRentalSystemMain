@@ -1,21 +1,21 @@
 package reservation;
 
+import carrentalsystemmain.FoundationFrame;
 import javax.swing.*;
 import java.awt.*;
+import carrentalsystemmain.*;
 
-class ReservationDetailsFrame extends JFrame {
+class ReservationDetailsFrame extends JPanel {
 
     JTextArea detailsArea;
 
     ReservationDetailsFrame(String details) {
 
-        setTitle("Reservation Details");
 
    
-        setSize(600, 600);
+        setBounds(400,25,600, 600);
 
         setLayout(null);
-        setResizable(false);
 
         JLabel titleLabel = new JLabel("RESERVATION DETAILS");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
@@ -32,18 +32,20 @@ class ReservationDetailsFrame extends JFrame {
         JButton closeButton = new JButton("Close");
         closeButton.setBounds(220, 460, 120, 40);
 
-        closeButton.addActionListener(e -> dispose());
+//        closeButton.addActionListener(e -> 
+//        
+//                
+//        );
 
         add(titleLabel);
         add(scrollPane);
         add(closeButton);
 
-        setLocationRelativeTo(null);
         setVisible(true);
     }
 }
 
-public class CarRentalSystemGUI extends JFrame {
+public class CarRentalSystemGUI extends JPanel {
 
     static int reservationCounter = 1001;
 
@@ -52,21 +54,21 @@ public class CarRentalSystemGUI extends JFrame {
 
     public CarRentalSystemGUI() {
 
-        setTitle("Booking and Reservation");
 
    
-        setSize(1000, 600);
+        setBounds(450,50,1000, 600);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-        setResizable(false);
 
         JButton backBtn = new JButton("Back");
-        backBtn.setBounds(20, 510, 100, 40);
+        backBtn.setBounds(5, 475, 180, 40);
         add(backBtn);
         
     backBtn.addActionListener(e -> {
-    dispose(); 
+        JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+        current.dispose();
+
+        FoundationFrame ff = new FoundationFrame(new CustomerOption());
     });
 
         JLabel titleLabel = new JLabel("BOOKING AND RESERVATION");
@@ -111,7 +113,7 @@ public class CarRentalSystemGUI extends JFrame {
         
         JButton reserveButton = new JButton("Reserve");
         reserveButton.setFont(new Font("Arial", Font.BOLD, 16));
-        reserveButton.setBounds(420, 510, 160, 45);
+        reserveButton.setBounds(475, 475, 180, 40);
 
         statusLabel = new JLabel("");
         statusLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -142,7 +144,6 @@ public class CarRentalSystemGUI extends JFrame {
 
         add(statusLabel);
 
-        setLocationRelativeTo(null);
         setVisible(true);
     }
 
