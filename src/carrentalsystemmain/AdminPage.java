@@ -64,6 +64,8 @@ public class AdminPage extends JPanel implements ActionListener {
         
         btnLogin.addActionListener(this);
         btnBack.addActionListener(this);
+        
+        
     }
     
     @Override

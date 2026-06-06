@@ -4,15 +4,14 @@ import carrentalsystemmain.FoundationFrame;
 import javax.swing.*;
 import java.awt.*;
 import carrentalsystemmain.*;
+import billing.*;
+import vehicle.*;
 
 class ReservationDetailsFrame extends JPanel {
 
     JTextArea detailsArea;
 
-    ReservationDetailsFrame(String details) {
-
-
-   
+    public ReservationDetailsFrame(String details) {
         setBounds(400,25,600, 600);
 
         setLayout(null);
@@ -29,14 +28,14 @@ class ReservationDetailsFrame extends JPanel {
         JScrollPane scrollPane = new JScrollPane(detailsArea);
         scrollPane.setBounds(70, 100, 450, 320);
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("Check Out");
         closeButton.setBounds(220, 460, 120, 40);
 
         closeButton.addActionListener(e -> {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            CustomerOption ap = new CustomerOption();
+            HomePageBilling ap = new HomePageBilling();
             ap.setBounds(875, 175, 1366, 768);
             background.add(ap);
             background.revalidate();
@@ -60,8 +59,6 @@ public class CarRentalSystemGUI extends JPanel {
 
     public CarRentalSystemGUI() {
 
-
-   
         setBounds(450,50,1000, 600);
 
         setLayout(null);
@@ -71,22 +68,10 @@ public class CarRentalSystemGUI extends JPanel {
         add(backBtn);
         
     backBtn.addActionListener(e -> {
-        JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        currentFrame.dispose();
+        JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+        current.dispose();
 
-        JFrame mainFrame = new JFrame();
-        mainFrame.setSize(1366, 768);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
-        background.setLayout(null);
-        CustomerOption ap = new CustomerOption();
-        ap.setBounds(950, 150, 1366, 768);
-        background.add(ap);
-        mainFrame.setContentPane(background);
-        mainFrame.setVisible(true);
+        FoundationFrame ff = new FoundationFrame(new CarDisplayCh());
     });
 
         JLabel titleLabel = new JLabel("BOOKING AND RESERVATION");
@@ -137,7 +122,31 @@ public class CarRentalSystemGUI extends JPanel {
         statusLabel.setFont(new Font("Arial", Font.BOLD, 15));
         statusLabel.setBounds(420, 470, 300, 30);
 
-        reserveButton.addActionListener(e -> reserveCar());
+        reserveButton.addActionListener(e ->{
+            String name = nameField.getText();
+            String contact = contactField.getText();
+            String email = emailField.getText();
+            String licensenum = licenseField.getText();
+            String address = addressField.getName();
+
+            if (name.isEmpty() || contact.isEmpty()
+                    || licensenum.isEmpty()) {
+
+                statusLabel.setText("Please fill in the fields!");
+                return;
+            }
+            if (email == null || email.trim().isEmpty()) {
+                email = "N/A";
+            }
+
+            if (address == null || address.trim().isEmpty()) {
+                address = "N/A";
+            }
+                JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+                current.dispose();
+
+                FoundationFrame ff = new FoundationFrame(new HomePageBilling());
+        });
 
         add(titleLabel);
 

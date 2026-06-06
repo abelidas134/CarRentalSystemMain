@@ -7,7 +7,8 @@ package carrentalsystemmain;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+import reservation.CarRentalSystemGUI;
+import vehicle.*;
 /**
  *
  * @author Mickey
@@ -81,15 +82,11 @@ public class CustomerPage extends JPanel implements ActionListener {
             String userName = txtUserName.getText().trim();
             String pass = txtPassword.getText().trim();
             if(userName.matches("user123")&&pass.matches("0000")){
-                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                Container background = mainFrame.getContentPane();
-                background.remove(this);
-                CustomerOption oc = new CustomerOption();
-                oc.setBounds(950, 150, 1366, 768);
-                background.add(oc);
-                background.revalidate();
-                background.repaint();
-                
+                JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+                current.dispose();
+
+                FoundationFrame ff = new FoundationFrame(new CarDisplayCh());
+               
             } else {
                 lblMessage = new JLabel("Access Denied: Invalid inputs.");
                 lblMessage.setBounds(250, 350, 500, 100);

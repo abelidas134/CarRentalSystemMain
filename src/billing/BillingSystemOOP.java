@@ -1,153 +1,123 @@
 package billing;
 
-import java.util.*;
+import javax.swing.*;
+import java.awt.*;
 
-public class BillingSystemOOP {
-    static Scanner scan = new Scanner(System.in);
-    
-    static int daysRented, pickUp, dropOff, year;
-    static String reservationNo, pickUpMonth, dropOffMonth;
-    
-    static int ratePerDay = 2000;
-    static int penaltyRate = 600;
-    static int cleaningFee = 400;
-    static double damageFee = ratePerDay * 0.50; 
-    
-    static double finalTotal, tax, subTotal;
-    static int actualReturnDate = 0, expectedReturnDate = 0;
-    static String paymentStatus = "paid";
-    
-    static int daysOfMonthPick = 0, daysOfMonthDrop = 0;
-    
-    public static void main(String[] args) {
-        System.out.print("Enter reservation number: ");
-        reservationNo = scan.nextLine();
-        
-        if (reservationNo.equals("0000")) { 
-            getRentalDates();
-            int rentalDays = monthsPick(pickUpMonth, dropOffMonth);
-            System.out.println("Rental Days: " + rentalDays);
-            
-            reservationStatus();
-        } else {
-            System.out.println("Reservation number not found. Try again!");
+public class BillingSystemOOP extends JPanel  {
+
+    private JTextField txtReservation, txtPickDay, txtDropDay;
+    private JComboBox<String> cbPickMonth, cbDropMonth;
+    private JTextArea txtInvoice;
+    private JButton btnCalculate;
+
+    public BillingSystemOOP() {
+        setBounds(400,100,700,600);
+        setLayout(null);
+
+        JLabel lblRes = new JLabel("Reservation No:");
+        lblRes.setBounds(50,50,120,25);
+        add(lblRes);
+
+        txtReservation = new JTextField();
+        txtReservation.setBounds(180,50,150,25);
+        add(txtReservation);
+
+        String[] months = {
+            "January","February","March","April",
+            "May","June","July","August",
+            "September","October","November","December"
+        };
+
+        JLabel lblPickMonth = new JLabel("Pick-up Month:");
+        lblPickMonth.setBounds(50,100,120,25);
+        add(lblPickMonth);
+
+        cbPickMonth = new JComboBox<>(months);
+        cbPickMonth.setBounds(180,100,150,25);
+        add(cbPickMonth);
+
+        JLabel lblPickDay = new JLabel("Pick-up Day:");
+        lblPickDay.setBounds(50,140,120,25);
+        add(lblPickDay);
+
+        txtPickDay = new JTextField();
+        txtPickDay.setBounds(180,140,150,25);
+        add(txtPickDay);
+
+        JLabel lblDropMonth = new JLabel("Drop-off Month:");
+        lblDropMonth.setBounds(50,190,120,25);
+        add(lblDropMonth);
+
+        cbDropMonth = new JComboBox<>(months);
+        cbDropMonth.setBounds(180,190,150,25);
+        add(cbDropMonth);
+
+        JLabel lblDropDay = new JLabel("Drop-off Day:");
+        lblDropDay.setBounds(50,230,120,25);
+        add(lblDropDay);
+
+        txtDropDay = new JTextField();
+        txtDropDay.setBounds(180,230,150,25);
+        add(txtDropDay);
+
+        btnCalculate = new JButton("Generate Invoice");
+        btnCalculate.setBounds(180,280,180,35);
+        add(btnCalculate);
+
+        txtInvoice = new JTextArea();
+        txtInvoice.setEditable(false);
+
+        JScrollPane sp = new JScrollPane(txtInvoice);
+        sp.setBounds(50,340,580,180);
+        add(sp);
+
+        btnCalculate.addActionListener(e -> generateBill());
+
+        setVisible(true);
+        UIManager.put("OptionPane.background", Color.WHITE);
+        UIManager.put("Panel.background", Color.WHITE);
+        UIManager.put("OptionPane.messageFont",new Font("Poppins", Font.BOLD, 14));
+    }
+
+    private void generateBill() {
+
+        try {
+
+            String reservationNo = txtReservation.getText();
+
+            int pickDay = Integer.parseInt(txtPickDay.getText());
+            int dropDay = Integer.parseInt(txtDropDay.getText());
+
+            int daysRented = dropDay - pickDay + 1;
+
+            int ratePerDay = 2000;
+            int cleaningFee = 400;
+            double damageFee = ratePerDay * 0.50;
+
+            double subtotal =
+                    (daysRented * ratePerDay)
+                    + cleaningFee
+                    + damageFee;
+
+            double tax = subtotal * 0.12;
+            double total = subtotal + tax;
+
+            txtInvoice.setText(
+                    "CAR RENTAL INVOICE\n\n" +
+                    "Reservation #: " + reservationNo + "\n\n" +
+                    "Days Rented: " + daysRented + "\n\n" +
+                    "Rental Cost: ₱" + (daysRented * ratePerDay) + "\n" +
+                    "Cleaning Fee: ₱" + cleaningFee + "\n" +
+                    "Damage Fee: ₱" + damageFee + "\n" +
+                    "Tax: ₱" + String.format("%.2f", tax) + "\n\n" +
+                    "TOTAL: ₱" + String.format("%.2f", total)
+            );
+
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Please enter valid values."
+            );
         }
-        scan.close();
-    }
-    
-    
-    public static void getRentalDates() {
-        System.out.print("Pick-up Month: ");
-        pickUpMonth = scan.nextLine().toLowerCase();
-        System.out.print("Pick-up Day: ");
-        pickUp = scan.nextInt();
-        scan.nextLine(); 
-        
-        System.out.print("Drop-off Month: ");
-        dropOffMonth = scan.nextLine().toLowerCase();
-        System.out.print("Drop-off Day: ");
-        dropOff = scan.nextInt();
-    }
-    
-    public static int monthsPick(String monthPick, String monthDrop) {
-        daysOfMonthPick = getDaysInMonth(monthPick);
-        if (pickUp < 1 || pickUp > daysOfMonthPick) {
-            System.out.println("Invalid pick-up day for " + monthPick + "!");
-            System.exit(1);
-        }
-        
-        daysOfMonthDrop = getDaysInMonth(monthDrop);
-        if (dropOff < 1 || dropOff > daysOfMonthDrop) {
-            System.out.println("Invalid drop-off day for " + monthDrop + "!");
-            System.exit(1);
-        }
-        
-        daysRented = dropOff - pickUp + 1;
-        
-        if (daysRented < 1) {
-            System.out.println("Drop-off must be after pick-up!");
-            System.exit(1);
-        }
-        
-        System.out.println("Valid rental: " + pickUp + "-" + dropOff + " (" + daysRented + " days)");
-        return daysRented;
-    }
-    public static int getDaysInMonth(String month) {
-        switch (month) {
-            case "january": case "march": case "may": case "july":
-            case "august": case "october": case "december":
-                return 31;
-            case "april": case "june": case "september": case "november":
-                return 30;
-            case "february":
-                System.out.print("Year for February: ");
-                year = scan.nextInt();
-                return isLeapYear(year) ? 29 : 28;
-            default:
-                System.out.println("Invalid month: " + month);
-                System.exit(1);
-                return 0; 
-        }
-    }
-    
-    public static boolean isLeapYear(int year) {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    }
-    
-    public static void reservationStatus() {
-        String rStatus = "active"; // From reservation database
-        
-        switch (rStatus) {
-            case "active":
-            case "completed":
-                System.out.println("\nReservation Status: " + rStatus.toUpperCase());
-                calculateBill();
-                generateInvoice();
-                break;
-            case "cancelled":
-                System.out.println("Reservation Status: Cancelled");
-                System.out.println("Thank you for trying with us!");
-                break;
-            default:
-                System.out.println("Unknown reservation status");
-                break;
-        }
-    }
-    
-    public static void calculateBill() {
-        int rentalCost = ratePerDay * daysRented;
-        
-        int extraDays = Math.max(0, actualReturnDate - expectedReturnDate);
-        int latePenalty = extraDays * penaltyRate;
-        
-        double extraFees = cleaningFee + damageFee;
-        
-        subTotal = rentalCost + latePenalty + extraFees;
-        tax = subTotal * 0.12;  
-        finalTotal = subTotal + tax;
-    }
-    
-    public static void generateInvoice() {
-        System.out.println("\n" + "═".repeat(50));
-        System.out.println("                    CAR RENTAL INVOICE");
-        System.out.println("═".repeat(50));
-        System.out.println("Reservation #: " + reservationNo);
-        System.out.println("Pick-up: " + pickUp + " " + pickUpMonth);
-        System.out.println("Drop-off: " + dropOff + " " + dropOffMonth);
-        System.out.println("Days Rented: " + daysRented);
-        System.out.println();
-        System.out.println("BREAKDOWN:");
-        System.out.printf("  Rental Cost (%d days × ₱%,-8d): ₱%,-10.2f%n", 
-                         daysRented, ratePerDay, (double)ratePerDay * daysRented);
-        System.out.printf("  Cleaning Fee:                  ₱%,-10.2f%n", (double)cleaningFee);
-        System.out.printf("  Damage Fee:                    ₱%,-10.2f%n", damageFee);
-        System.out.printf("  Late Penalty:                  ₱%,-10.2f%n", (double)(actualReturnDate - expectedReturnDate) * penaltyRate);
-        System.out.println("─".repeat(50));
-        System.out.printf("  SUBTOTAL:                      ₱%,-10.2f%n", subTotal);
-        System.out.printf("  TAX (12%%):                     ₱%,-10.2f%n", tax);
-        System.out.println("═".repeat(50));
-        System.out.printf("  TOTAL AMOUNT:                  ₱%,-10.2f%n", finalTotal);
-        System.out.println("═".repeat(50));
-        System.out.println("Payment Status: " + paymentStatus.toUpperCase());
     }
 }

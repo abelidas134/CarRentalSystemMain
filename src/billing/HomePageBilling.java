@@ -4,6 +4,8 @@
  */
 package billing;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -12,36 +14,46 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-public class HomePageBilling extends JFrame implements ActionListener {
+public class HomePageBilling extends JPanel implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
     private JButton btnEnter;
     private String resNoText;
     
     public HomePageBilling (){
-        setSize(600,600);
-        setTitle("Billing System");
+        setBounds(600,100,600,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         lblPage = new JLabel ("PAYMENT PORTAL");
         lblPage.setBounds(230,75,200,100);
+        lblPage.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblPage);
         
         lblResNo = new JLabel ("RESERVATION NUMBER: ");
         lblResNo.setBounds(75,150,200,100);
+        lblResNo.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblResNo);
         
         txtResNo = new JTextField ();
-        txtResNo.setBounds(250,175,225,50);
+        txtResNo.setBounds(250,175,200,40);
         add(txtResNo);
         
         btnEnter = new JButton ("ENTER");
         btnEnter.setBounds(200,270,175,50);
+        btnEnter.setFont(new Font("Poppins",Font.BOLD,15));
+        btnEnter.setForeground(Color.WHITE);
+        btnEnter.setBackground(darkAzure);
+        btnEnter.setOpaque(true);
+        btnEnter.setFocusPainted(false);
         add(btnEnter);
         
         btnEnter.addActionListener(this);
+        
+        UIManager.put("OptionPane.background", Color.WHITE);
+        UIManager.put("Panel.background", Color.WHITE);
+        UIManager.put("OptionPane.messageFont",new Font("Poppins", Font.BOLD, 14));
     }
 
     @Override
@@ -61,7 +73,6 @@ public class HomePageBilling extends JFrame implements ActionListener {
             if (resNoText.equals("0000")) {
                 bill b = new bill(resNoText);
                 b.setVisible(true);
-                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Reservation number is not recorded. Try again!",

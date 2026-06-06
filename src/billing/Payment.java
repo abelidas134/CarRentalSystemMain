@@ -15,13 +15,12 @@ import javax.swing.*;
 class Payment extends JFrame implements ActionListener{
     private JPanel panelBill,panelMenu;
     private JLabel lblMode;
+    private JButton btnCash, btnCashless;
+    
     
     Payment(){
-        setSize(600,600);
-        setTitle("Billing System");
+        setBounds(400,100,600,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         
         panelBill = new JPanel ();
         panelBill.setLayout(null);
@@ -40,11 +39,29 @@ class Payment extends JFrame implements ActionListener{
         lblMode.setBounds(30,0,200,40);
         panelBill.add(lblMode);
         panelBill.setBackground(Color.WHITE);
+        
+        btnCash = new JButton("CASH");
+        btnCash.setBounds(125, 120, 200, 50);
+        panelMenu.add(btnCash);
+
+        btnCashless = new JButton("CASHLESS");
+        btnCashless.setBounds(125, 220, 200, 50);
+        panelMenu.add(btnCashless);
+
+        btnCash.addActionListener(this);
+        btnCashless.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
+        if (e.getSource() == btnCash) {
+            JOptionPane.showMessageDialog(this,
+                    "Please proceed to the cashier.");
+        } else if (e.getSource() == btnCashless) {
+            CashlessPayment cp = new CashlessPayment();
+            cp.setVisible(true);
+        }
     }
     
 }

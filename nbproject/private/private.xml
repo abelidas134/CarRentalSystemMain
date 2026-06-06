@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/carrentalsystemmain/CarRentalSystemMain.java</file>
-            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/carrentalsystemmain/AdminOption.java</file>
-            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/carrentalsystemmain/FoundationFrame.java</file>
-            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/carrentalsystemmain/AdminPage.java</file>
+            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/vehicle/CarRentalSystemMain.java</file>
+            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/vehicle/CarDisplayCh.java</file>
             <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/carrentalsystemmain/CustomerOption.java</file>
+            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/carrentalsystemmain/CustomerPage.java</file>
             <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/reservation/CarRentalSystemGUI.java</file>
-            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/customers/CustomerForm.java</file>
+            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/serviceTracking/carMenu.java</file>
+            <file>file:/C:/Users/Mickey/source/repos/CarRentalSystemMain/src/Services/CarDetails.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,14 +6,16 @@ import javax.swing.table.DefaultTableModel;
 import Services.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableCellRenderer;
-public class CarDisplayCh extends JFrame{
-    public CarDisplayCh(){
+import carrentalsystemmain.*;
+import reservation.*;
+
+public class CarDisplayCh extends JPanel{
     
-        setTitle("Vehicles");
-        setSize(1000, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+    public CarDisplayCh(){
+        setBounds(400,100,1000, 600);
         setLayout(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         JLabel lblce = new JLabel("What do you want to book today?");
         lblce.setFont(new Font("Arial", Font.BOLD, 25));
@@ -27,7 +29,13 @@ public class CarDisplayCh extends JFrame{
             {"V004","1SN4US", "Nissan Altima", "AVAILABLE", "P280"},
             {"V005","GSV4U8", "Hyundai Elantra", "AVAILABLE", "P350"},
         };
-        DefaultTableModel model = new DefaultTableModel(data, column);
+        DefaultTableModel model = new DefaultTableModel(data, column) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         JTable table = new JTable(model);
         table.setRowHeight(35);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
@@ -52,7 +60,24 @@ public class CarDisplayCh extends JFrame{
         JButton btnstaff = new JButton("Staff?");
         btnstaff.setBounds(800, 500, 150, 30);
         
-        btncancel.addActionListener(e -> dispose());
+        btncancel.addActionListener(e -> {
+            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            currentFrame.dispose();
+
+            JFrame mainFrame = new JFrame();
+            mainFrame.setSize(1366, 768);
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+            JLabel background = new JLabel(new ImageIcon(carrentalsystemmain.CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+            background.setLayout(null);
+            CustomerPage ap = new CustomerPage();
+            ap.setBounds(950, 150, 1366, 768);
+            background.add(ap);
+            mainFrame.setContentPane(background);
+            mainFrame.setVisible(true);
+        });
 
         btndetails.addActionListener(e -> {
             int row = table.getSelectedRow();
@@ -74,12 +99,10 @@ public class CarDisplayCh extends JFrame{
                JOptionPane.showMessageDialog(this,"Please select a vehicle first.", "No Selection", JOptionPane.WARNING_MESSAGE);
                return;
            }
-            String id = (String)model.getValueAt(row, 0);
-            String plate = (String)model.getValueAt(row, 1);
-            String name = (String)model.getValueAt(row, 2);
-            String rate = (String)model.getValueAt(row, 4);
-            
-                new Booking(id,name, plate, rate, row, model);
+            JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+            current.dispose();
+
+            FoundationFrame ff = new FoundationFrame(new CarRentalSystemGUI());
            });
        
       btnstaff.addActionListener(e -> new Staff(model));

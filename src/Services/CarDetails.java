@@ -53,7 +53,7 @@ public class CarDetails extends JFrame {
         JLabel lblval = new JLabel(value);
         lblval.setFont(new Font("Arial", Font.BOLD, 15));
         lblval.setBounds(v, y, 250, h);
-
+        
         pane.add(lblkey);
         pane.add(lblval);
     
