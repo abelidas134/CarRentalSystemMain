@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class bill extends JFrame implements ActionListener {
+public class bill extends JPanel implements ActionListener {
     private JPanel panelBill,panelPick, panelDrop;
     private JLabel lblSec, lblPick, lblDrop,lblYear, lblMonth, lblDay;
     private JTextField txtYearPick, txtYearDrop;
@@ -15,7 +15,8 @@ public class bill extends JFrame implements ActionListener {
     private Integer[] feb29 = new Integer[29];
     private Integer[] month30 = new Integer[30];
     private Integer[] month31 = new Integer[31];
-    private String monthPickStmnt, monthDropStmnt, res;
+    private String monthPickStmnt, monthDropStmnt, res,reservationNumber, rate, name, plateresNum, pickDeets,  dropDeets, resNum,plate;
+    private Integer daysTotal;
     
     {
         for (int i=0;i<feb28.length;i++) feb28[i]=i+1;
@@ -24,14 +25,16 @@ public class bill extends JFrame implements ActionListener {
         for (int i=0;i<month31.length;i++) month31[i]=i+1;
     }
     
-    bill(String res){
-        this.res = res;
+    bill(String reservationNumber,String rate, String name, String plate){
+        this.reservationNumber = reservationNumber;
+        this.rate =rate;
+        this.name = name;
+        this.plate = plate;
         
-        setSize (600,600);
-        setTitle("Date Details");
+        setBounds(0,0,600,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         panelBill = new JPanel ();
         panelBill.setLayout(null);
@@ -182,7 +185,7 @@ public class bill extends JFrame implements ActionListener {
             Integer dayDrop = (Integer) comboDayDrop.getSelectedItem();
 
             if (dayPick == null || dayDrop == null) {
-                JOptionPane.showMessageDialog(this,"Please select both pick-up and drop-off days!","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Please select both pick-up and drop-off days!","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -190,7 +193,7 @@ public class bill extends JFrame implements ActionListener {
             String y2 = txtYearDrop.getText().trim();
 
             if (!y1.matches("\\d+") || !y2.matches("\\d+")) {
-                JOptionPane.showMessageDialog(this,"Enter valid years!","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Enter valid years!","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -206,18 +209,32 @@ public class bill extends JFrame implements ActionListener {
             long days = java.time.temporal.ChronoUnit.DAYS.between(d1, d2);
 
             if (days < 1) {
-                JOptionPane.showMessageDialog(this,"Drop-off must be after pick-up!","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Drop-off must be after pick-up!","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             monthPickStmnt = comboMonthPick.getSelectedItem() + ", " + dayPick + ", " + yearPick;
             monthDropStmnt = comboMonthDrop.getSelectedItem() + ", " + dayDrop + ", " + yearDrop;
 
-            OutputPage op = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days);
-            op.setVisible(true);
-            this.dispose();
+//            OutputPage op = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days);
+//            op.setVisible(true);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
+            OutputPage ap = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days,plate,name,rate,reservationNumber);
+            ap.setBounds(550, 200, 1366, 768);
+            background.add(ap);
+            background.revalidate();
+            background.repaint();
         } else if (e.getSource() == btnBack) {
-            this.dispose();
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
+            HomePageBilling ap = new HomePageBilling(reservationNumber, rate, name,plate);
+            ap.setBounds(550, 200, 1366, 768);
+            background.add(ap);
+            background.revalidate();
+            background.repaint();
         }
     }
 }

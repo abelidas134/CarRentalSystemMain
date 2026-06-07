@@ -10,8 +10,8 @@ import vehicle.*;
 class ReservationDetailsFrame extends JPanel {
 
     JTextArea detailsArea;
-
-    public ReservationDetailsFrame(String details) {
+    String rate, name, plate;
+    public ReservationDetailsFrame(String details, String reservationNumber) {
         setBounds(400,25,600, 600);
 
         setLayout(null);
@@ -28,37 +28,59 @@ class ReservationDetailsFrame extends JPanel {
         JScrollPane scrollPane = new JScrollPane(detailsArea);
         scrollPane.setBounds(70, 100, 450, 320);
 
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(150, 460, 120, 40);
+
         JButton closeButton = new JButton("Check Out");
-        closeButton.setBounds(220, 460, 120, 40);
+        closeButton.setBounds(300, 460, 120, 40);
 
         closeButton.addActionListener(e -> {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            HomePageBilling ap = new HomePageBilling();
-            ap.setBounds(875, 175, 1366, 768);
+            HomePageBilling ap = new HomePageBilling(reservationNumber,rate, name, plate);
+            ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();
+        });
+        
+        backButton.addActionListener(e -> {
+                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                Container background = mainFrame.getContentPane();
+
+                background.remove(this);
+
+                Reservation reservationPanel = new Reservation(rate,name, plate);
+                reservationPanel.setBounds(450, 50, 1000, 600);
+
+                background.add(reservationPanel);
+
+                background.revalidate();
+                background.repaint();
+        
         });
 
         add(titleLabel);
         add(scrollPane);
         add(closeButton);
+        add(backButton);
 
         setVisible(true);
     }
 }
 
-public class CarRentalSystemGUI extends JPanel {
+public class Reservation extends JPanel {
 
     static int reservationCounter = 1001;
 
     JTextField nameField, contactField, emailField, licenseField, addressField;
     JLabel statusLabel;
-
-    public CarRentalSystemGUI() {
-
+    private String rate, name, plate;
+    public Reservation(String rate,String name, String plate) {
+        this.rate = rate;
+        this.name = name;
+        this.plate = plate;
         setBounds(450,50,1000, 600);
 
         setLayout(null);
@@ -71,8 +93,9 @@ public class CarRentalSystemGUI extends JPanel {
         JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
         current.dispose();
 
-        FoundationFrame ff = new FoundationFrame(new CarDisplayCh());
+        FoundationFrame ff = new FoundationFrame(new Vehicle());
     });
+    
 
         JLabel titleLabel = new JLabel("BOOKING AND RESERVATION");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
@@ -106,7 +129,7 @@ public class CarRentalSystemGUI extends JPanel {
           licenseField = new JTextField();
         licenseField.setBounds(420, 330, 300, 35);
 
-        JLabel addressLabel = new JLabel("Driver's Address(Optional)");
+        JLabel addressLabel = new JLabel("House Address(Optional)");
         addressLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         addressLabel.setBounds(150, 400, 250, 30);
 
@@ -122,31 +145,7 @@ public class CarRentalSystemGUI extends JPanel {
         statusLabel.setFont(new Font("Arial", Font.BOLD, 15));
         statusLabel.setBounds(420, 470, 300, 30);
 
-        reserveButton.addActionListener(e ->{
-            String name = nameField.getText();
-            String contact = contactField.getText();
-            String email = emailField.getText();
-            String licensenum = licenseField.getText();
-            String address = addressField.getName();
-
-            if (name.isEmpty() || contact.isEmpty()
-                    || licensenum.isEmpty()) {
-
-                statusLabel.setText("Please fill in the fields!");
-                return;
-            }
-            if (email == null || email.trim().isEmpty()) {
-                email = "N/A";
-            }
-
-            if (address == null || address.trim().isEmpty()) {
-                address = "N/A";
-            }
-                JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
-                current.dispose();
-
-                FoundationFrame ff = new FoundationFrame(new HomePageBilling());
-        });
+        reserveButton.addActionListener(e -> reserveCar());
 
         add(titleLabel);
 
@@ -180,7 +179,7 @@ public class CarRentalSystemGUI extends JPanel {
         String contact = contactField.getText();
         String email = emailField.getText();
         String licensenum = licenseField.getText();
-        String address = addressField.getName();
+        String address = addressField.getText();
 
         if (name.isEmpty() || contact.isEmpty()
                 || licensenum.isEmpty()) {
@@ -199,15 +198,25 @@ if (address == null || address.trim().isEmpty()) {
 
         String details =
                 "RESERVATION DETAILS\n\n"
-                + "Reservation Number : " + reservationNumber + "\n\n"
+                + "Reservation ID     : " + reservationNumber + "\n\n"
                 + "Customer Name      : " + name + "\n\n"
                 + "Contact Number     : " + contact + "\n\n"
                 + "Email Address      : " + email + "\n\n"
                 + "Driver's Address   : " + address + "\n\n"
-                + "Driver's License Number  : " + licensenum + "\n\n"
-                + "Reservation Status : RESERVED";
+                + "Driver's License Number  : " + licensenum + "\n\n";
 
-        new ReservationDetailsFrame(details);
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+       Container background = mainFrame.getContentPane();
+
+       background.remove(this);
+
+       ReservationDetailsFrame rdf = new ReservationDetailsFrame(details, reservationNumber);
+       rdf.setBounds(600, 25, 600, 600);
+
+       background.add(rdf);
+
+       background.revalidate();
+       background.repaint();
 
         statusLabel.setText("Reservation Successful!");
 

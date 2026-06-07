@@ -20,7 +20,7 @@ public class CustomerForm extends JPanel implements Searchable {
         setOpaque(false);
         Color darkAzure = new Color(0, 95, 115);
 
-        JLabel lblId = new JLabel("Customer ID:");
+        JLabel lblId = new JLabel("Reservation ID:");
         lblId.setBounds(50, 75, 200, 25);
         lblId.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblId);
@@ -52,7 +52,7 @@ public class CustomerForm extends JPanel implements Searchable {
         txtLicense.setBounds(250, 235, 300,40);
         add(txtLicense);
 
-        JLabel lblAddress = new JLabel("Address:");
+        JLabel lblAddress = new JLabel("Email Address:");
         lblAddress.setBounds(50, 290, 200, 25);
         lblAddress.setFont(new Font("Poppins",Font.BOLD,25));
         add(lblAddress);
@@ -151,7 +151,7 @@ public class CustomerForm extends JPanel implements Searchable {
             if(txtAddress.getText().isEmpty()) missing.append("Address, ");
 
             if(missing.length() > 0){
-                JOptionPane.showMessageDialog(this,"Missing fields: " + missing.substring(0, missing.length() - 2));
+                JOptionPane.showMessageDialog(null,"Missing fields: " + missing.substring(0, missing.length() - 2));
                    return;
 }        
             for(CustomerPage c : customerList){
@@ -236,7 +236,7 @@ public class CustomerForm extends JPanel implements Searchable {
             mainFrame.setLocationRelativeTo(null);
             mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
             
-            JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+            JLabel background = new JLabel(new ImageIcon(Main.class.getResource("/img/firstBG.png")));
             background.setLayout(null);
             AdminOption ap = new AdminOption();
             ap.setBounds(875, 175, 1366, 768);
@@ -301,7 +301,7 @@ public class CustomerForm extends JPanel implements Searchable {
     }
 
     private void showCustomerDetails(CustomerPage c){
-        JOptionPane.showMessageDialog(this,
+        JOptionPane.showMessageDialog(null,
             "ID: " + c.getId() +
             "\nName: " + c.getName() +
             "\nPhone: " + c.getPhone() +
@@ -315,7 +315,7 @@ public class CustomerForm extends JPanel implements Searchable {
     ArrayList<CustomerPage> matchedCustomers = searchResults(searchTerm);
     
     if(matchedCustomers.isEmpty()){
-        JOptionPane.showMessageDialog(this, "No customer found.");
+        JOptionPane.showMessageDialog(null, "No customer found.");
     } else {
         StringBuilder message = new StringBuilder("Found " + matchedCustomers.size() + " customer(s):\n");
         
@@ -326,7 +326,7 @@ public class CustomerForm extends JPanel implements Searchable {
                    .append("\n");
         }
         
-        JOptionPane.showMessageDialog(this, message.toString());
+        JOptionPane.showMessageDialog(null, message.toString());
     }
 }
 

@@ -13,28 +13,33 @@ import javax.swing.BorderFactory;
  *
  * @author Mickey
  */
-class OutputPage extends JFrame implements ActionListener{
+class OutputPage extends JPanel implements ActionListener{
     private JLabel lblPage, lblInvoice, lblRes, lblPick, lblDrop,lblDays,
             lblBreakdown, lblRentalCost, lblClean, lblDamage, lblLate,
             lblSubTotal, lblTax, lblTotal,lblTotalAmount, lblCostPrice, lblCleanCost,
             lblDamageCost, lblLateCost,lblTaxCost;
     private JPanel panelBill,panelMenu;
     private JButton btnBack, btnContinue;
-    private String resNum, pickDeets, dropDeets;
+    private String resNum, pickDeets, dropDeets, name, plate,rate,reservationNumber;
     private int daysTotal;
 
     
-    OutputPage(String resNum,String pickDeets, String dropDeets,Integer daysTotal) {
+    OutputPage(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
+            String plate, String rate, String reservationNumber) {
         this.resNum = resNum;
         this.pickDeets = pickDeets;
         this.dropDeets = dropDeets;
         this.daysTotal = daysTotal;
+        this.name = name;
+        this.plate = plate;
+        this.rate = rate;
+        this.reservationNumber = reservationNumber;
+        double rentalRate = Double.parseDouble(rate.replace("P", ""));
         
         setSize(600,600);
-        setTitle("Billing System");
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         panelBill = new JPanel ();
         panelBill.setLayout(null);
@@ -119,11 +124,11 @@ class OutputPage extends JFrame implements ActionListener{
         lblBreakdown.setBounds(10, 130, 600, 100);
         panelMenu.add(lblBreakdown);
         
-        lblRentalCost = new JLabel("Rental Cost:        "+daysTotal+" day/s x P2,000.00");
+        lblRentalCost = new JLabel("Rental Cost:        "+daysTotal+" day/s x "+rentalRate);
         lblRentalCost.setBounds(15, 150, 600, 100);
         panelMenu.add(lblRentalCost);
         
-        lblCostPrice = new JLabel("P"+String.format("%,.2f",daysTotal*2000.00));
+        lblCostPrice = new JLabel("P"+String.format("%,.2f",daysTotal*rentalRate));
         lblCostPrice.setBounds(270, 150, 600, 100);
         panelMenu.add(lblCostPrice);
         
@@ -139,7 +144,7 @@ class OutputPage extends JFrame implements ActionListener{
         lblDamage.setBounds(15, 190, 600, 100);
         panelMenu.add(lblDamage);
         
-        lblDamageCost = new JLabel("P"+String.format("%,.2f",2000.00*0.50));
+        lblDamageCost = new JLabel("P"+String.format("%,.2f",rentalRate*0.50));
         lblDamageCost.setBounds(270, 190, 600, 100);
         panelMenu.add(lblDamageCost);
         
@@ -159,7 +164,7 @@ class OutputPage extends JFrame implements ActionListener{
         lblInvoice.setBounds(15,280,600,20);
         panelMenu.add(lblInvoice);
         
-        double subTotal = 400 + 600 + (2000 * 0.50) + (2000 * daysTotal);
+        double subTotal = 400 + 600 + (rentalRate * 0.50) + (rentalRate * daysTotal);
         lblSubTotal = new JLabel("P" + String.format("%,.2f", subTotal));
         lblSubTotal.setBounds(270, 280, 600, 20);
         panelMenu.add(lblSubTotal);
@@ -197,8 +202,16 @@ class OutputPage extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==btnBack){
-            bill b = new bill(resNum);
-            b.setVisible(true);
+//            bill b = new bill(resNum);
+//            b.setVisible(true);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
+            bill ap = new bill(reservationNumber, rate, name, plate);
+            ap.setBounds(550, 200, 1366, 768);
+            background.add(ap);
+            background.revalidate();
+            background.repaint();
         } else if (e.getSource()==btnContinue){
             Payment pm = new Payment ();
             pm.setVisible(true);

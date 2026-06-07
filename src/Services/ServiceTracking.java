@@ -1,17 +1,19 @@
 package Services;
 
+import carrentalsystemmain.AdminOption;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+import carrentalsystemmain.*;
+import serviceTracking.*;
 
-public class Staff extends JFrame {
+public class ServiceTracking extends JPanel {
 
-    public Staff(DefaultTableModel model) {
-        setTitle("Staff Tab");
-        setSize(600, 600);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+    public ServiceTracking(DefaultTableModel model) {
+        setBounds(600,150,600, 600);
         setLayout(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
                 
         //STATUS CHANGE
         JTabbedPane tabs = new JTabbedPane();
@@ -35,7 +37,26 @@ public class Staff extends JFrame {
         JButton btnback = new JButton("Back");
         btnback.setBounds(20,260,150,30);
         
-        btnback.addActionListener(e -> dispose());
+        
+        
+        btnback.addActionListener(e -> {
+            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            currentFrame.dispose();
+            
+            JFrame mainFrame = new JFrame();
+            mainFrame.setSize(1366, 768);
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            
+            JLabel background = new JLabel(new ImageIcon(Main.class.getResource("/img/firstBG.png")));
+            background.setLayout(null);
+            AdminOption ap = new AdminOption();
+            ap.setBounds(875, 175, 1366, 768);
+            background.add(ap);
+            mainFrame.setContentPane(background);
+            mainFrame.setVisible(true);
+        });
 
         btnStatus.addActionListener(e -> {
             int row = vehicleTable.getSelectedRow();
@@ -64,7 +85,9 @@ public class Staff extends JFrame {
         JLabel lbltitle2 = new JLabel("VEHICLE HISTORY");
         lbltitle2.setFont(new Font("Arial", Font.BOLD, 16));
         lbltitle2.setBounds(50, 20, 300, 30);
-               
+        History h = new History();
+        h.setBounds(0, 0, 600, 600);
+        historyPanel.add(h);       
         historyPanel.add(lbltitle2);
         
         //MAINTENANCE       
@@ -74,19 +97,22 @@ public class Staff extends JFrame {
         lbltitle3.setBounds(50, 20, 300, 30);
        
         maintenancePanel.add(lbltitle3);
+        Maintenance m = new Maintenance();
+        m.setBounds(50,25,600,600);
+        maintenancePanel.add(m);
+        JButton btnUpdate = new JButton("Update");
+        btnback.setBounds(20,260,150,30);
+        maintenancePanel.add(btnUpdate);
+        btnUpdate.addActionListener(e -> {
+            MaintenanceUpdate mu = new MaintenanceUpdate();
+            mu.setVisible(true);
+        });
         
-        //SERVICE DUE
-        JPanel servicePanel = new JPanel(null);
-        JLabel lbltitle4 = new JLabel("VEHICLE SERVICE DUE");
-        lbltitle4.setFont(new Font("Arial", Font.BOLD, 16));
-        lbltitle4.setBounds(50, 20, 300, 30);
         
-        servicePanel.add(lbltitle4);
-        
+       
         tabs.addTab("Vehicles", vehiclePanel);
         tabs.addTab("History", historyPanel);
         tabs.addTab("Maintenance", maintenancePanel);
-        tabs.addTab("Service Due", servicePanel);
         
         add(tabs);
         setVisible(true);

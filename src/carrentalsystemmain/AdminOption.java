@@ -5,6 +5,10 @@ import javax.swing.*;
 import customers.*;
 import java.awt.*;
 import serviceTracking.*;
+import Services.*;
+import javax.swing.table.*;
+import vehicle.*;
+
 
 public class AdminOption extends JPanel implements ActionListener{
     private JButton btnCustomer, btnBack, btnMaintenance;
@@ -57,8 +61,8 @@ public class AdminOption extends JPanel implements ActionListener{
         }else if (e.getSource()==btnMaintenance){
             JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
             current.dispose();
-
-            FoundationFrame ff = new FoundationFrame(new carMenu());
+            
+            FoundationFrame ff = new FoundationFrame(new ServiceTracking(Vehicle.model));
         }else if (e.getSource()==btnBack){
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();

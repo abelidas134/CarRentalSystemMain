@@ -22,7 +22,7 @@ public class FoundationFrame extends JFrame{
 
         JLabel background = new JLabel(
                 new ImageIcon(
-                        CarRentalSystemMain.class.getResource("/img/3rdBG.jpg")
+                        Main.class.getResource("/img/3rdBG.jpg")
                 )
         );
 

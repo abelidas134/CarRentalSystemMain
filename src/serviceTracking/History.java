@@ -1,20 +1,18 @@
 
 package serviceTracking;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Color;
 import javax.swing.*;
 
-public class nissan4567_HistoryReports extends JFrame implements ActionListener {
+//History
+    public class History extends JPanel {
     JTextArea txtHistory;
-    JButton btnback;
     
-    nissan4567_HistoryReports(){
+    public History(){
         setSize(600,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("History Reports of Toyota Vios 1270");
-        setLocationRelativeTo(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         txtHistory = new JTextArea();
         txtHistory.setEditable(false);
@@ -33,24 +31,8 @@ public class nissan4567_HistoryReports extends JFrame implements ActionListener 
         JScrollPane scrollPane = new JScrollPane(txtHistory);
         scrollPane.setBounds(50, 50, 500, 400); 
         add(scrollPane);
-        
-        
-        btnback = new JButton("Back");
-        btnback.setBounds(250, 480, 100, 25);
-        add(btnback);
-        
-        btnback.addActionListener(this);
+    
     }
     
-    
-    @Override
-    public void actionPerformed(ActionEvent j) {
-        if (j.getSource() == btnback) 
-        {
-            dispose();
-            updatingPageStatusNissanGTR4567 updStatNissan4567 = new updatingPageStatusNissanGTR4567();
-            updStatNissan4567.setVisible(true);
-        }
-    }
-    
+   
 }

@@ -9,9 +9,23 @@ import javax.swing.table.DefaultTableCellRenderer;
 import carrentalsystemmain.*;
 import reservation.*;
 
-public class CarDisplayCh extends JPanel{
-    
-    public CarDisplayCh(){
+public class Vehicle extends JPanel{
+    public static DefaultTableModel model = new DefaultTableModel(
+            new String[][]{
+                {"V001", "KO3AN0", "Toyota Vios", "AVAILABLE", "P200"},
+                {"V002", "H3KAO9", "Honda Civic", "AVAILABLE", "P230"},
+                {"V003", "GW3H5D", "Ford Ranger", "AVAILABLE", "P330"},
+                {"V004", "1SN4US", "Nissan Altima", "AVAILABLE", "P280"},
+                {"V005", "GSV4U8", "Hyundai Elantra", "AVAILABLE", "P350"}
+            },
+            new String[]{"ID", "Plate Number", "Name", "Status", "Rate"}
+    ) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    public Vehicle(){
         setBounds(400,100,1000, 600);
         setLayout(null);
         setOpaque(false);
@@ -20,22 +34,7 @@ public class CarDisplayCh extends JPanel{
         JLabel lblce = new JLabel("What do you want to book today?");
         lblce.setFont(new Font("Arial", Font.BOLD, 25));
         lblce.setBounds(300, 80, 450, 30);
-                       
-        String[] column = {"ID","Plate Number","Name", "Status", "Rate"};
-        String[][] data = { 
-            {"V001","KO3AN0","Toyota Vios", "AVAILABLE", "P200"},
-            {"V002","H3KAO9", "Honda Civic", "AVAILABLE", "P230"},
-            {"V003","GW3H5D","Ford Ranger", "AVAILABLE", "P330"},
-            {"V004","1SN4US", "Nissan Altima", "AVAILABLE", "P280"},
-            {"V005","GSV4U8", "Hyundai Elantra", "AVAILABLE", "P350"},
-        };
-        DefaultTableModel model = new DefaultTableModel(data, column) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
+        
         JTable table = new JTable(model);
         table.setRowHeight(35);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
@@ -57,10 +56,9 @@ public class CarDisplayCh extends JPanel{
         btnbook.setBounds(650, 400, 150, 40);
         JButton btncancel = new JButton("Cancel");
         btncancel.setBounds(200,400,150,40);
-        JButton btnstaff = new JButton("Staff?");
-        btnstaff.setBounds(800, 500, 150, 30);
-        
+      
         btncancel.addActionListener(e -> {
+
             JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             currentFrame.dispose();
 
@@ -70,10 +68,10 @@ public class CarDisplayCh extends JPanel{
             mainFrame.setLocationRelativeTo(null);
             mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-            JLabel background = new JLabel(new ImageIcon(carrentalsystemmain.CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+            JLabel background = new JLabel(new ImageIcon(Main.class.getResource("/img/firstBG.png")));
             background.setLayout(null);
             CustomerPage ap = new CustomerPage();
-            ap.setBounds(950, 150, 1366, 768);
+            ap.setBounds(875, 175, 1366, 768);
             background.add(ap);
             mainFrame.setContentPane(background);
             mainFrame.setVisible(true);
@@ -99,20 +97,24 @@ public class CarDisplayCh extends JPanel{
                JOptionPane.showMessageDialog(this,"Please select a vehicle first.", "No Selection", JOptionPane.WARNING_MESSAGE);
                return;
            }
+           String id = (String)model.getValueAt(row, 0);
+            String plate = (String)model.getValueAt(row, 1);
+            String name = (String)model.getValueAt(row, 2);
+            String status = (String)model.getValueAt(row, 3);
+            String rate = (String)model.getValueAt(row, 4);
+            
             JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
             current.dispose();
 
-            FoundationFrame ff = new FoundationFrame(new CarRentalSystemGUI());
+            FoundationFrame ff = new FoundationFrame(new Reservation(rate, name, plate));
            });
        
-      btnstaff.addActionListener(e -> new Staff(model));
                
         add(lblce);
         add(spane);
         add(btndetails);
         add(btnbook);
         add(btncancel);
-        add(btnstaff);
         
         setVisible(true);
         

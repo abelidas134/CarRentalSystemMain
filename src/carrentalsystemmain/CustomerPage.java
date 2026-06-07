@@ -7,7 +7,7 @@ package carrentalsystemmain;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import reservation.CarRentalSystemGUI;
+import reservation.Reservation;
 import vehicle.*;
 /**
  *
@@ -85,7 +85,7 @@ public class CustomerPage extends JPanel implements ActionListener {
                 JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
                 current.dispose();
 
-                FoundationFrame ff = new FoundationFrame(new CarDisplayCh());
+                FoundationFrame ff = new FoundationFrame(new Vehicle());
                
             } else {
                 lblMessage = new JLabel("Access Denied: Invalid inputs.");

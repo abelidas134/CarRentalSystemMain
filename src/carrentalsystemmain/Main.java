@@ -6,7 +6,7 @@ import javax.swing.*;
 import reservation.*;
 
 
-public class CarRentalSystemMain {
+public class Main {
 
     public static void main(String[] args) {
         JFrame mainFrame = new JFrame ();
@@ -15,7 +15,7 @@ public class CarRentalSystemMain {
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 
-        JLabel background = new JLabel(new ImageIcon(CarRentalSystemMain.class.getResource("/img/firstBG.png")));
+        JLabel background = new JLabel(new ImageIcon(Main.class.getResource("/img/firstBG.png")));
         background.setLayout(null);
         Homepage hp = new Homepage();
         hp.setBounds(775, 150, 1366, 768);

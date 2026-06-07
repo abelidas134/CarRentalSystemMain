@@ -1,20 +1,20 @@
 package serviceTracking;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-
-public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
+//Maintenance
+public class Maintenance extends JPanel implements ActionListener{
     JLabel lblcarModelPlatenum, lbl2ndHeadStatus, lblCurrentReports ;
     JButton btnback, btnUpdateStats;
     
-    carStatusNissanGTR4567(){
-        setSize(600,600);
+    public Maintenance(){
+        setBounds(0,0,600,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Nissan GT-R TRP 4567 Status");
-        setLocationRelativeTo(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         lblcarModelPlatenum = new JLabel("Nissan GT-R TRP 4567");
         lblcarModelPlatenum.setBounds(30,40,200,50);
@@ -36,31 +36,30 @@ public class carStatusNissanGTR4567 extends JFrame implements ActionListener{
 //        add(lbl2ndHeadStatus);
         
         //
-        btnback = new JButton("Back");
-        btnback.setBounds(30,480,100,25);
-        add(btnback);
-        
+//        btnback = new JButton("Back");
+//        btnback.setBounds(30,480,100,25);
+//        add(btnback);
+//        
         btnUpdateStats = new JButton("UPDATE STATUS");
-        btnUpdateStats.setBounds(415,480,140,25);
+        btnUpdateStats.setBounds(175,400,140,25);
         add(btnUpdateStats);
         
         
-        btnback.addActionListener(this);
+//        btnback.addActionListener(this);
         btnUpdateStats.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent j) {
-         if (j.getSource() == btnback) 
-            {
-                dispose();
-                carMenu cm = new carMenu();
-                cm.setVisible(true);
-            }
+//         if (j.getSource() == btnback) 
+//            {
+//                dispose();
+//                carMenu cm = new carMenu();
+//                cm.setVisible(true);
+//            }
          
-         else if(j.getSource() == btnUpdateStats)
+          if(j.getSource() == btnUpdateStats)
             {
-                dispose();
-                updatingPageStatusNissanGTR4567 updStatNissan4567 = new updatingPageStatusNissanGTR4567();
+                MaintenanceUpdate updStatNissan4567 = new MaintenanceUpdate();
                 updStatNissan4567.setVisible(true);
             }
     }
