@@ -1,5 +1,4 @@
 package reservation;
-
 import carrentalsystemmain.FoundationFrame;
 import javax.swing.*;
 import java.awt.*;

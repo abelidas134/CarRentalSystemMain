@@ -8,8 +8,7 @@ public class CashlessPayment extends JPanel implements ActionListener {
 
     private JPanel panelBill, panelMenu;
     private JLabel lblMode;
-    private JButton btnCard, btnQR;
-    private JLabel lblQR;
+    private JButton btnCard, btnQR,btnBack;
     private String resNum, pickDeets, dropDeets, name, plate, rate, reservationNumber, customerName;
     private int daysTotal;
     
@@ -57,18 +56,13 @@ public class CashlessPayment extends JPanel implements ActionListener {
         btnQR.setBounds(125,220,200,50);
         panelMenu.add(btnQR);
         
-        ImageIcon qrIcon = new ImageIcon(
-                getClass().getResource("/img/qr.jpg"));
 
-        Image img = qrIcon.getImage().getScaledInstance(
-                200, 200, Image.SCALE_SMOOTH);
-
-        lblQR = new JLabel(new ImageIcon(img));
-        lblQR.setBounds(125, 100, 200, 200);
-        lblQR.setVisible(false);
-
-        panelMenu.add(lblQR);
-
+        
+        btnBack = new JButton ("Back");
+        btnBack.setBounds(125,300,100,25);
+        panelMenu.add(btnBack);
+        
+        btnBack.addActionListener(this);
         btnCard.addActionListener(this);
         btnQR.addActionListener(this);
 
@@ -108,8 +102,7 @@ public class CashlessPayment extends JPanel implements ActionListener {
             background.add(sr);
             background.revalidate();
             background.repaint();
-        } 
-        if (e.getSource() == btnQR) {
+        }else if (e.getSource() == btnQR) {
 
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
@@ -132,6 +125,15 @@ public class CashlessPayment extends JPanel implements ActionListener {
             sr.setBounds(550, 200, 1366, 768);
 
             background.add(sr);
+            background.revalidate();
+            background.repaint();
+        } else if (e.getSource()==btnBack){
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
+            Payment ap = new Payment(resNum, pickDeets, dropDeets, daysTotal, name, plate, rate, reservationNumber, customerName);
+            ap.setBounds(550, 200, 1366, 768);
+            background.add(ap);
             background.revalidate();
             background.repaint();
         }

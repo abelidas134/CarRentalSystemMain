@@ -62,8 +62,9 @@ public class AdminPage extends JPanel implements ActionListener {
         btnBack.setBounds(225,350,100,25);
         add(btnBack);
         
-        btnLogin.addActionListener(this);
         btnBack.addActionListener(this);
+        btnLogin.addActionListener(this);
+        
         
         
     }

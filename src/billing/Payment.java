@@ -6,8 +6,10 @@ package billing;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
+import prevention.*;
 
 /**
  *
@@ -16,7 +18,7 @@ import javax.swing.*;
 class Payment extends JPanel implements ActionListener{
     private JPanel panelBill,panelMenu;
     private JLabel lblMode;
-    private JButton btnCash, btnCashless;
+    private JButton btnCash, btnCashless,btnBack;
     private String resNum, pickDeets, dropDeets, name, plate,rate,reservationNumber, customerName;
     private int daysTotal;
     
@@ -63,6 +65,12 @@ class Payment extends JPanel implements ActionListener{
         btnCashless.setBounds(125, 220, 200, 50);
         panelMenu.add(btnCashless);
 
+        btnBack = new JButton ("Back");
+        btnBack.setBounds(100,275,100,25);
+        panelMenu.add(btnBack);
+        
+        btnBack.addActionListener(this);
+        
         btnCash.addActionListener(this);
         btnCashless.addActionListener(this);
     }
@@ -81,6 +89,26 @@ class Payment extends JPanel implements ActionListener{
             background.remove(this);
             System.out.println("RATE = " + rate);
             CashlessPayment ap = new CashlessPayment(
+                    resNum,
+                    pickDeets,
+                    dropDeets,
+                    daysTotal,
+                    name,
+                    plate,
+                    rate,
+                    reservationNumber,
+                    customerName
+            );
+            ap.setBounds(550, 200, 1366, 768);
+            background.add(ap);
+            background.revalidate();
+            background.repaint();
+        }else if (e.getSource()==btnBack){
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
+            System.out.println("RATE = " + rate);
+            OutputPage ap = new OutputPage(
                     resNum,
                     pickDeets,
                     dropDeets,

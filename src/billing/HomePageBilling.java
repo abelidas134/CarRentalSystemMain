@@ -4,6 +4,7 @@
  */
 package billing;
 
+import carrentalsystemmain.FoundationFrame;
 import java.awt.Color;
 import java.awt.*;
 import java.awt.Font;
@@ -18,7 +19,7 @@ import reservation.*;
 public class HomePageBilling extends JPanel implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
-    private JButton btnEnter;
+    private JButton btnEnter,btnBack;
     private String reservationNumber,rate, name, plate, customerName;    
     
     public HomePageBilling(
@@ -53,7 +54,7 @@ public class HomePageBilling extends JPanel implements ActionListener {
         add(txtResNo);
         
         btnEnter = new JButton ("ENTER");
-        btnEnter.setBounds(225,270,175,50);
+        btnEnter.setBounds(250,270,175,50);
         btnEnter.setFont(new Font("Poppins",Font.BOLD,15));
         btnEnter.setForeground(Color.WHITE);
         btnEnter.setBackground(darkAzure);
@@ -61,6 +62,16 @@ public class HomePageBilling extends JPanel implements ActionListener {
         btnEnter.setFocusPainted(false);
         add(btnEnter);
         
+        btnBack = new JButton("Back");
+        btnBack.setBounds(200, 475, 180, 40);
+        btnBack.setFont(new Font("Poppins",Font.BOLD,15));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setBackground(darkAzure);
+        btnBack.setOpaque(true);
+        btnBack.setFocusPainted(false);
+        add(btnBack);
+
+        btnBack.addActionListener(this);
         btnEnter.addActionListener(this);
         
         UIManager.put("OptionPane.background", Color.WHITE);
@@ -92,11 +103,16 @@ public class HomePageBilling extends JPanel implements ActionListener {
                 background.revalidate();
                 background.repaint();
             } else {
-                JOptionPane.showMessageDialog(this,
+                JOptionPane.showMessageDialog(null,
                         "Reservation number is not recorded. Try again!",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
+        } else if (e.getSource()==btnBack){
+            JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+            current.dispose();
+
+            FoundationFrame ff = new FoundationFrame(new Reservation(rate, name, plate));
         }
     }
     

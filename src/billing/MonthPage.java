@@ -4,6 +4,8 @@
  */
 package billing;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -16,7 +18,7 @@ class MonthPage extends JFrame implements ActionListener {
     private JLabel lblPage, lblPick, lblDrop, lblMonthPick, lblMonthDrop, lblDayPick, lblDayDrop, lblYearPick, lblYearDrop;
     private JTextField txtYearPick, txtYearDrop;
     private JComboBox comboDayPick, comboDayDrop, comboMonthPick, comboMonthDrop;
-    private JButton btnCalculate;
+    private JButton btnCalculate, btnBack;
     private String [] month = {" ","January", "February", "March", "April", "May", "June", "July", "August", "September","October", "November", "December"};
     private Integer [] day28 = new Integer[28];
     private Integer [] day29 = new Integer [29];
@@ -104,6 +106,12 @@ class MonthPage extends JFrame implements ActionListener {
         btnCalculate.setBounds(215,450,175,50);
         add(btnCalculate);
         
+        btnBack = new JButton("Back");
+        btnBack.setBounds(5, 475, 180, 40);
+        add(btnBack);
+        
+        
+        btnBack.addActionListener(this);
         btnCalculate.addActionListener(this);
         comboMonthPick.addActionListener(this);
         comboMonthDrop.addActionListener(this);
@@ -213,6 +221,8 @@ class MonthPage extends JFrame implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this, "Please select both pick-up and drop-off days!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else if (e.getSource()==btnBack){
+            //HomePageBilling
         }
     }
     

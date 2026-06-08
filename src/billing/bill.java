@@ -3,6 +3,7 @@ package billing;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import prevention.*;
 
 public class bill extends JPanel implements ActionListener {
     private JPanel panelBill,panelPick, panelDrop;
@@ -176,7 +177,7 @@ public class bill extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == comboMonthPick || e.getSource() == txtYearPick) {
+         if (e.getSource() == comboMonthPick || e.getSource() == txtYearPick) {
             monthPick();
         } else if (e.getSource() == comboMonthDrop || e.getSource() == txtYearDrop) {
             monthDrop();
@@ -206,7 +207,17 @@ public class bill extends JPanel implements ActionListener {
 
             java.time.LocalDate d1 = java.time.LocalDate.of(yearPick, monthPick, dayPick);
             java.time.LocalDate d2 = java.time.LocalDate.of(yearDrop, monthDrop, dayDrop);
-
+            
+             if (Prevent.hasConflict(plate, d1, d2)) {
+                 JOptionPane.showMessageDialog(
+                         null,
+                         "NO BOOKING: may existing reservation sa selected date!",
+                         "Conflict Detected",
+                         JOptionPane.ERROR_MESSAGE
+                 );
+                 return;
+             }
+            
             long days = java.time.temporal.ChronoUnit.DAYS.between(d1, d2);
 
             if (days < 1) {
@@ -219,6 +230,7 @@ public class bill extends JPanel implements ActionListener {
 
 //            OutputPage op = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days);
 //            op.setVisible(true);
+            Prevent.addBooking(plate, d1, d2);
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
