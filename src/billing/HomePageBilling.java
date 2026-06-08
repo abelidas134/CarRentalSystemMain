@@ -19,13 +19,19 @@ public class HomePageBilling extends JPanel implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
     private JButton btnEnter;
-    private String reservationNumber,rate, name, plate;
+    private String reservationNumber,rate, name, plate, customerName;    
     
-    public HomePageBilling (String reservationNumber, String rate, String name, String plate){
+    public HomePageBilling(
+            String reservationNumber,
+            String rate,
+            String name,
+            String plate,
+            String customerName){
         this.reservationNumber = reservationNumber;
         this.rate = rate;
         this.name = name;
         this.plate = plate;
+        this.customerName = customerName;
         
         setBounds(600,100,600,600);
         setLayout(null);
@@ -80,7 +86,7 @@ public class HomePageBilling extends JPanel implements ActionListener {
                 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 Container background = mainFrame.getContentPane();
                 background.remove(this);
-                bill ap = new bill(reservationNumber, rate, name, plate);
+                bill ap = new bill(reservationNumber, rate, name, plate, customerName);
                 ap.setBounds(550, 200, 1366, 768);
                 background.add(ap);
                 background.revalidate();

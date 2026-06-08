@@ -6,12 +6,26 @@ import java.awt.*;
 import carrentalsystemmain.*;
 import billing.*;
 import vehicle.*;
+import customers.*;
 
 class ReservationDetailsFrame extends JPanel {
 
     JTextArea detailsArea;
-    String rate, name, plate;
-    public ReservationDetailsFrame(String details, String reservationNumber) {
+    String rate, name, plate, customerName;
+        
+    public ReservationDetailsFrame(
+            String details,
+            String reservationNumber,
+            String rate,
+            String name,
+            String plate,
+            String customerName) {
+            this.rate = rate;
+            this.name = name;
+            this.plate = plate;
+            this.customerName = customerName;
+            
+            
         setBounds(400,25,600, 600);
 
         setLayout(null);
@@ -38,7 +52,14 @@ class ReservationDetailsFrame extends JPanel {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            HomePageBilling ap = new HomePageBilling(reservationNumber,rate, name, plate);
+            HomePageBilling ap
+                    = new HomePageBilling(
+                            reservationNumber,
+                            rate,
+                            name,
+                            plate,
+                            customerName
+                    );
             ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();
@@ -76,7 +97,7 @@ public class Reservation extends JPanel {
 
     JTextField nameField, contactField, emailField, licenseField, addressField;
     JLabel statusLabel;
-    private String rate, name, plate;
+    private String rate, name, plate, customerName;
     public Reservation(String rate,String name, String plate) {
         this.rate = rate;
         this.name = name;
@@ -174,13 +195,13 @@ public class Reservation extends JPanel {
     }
 
    public void reserveCar() {
-
         String name = nameField.getText();
+        this.customerName = name;
         String contact = contactField.getText();
         String email = emailField.getText();
         String licensenum = licenseField.getText();
         String address = addressField.getText();
-
+        
         if (name.isEmpty() || contact.isEmpty()
                 || licensenum.isEmpty()) {
 
@@ -195,6 +216,14 @@ if (address == null || address.trim().isEmpty()) {
     address = "N/A";
 }
         String reservationNumber = "CR-" + reservationCounter++;
+        
+        CustomerForm.addCustomer(
+               reservationCounter - 1,
+               name,
+               contact,
+               licensenum,
+               address
+       );
 
         String details =
                 "RESERVATION DETAILS\n\n"
@@ -210,7 +239,15 @@ if (address == null || address.trim().isEmpty()) {
 
        background.remove(this);
 
-       ReservationDetailsFrame rdf = new ReservationDetailsFrame(details, reservationNumber);
+       ReservationDetailsFrame rdf
+               = new ReservationDetailsFrame(
+                       details,
+                       reservationNumber,
+                       this.rate,
+                       this.name,
+                       this.plate,
+                       this.customerName
+               );
        rdf.setBounds(600, 25, 600, 600);
 
        background.add(rdf);
@@ -223,5 +260,7 @@ if (address == null || address.trim().isEmpty()) {
         nameField.setText("");
         contactField.setText("");
         licenseField.setText("");
+        System.out.println("Vehicle Name = " + this.name);
+System.out.println("Customer Name = " + this.customerName);
     }
 }

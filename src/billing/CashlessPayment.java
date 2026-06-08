@@ -9,8 +9,22 @@ public class CashlessPayment extends JPanel implements ActionListener {
     private JPanel panelBill, panelMenu;
     private JLabel lblMode;
     private JButton btnCard, btnQR;
-
-    public CashlessPayment() {
+    private JLabel lblQR;
+    private String resNum, pickDeets, dropDeets, name, plate, rate, reservationNumber, customerName;
+    private int daysTotal;
+    
+    public CashlessPayment(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
+            String plate, String rate, String reservationNumber, String customerName) {
+        this.resNum = resNum;
+        this.pickDeets = pickDeets;
+        this.dropDeets = dropDeets;
+        this.daysTotal = daysTotal;
+        this.name = name;
+        this.plate = plate;
+        this.rate = rate;
+        this.reservationNumber = reservationNumber;
+        this.customerName = customerName;
+        double rentalRate = Double.parseDouble(rate.replace("P", ""));
 
         setBounds(600,100,600,600);
         setLayout(null);
@@ -42,6 +56,18 @@ public class CashlessPayment extends JPanel implements ActionListener {
         btnQR = new JButton("QR CODE");
         btnQR.setBounds(125,220,200,50);
         panelMenu.add(btnQR);
+        
+        ImageIcon qrIcon = new ImageIcon(
+                getClass().getResource("/img/qr.jpg"));
+
+        Image img = qrIcon.getImage().getScaledInstance(
+                200, 200, Image.SCALE_SMOOTH);
+
+        lblQR = new JLabel(new ImageIcon(img));
+        lblQR.setBounds(125, 100, 200, 200);
+        lblQR.setVisible(false);
+
+        panelMenu.add(lblQR);
 
         btnCard.addActionListener(this);
         btnQR.addActionListener(this);
@@ -52,14 +78,62 @@ public class CashlessPayment extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == btnCard){
-            JOptionPane.showMessageDialog(this,
-                    "Card Payment Successful!");
-        }
+        if (e.getSource() == btnCard) {
 
-        else if(e.getSource() == btnQR){
-            JOptionPane.showMessageDialog(this,
-                    "Scan QR Code to complete payment.");
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Please proceed to the cashier for card payment processing."
+            );
+
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+
+            background.remove(this);
+
+            SummaryReceipt sr = new SummaryReceipt(
+                    resNum,
+                    pickDeets,
+                    dropDeets,
+                    daysTotal,
+                    name,
+                    plate,
+                    rate,
+                    reservationNumber,
+                    "CARD",
+                    customerName
+            );
+
+            sr.setBounds(550, 200, 1366, 768);
+
+            background.add(sr);
+            background.revalidate();
+            background.repaint();
+        } 
+        if (e.getSource() == btnQR) {
+
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+
+            background.remove(this);
+
+            SummaryReceipt sr = new SummaryReceipt(
+                    resNum,
+                    pickDeets,
+                    dropDeets,
+                    daysTotal,
+                    name,
+                    plate,
+                    rate,
+                    reservationNumber,
+                    "QR CODE",
+                    customerName
+            );
+
+            sr.setBounds(550, 200, 1366, 768);
+
+            background.add(sr);
+            background.revalidate();
+            background.repaint();
         }
     }
 }

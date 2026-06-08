@@ -20,12 +20,12 @@ class OutputPage extends JPanel implements ActionListener{
             lblDamageCost, lblLateCost,lblTaxCost;
     private JPanel panelBill,panelMenu;
     private JButton btnBack, btnContinue;
-    private String resNum, pickDeets, dropDeets, name, plate,rate,reservationNumber;
+    private String resNum, pickDeets, dropDeets, name, plate,rate,reservationNumber, customerName;
     private int daysTotal;
-
+    
     
     OutputPage(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
-            String plate, String rate, String reservationNumber) {
+            String plate, String rate, String reservationNumber, String customerName) {
         this.resNum = resNum;
         this.pickDeets = pickDeets;
         this.dropDeets = dropDeets;
@@ -34,6 +34,7 @@ class OutputPage extends JPanel implements ActionListener{
         this.plate = plate;
         this.rate = rate;
         this.reservationNumber = reservationNumber;
+        this.customerName = customerName;
         double rentalRate = Double.parseDouble(rate.replace("P", ""));
         
         setSize(600,600);
@@ -207,14 +208,20 @@ class OutputPage extends JPanel implements ActionListener{
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            bill ap = new bill(reservationNumber, rate, name, plate);
+            bill ap = new bill(reservationNumber, rate, name, plate, customerName);
             ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();
         } else if (e.getSource()==btnContinue){
-            Payment pm = new Payment ();
-            pm.setVisible(true);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
+            Payment ap = new Payment( resNum, pickDeets,  dropDeets, daysTotal,  name, plate,  rate,  reservationNumber, customerName);
+            ap.setBounds(550, 200, 1366, 768);
+            background.add(ap);
+            background.revalidate();
+            background.repaint();
         }
     }
 }

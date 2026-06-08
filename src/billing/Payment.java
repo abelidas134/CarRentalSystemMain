@@ -5,6 +5,7 @@
 package billing;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -12,13 +13,27 @@ import javax.swing.*;
  *
  * @author Mickey
  */
-class Payment extends JFrame implements ActionListener{
+class Payment extends JPanel implements ActionListener{
     private JPanel panelBill,panelMenu;
     private JLabel lblMode;
     private JButton btnCash, btnCashless;
+    private String resNum, pickDeets, dropDeets, name, plate,rate,reservationNumber, customerName;
+    private int daysTotal;
     
-    
-    Payment(){
+    Payment(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
+            String plate, String rate, String reservationNumber, String customerName){
+        this.resNum = resNum;
+        this.pickDeets = pickDeets;
+        this.dropDeets = dropDeets;
+        this.daysTotal = daysTotal;
+        this.name = name;
+        this.plate = plate;
+        this.rate = rate;
+        this.reservationNumber = reservationNumber;
+        this.customerName = customerName;
+        double rentalRate = Double.parseDouble(rate.replace("P", ""));
+        
+        
         setBounds(400,100,600,600);
         setLayout(null);
         
@@ -56,11 +71,30 @@ class Payment extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnCash) {
-            JOptionPane.showMessageDialog(this,
-                    "Please proceed to the cashier.");
+            JOptionPane.showMessageDialog(null,
+                    "Please proceed to the cashier for cash payment.");
         } else if (e.getSource() == btnCashless) {
-            CashlessPayment cp = new CashlessPayment();
-            cp.setVisible(true);
+//            CashlessPayment cp = new CashlessPayment();
+//            cp.setVisible(true);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
+            background.remove(this);
+            System.out.println("RATE = " + rate);
+            CashlessPayment ap = new CashlessPayment(
+                    resNum,
+                    pickDeets,
+                    dropDeets,
+                    daysTotal,
+                    name,
+                    plate,
+                    rate,
+                    reservationNumber,
+                    customerName
+            );
+            ap.setBounds(550, 200, 1366, 768);
+            background.add(ap);
+            background.revalidate();
+            background.repaint();
         }
     }
     

@@ -7,9 +7,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import carrentalsystemmain.*;
+import reservation.*;
 
 public class CustomerForm extends JPanel implements Searchable {
-    private ArrayList<CustomerPage> customerList = new ArrayList<>();
+    static  ArrayList<CustomerPage> customerList = new ArrayList<>();
 
     private JTextField txtId, txtName, txtPhone, txtLicense, txtAddress, txtSearch;
     
@@ -330,7 +331,7 @@ public class CustomerForm extends JPanel implements Searchable {
     }
 }
 
-    private ArrayList<CustomerPage> searchResults(String keyword){
+    public static  ArrayList<CustomerPage> searchResults(String keyword){
         ArrayList<CustomerPage> results = new ArrayList<>();
         for(CustomerPage c : customerList){
             if(String.valueOf(c.getId()).equals(keyword) || c.getName().toLowerCase().contains(keyword.toLowerCase())){
@@ -338,5 +339,22 @@ public class CustomerForm extends JPanel implements Searchable {
             }
         }
         return results;
+    }
+    public static void addCustomer(
+            int id,
+            String name,
+            String phone,
+            String license,
+            String address) {
+
+        CustomerPage customer = new CustomerPage(
+                id,
+                name,
+                phone,
+                license,
+                address
+        );
+
+        customerList.add(customer);
     }
 }

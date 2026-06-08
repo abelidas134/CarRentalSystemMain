@@ -15,7 +15,7 @@ public class bill extends JPanel implements ActionListener {
     private Integer[] feb29 = new Integer[29];
     private Integer[] month30 = new Integer[30];
     private Integer[] month31 = new Integer[31];
-    private String monthPickStmnt, monthDropStmnt, res,reservationNumber, rate, name, plateresNum, pickDeets,  dropDeets, resNum,plate;
+    private String monthPickStmnt, monthDropStmnt, res,reservationNumber, rate, name, plateresNum, pickDeets,  dropDeets, resNum,plate, customerName;
     private Integer daysTotal;
     
     {
@@ -25,11 +25,12 @@ public class bill extends JPanel implements ActionListener {
         for (int i=0;i<month31.length;i++) month31[i]=i+1;
     }
     
-    bill(String reservationNumber,String rate, String name, String plate){
+    bill(String reservationNumber,String rate, String name, String plate, String customerName){
         this.reservationNumber = reservationNumber;
         this.rate =rate;
         this.name = name;
         this.plate = plate;
+        this.customerName = customerName;
         
         setBounds(0,0,600,600);
         setLayout(null);
@@ -221,7 +222,8 @@ public class bill extends JPanel implements ActionListener {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            OutputPage ap = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days,plate,name,rate,reservationNumber);
+            System.out.println("RATE = " + rate);
+            OutputPage ap = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days,name,plate,rate,reservationNumber,customerName);
             ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();
@@ -230,7 +232,7 @@ public class bill extends JPanel implements ActionListener {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            HomePageBilling ap = new HomePageBilling(reservationNumber, rate, name,plate);
+            HomePageBilling ap = new HomePageBilling(reservationNumber, rate, name,plate,customerName);
             ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();
