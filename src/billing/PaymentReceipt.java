@@ -13,7 +13,7 @@ import javax.swing.BorderFactory;
  *
  * @author Mickey
  */
-class OutputPage extends JPanel implements ActionListener{
+class PaymentReceipt extends JPanel implements ActionListener{
     private JLabel lblPage, lblInvoice, lblRes, lblPick, lblDrop,lblDays,
             lblBreakdown, lblRentalCost, lblClean, lblDamage, lblLate,
             lblSubTotal, lblTax, lblTotal,lblTotalAmount, lblCostPrice, lblCleanCost,
@@ -24,7 +24,7 @@ class OutputPage extends JPanel implements ActionListener{
     private int daysTotal;
     
     
-    OutputPage(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
+    PaymentReceipt(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
             String plate, String rate, String reservationNumber, String customerName) {
         this.resNum = resNum;
         this.pickDeets = pickDeets;
@@ -203,12 +203,12 @@ class OutputPage extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==btnBack){
-//            bill b = new bill(resNum);
+//            DatesBilling b = new DatesBilling(resNum);
 //            b.setVisible(true);
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            bill ap = new bill(reservationNumber, rate, name, plate, customerName);
+            DatesBilling ap = new DatesBilling(reservationNumber, rate, name, plate, customerName);
             ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();

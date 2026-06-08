@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import carrentalsystemmain.*;
 import reservation.*;
 
-public class CustomerForm extends JPanel implements Searchable {
-    static  ArrayList<CustomerPage> customerList = new ArrayList<>();
+public class Customers extends JPanel implements Searchable {
+    static  ArrayList<CustomerMethods> customerList = new ArrayList<>();
 
     private JTextField txtId, txtName, txtPhone, txtLicense, txtAddress, txtSearch;
     
 
-    public CustomerForm() {
+    public Customers() {
         setBounds(575, 225, 1000, 1000);
         setLayout(null);
         setOpaque(false);
@@ -155,13 +155,13 @@ public class CustomerForm extends JPanel implements Searchable {
                 JOptionPane.showMessageDialog(null,"Missing fields: " + missing.substring(0, missing.length() - 2));
                    return;
 }        
-            for(CustomerPage c : customerList){
+            for(CustomerMethods c : customerList){
                 if(c.getId() == id){
                     JOptionPane.showMessageDialog(null, "Customer with this ID already exists.","Error", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
-            CustomerPage c = new CustomerPage(
+            CustomerMethods c = new CustomerMethods(
                 id,
                 txtName.getText(),
                 txtPhone.getText(),
@@ -185,8 +185,8 @@ public class CustomerForm extends JPanel implements Searchable {
                 JOptionPane.showMessageDialog(null, "ID must be a number.","Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            CustomerPage found = null;
-            for(CustomerPage c : customerList){
+            CustomerMethods found = null;
+            for(CustomerMethods c : customerList){
                 if(c.getId() == id){
                     found = c;
                     break;
@@ -261,11 +261,11 @@ public class CustomerForm extends JPanel implements Searchable {
                 JOptionPane.showMessageDialog(null, "Enter ID or Fullname to search before viewing.","Error", JOptionPane.OK_OPTION);
                 return;
             }
-            ArrayList<CustomerPage> results = searchResults(keyword);
+            ArrayList<CustomerMethods> results = searchResults(keyword);
             if(results.isEmpty()){
                 JOptionPane.showMessageDialog(null, "No customer found.","Error", JOptionPane.OK_OPTION);
             } else if(results.size() == 1){
-                CustomerPage c = results.get(0);
+                CustomerMethods c = results.get(0);
                 showCustomerDetails(c);
             } else {
                 String[] options = new String[results.size()];
@@ -277,8 +277,8 @@ public class CustomerForm extends JPanel implements Searchable {
                     JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                 if(choice != null){
                     int chosenId = Integer.parseInt(choice.split(" - ")[0]);
-                    CustomerPage chosen = null;
-                    for(CustomerPage c : results){
+                    CustomerMethods chosen = null;
+                    for(CustomerMethods c : results){
                         if(c.getId() == chosenId){
                             chosen = c;
                             break;
@@ -301,7 +301,7 @@ public class CustomerForm extends JPanel implements Searchable {
         txtSearch.setText("");
     }
 
-    private void showCustomerDetails(CustomerPage c){
+    private void showCustomerDetails(CustomerMethods c){
         JOptionPane.showMessageDialog(null,
             "ID: " + c.getId() +
             "\nName: " + c.getName() +
@@ -313,14 +313,14 @@ public class CustomerForm extends JPanel implements Searchable {
 
     @Override
     public void search(String searchTerm){
-    ArrayList<CustomerPage> matchedCustomers = searchResults(searchTerm);
+    ArrayList<CustomerMethods> matchedCustomers = searchResults(searchTerm);
     
     if(matchedCustomers.isEmpty()){
         JOptionPane.showMessageDialog(null, "No customer found.");
     } else {
         StringBuilder message = new StringBuilder("Found " + matchedCustomers.size() + " customer(s):\n");
         
-        for(CustomerPage customer : matchedCustomers){
+        for(CustomerMethods customer : matchedCustomers){
             message.append(customer.getId())
                    .append(" - ")
                    .append(customer.getName())
@@ -331,9 +331,9 @@ public class CustomerForm extends JPanel implements Searchable {
     }
 }
 
-    public static  ArrayList<CustomerPage> searchResults(String keyword){
-        ArrayList<CustomerPage> results = new ArrayList<>();
-        for(CustomerPage c : customerList){
+    public static  ArrayList<CustomerMethods> searchResults(String keyword){
+        ArrayList<CustomerMethods> results = new ArrayList<>();
+        for(CustomerMethods c : customerList){
             if(String.valueOf(c.getId()).equals(keyword) || c.getName().toLowerCase().contains(keyword.toLowerCase())){
                 results.add(c);
             }
@@ -347,7 +347,7 @@ public class CustomerForm extends JPanel implements Searchable {
             String license,
             String address) {
 
-        CustomerPage customer = new CustomerPage(
+        CustomerMethods customer = new CustomerMethods(
                 id,
                 name,
                 phone,

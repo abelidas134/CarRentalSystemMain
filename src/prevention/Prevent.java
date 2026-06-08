@@ -20,7 +20,6 @@ public class Prevent {
 
     public static List<Booking> bookings = new ArrayList<>();
 
-    // 🔥 CORE CONFLICT LOGIC
     public static boolean hasConflict(String plate, LocalDate newFrom, LocalDate newTo) {
         for (Booking b : bookings) {
             if (b.carPlate.equals(plate)) {

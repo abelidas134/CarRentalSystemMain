@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import prevention.*;
 
-public class bill extends JPanel implements ActionListener {
+public class DatesBilling extends JPanel implements ActionListener {
     private JPanel panelBill,panelPick, panelDrop;
     private JLabel lblSec, lblPick, lblDrop,lblYear, lblMonth, lblDay;
     private JTextField txtYearPick, txtYearDrop;
@@ -26,7 +26,7 @@ public class bill extends JPanel implements ActionListener {
         for (int i=0;i<month31.length;i++) month31[i]=i+1;
     }
     
-    bill(String reservationNumber,String rate, String name, String plate, String customerName){
+    DatesBilling(String reservationNumber,String rate, String name, String plate, String customerName){
         this.reservationNumber = reservationNumber;
         this.rate =rate;
         this.name = name;
@@ -228,14 +228,14 @@ public class bill extends JPanel implements ActionListener {
             monthPickStmnt = comboMonthPick.getSelectedItem() + ", " + dayPick + ", " + yearPick;
             monthDropStmnt = comboMonthDrop.getSelectedItem() + ", " + dayDrop + ", " + yearDrop;
 
-//            OutputPage op = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days);
+//            PaymentReceipt op = new PaymentReceipt(res, monthPickStmnt, monthDropStmnt, (int)days);
 //            op.setVisible(true);
             Prevent.addBooking(plate, d1, d2);
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
             System.out.println("RATE = " + rate);
-            OutputPage ap = new OutputPage(res, monthPickStmnt, monthDropStmnt, (int)days,name,plate,rate,reservationNumber,customerName);
+            PaymentReceipt ap = new PaymentReceipt(res, monthPickStmnt, monthDropStmnt, (int)days,name,plate,rate,reservationNumber,customerName);
             ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();
@@ -244,7 +244,7 @@ public class bill extends JPanel implements ActionListener {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            HomePageBilling ap = new HomePageBilling(reservationNumber, rate, name,plate,customerName);
+            ResNumLog ap = new ResNumLog(reservationNumber, rate, name,plate,customerName);
             ap.setBounds(550, 200, 1366, 768);
             background.add(ap);
             background.revalidate();

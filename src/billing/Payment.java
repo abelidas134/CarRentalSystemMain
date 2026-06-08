@@ -108,7 +108,7 @@ class Payment extends JPanel implements ActionListener{
             Container background = mainFrame.getContentPane();
             background.remove(this);
             System.out.println("RATE = " + rate);
-            OutputPage ap = new OutputPage(
+            PaymentReceipt ap = new PaymentReceipt(
                     resNum,
                     pickDeets,
                     dropDeets,

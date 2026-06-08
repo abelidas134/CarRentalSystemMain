@@ -4,7 +4,7 @@
  */
 package carrentalsystemmain;
 
-import customers.CustomerForm;
+import customers.Customers;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

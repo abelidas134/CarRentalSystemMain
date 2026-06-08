@@ -51,8 +51,8 @@ class ReservationDetailsFrame extends JPanel {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            HomePageBilling ap
-                    = new HomePageBilling(
+            ResNumLog ap
+                    = new ResNumLog(
                             reservationNumber,
                             rate,
                             name,
@@ -216,7 +216,7 @@ if (address == null || address.trim().isEmpty()) {
 }
         String reservationNumber = "CR-" + reservationCounter++;
         
-        CustomerForm.addCustomer(
+        Customers.addCustomer(
                reservationCounter - 1,
                name,
                contact,

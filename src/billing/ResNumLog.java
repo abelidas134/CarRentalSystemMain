@@ -16,13 +16,13 @@ import reservation.*;
  *
  * @author Mickey
  */
-public class HomePageBilling extends JPanel implements ActionListener {
+public class ResNumLog extends JPanel implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
     private JButton btnEnter,btnBack;
     private String reservationNumber,rate, name, plate, customerName;    
     
-    public HomePageBilling(
+    public ResNumLog(
             String reservationNumber,
             String rate,
             String name,
@@ -97,7 +97,7 @@ public class HomePageBilling extends JPanel implements ActionListener {
                 JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 Container background = mainFrame.getContentPane();
                 background.remove(this);
-                bill ap = new bill(reservationNumber, rate, name, plate, customerName);
+                DatesBilling ap = new DatesBilling(reservationNumber, rate, name, plate, customerName);
                 ap.setBounds(550, 200, 1366, 768);
                 background.add(ap);
                 background.revalidate();
