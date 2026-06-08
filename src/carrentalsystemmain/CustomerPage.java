@@ -101,7 +101,7 @@ public class CustomerPage extends JPanel implements ActionListener {
             Container background = mainFrame.getContentPane();
             background.remove(this);
             Homepage hp = new Homepage();
-            hp.setBounds(775, 150, 1366, 768);  
+            hp.setBounds(975, 220, 1366, 768);  
             background.add(hp);
             background.revalidate();
             background.repaint();

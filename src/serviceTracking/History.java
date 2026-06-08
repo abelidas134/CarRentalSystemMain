@@ -1,38 +1,32 @@
-
 package serviceTracking;
 
 import java.awt.Color;
 import javax.swing.*;
 
-//History
-    public class History extends JPanel {
-    JTextArea txtHistory;
-    
-    public History(){
-        setSize(600,600);
+public class History extends JPanel {
+
+    public static JTextArea txtHistory;
+
+    public History() {
+
+        setSize(900,500);
         setLayout(null);
         setOpaque(false);
-        Color darkAzure = new Color(0, 95, 115);
-        
+
         txtHistory = new JTextArea();
         txtHistory.setEditable(false);
-        txtHistory.setLineWrap(true); 
-        txtHistory.setWrapStyleWord(true); 
-        
-        txtHistory.setText("=== Toyota Vios 1270 History Reports ===\n"
-                + "2024-05-10: Brake maintenace\n"
-                + "2025-07-22: Tire replacement\n"
-                + "2026-01-15: Rented in Manila\n"
-                + "2025-09-30: Battery replaced\n"
-                + "...\n"
-                + "Sampleee Recordsssss (not yet added to the database)");
-        
-        
+        txtHistory.setLineWrap(true);
+        txtHistory.setWrapStyleWord(true);
+
+        txtHistory.setText(
+                "=== VEHICLE MAINTENANCE HISTORY ===\n\n"
+        );
+
         JScrollPane scrollPane = new JScrollPane(txtHistory);
-        scrollPane.setBounds(50, 50, 500, 400); 
+        scrollPane.setBounds(30, 60, 850, 350);
+        scrollPane.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
         add(scrollPane);
-    
     }
-    
-   
 }

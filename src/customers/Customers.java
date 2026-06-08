@@ -16,14 +16,14 @@ public class Customers extends JPanel implements Searchable {
     
 
     public Customers() {
-        setBounds(575, 225, 1000, 1000);
+        setBounds(800, 250, 1000, 1000);
         setLayout(null);
         setOpaque(false);
         Color darkAzure = new Color(0, 95, 115);
 
         JLabel lblId = new JLabel("Reservation ID:");
         lblId.setBounds(50, 75, 200, 25);
-        lblId.setFont(new Font("Poppins",Font.BOLD,25));
+        lblId.setFont(new Font("Poppins",Font.ROMAN_BASELINE,20));
         add(lblId);
         txtId = new JTextField();
         txtId.setBounds(250, 70, 300,40);
@@ -31,7 +31,7 @@ public class Customers extends JPanel implements Searchable {
 
         JLabel lblName = new JLabel("Full Name:");
         lblName.setBounds(50, 125, 200, 25);
-        lblName.setFont(new Font("Poppins",Font.BOLD,25));
+        lblName.setFont(new Font("Poppins",Font.ROMAN_BASELINE,20));
         add(lblName);
         txtName = new JTextField();
         txtName.setBounds(250, 125,300,40);
@@ -39,7 +39,7 @@ public class Customers extends JPanel implements Searchable {
 
         JLabel lblPhone = new JLabel("Phone Number:");
         lblPhone.setBounds(50, 180, 200, 25);
-        lblPhone.setFont(new Font("Poppins",Font.BOLD,25));
+        lblPhone.setFont(new Font("Poppins",Font.ROMAN_BASELINE,20));
         add(lblPhone);
         txtPhone = new JTextField();
         txtPhone.setBounds(250, 180, 300,40);
@@ -47,7 +47,7 @@ public class Customers extends JPanel implements Searchable {
 
         JLabel lblLicense = new JLabel("Drivers License:");
         lblLicense.setBounds(50, 235, 200, 25);
-        lblLicense.setFont(new Font("Poppins",Font.BOLD,25));
+        lblLicense.setFont(new Font("Poppins",Font.ROMAN_BASELINE,20));
         add(lblLicense);
         txtLicense = new JTextField();
         txtLicense.setBounds(250, 235, 300,40);
@@ -55,7 +55,7 @@ public class Customers extends JPanel implements Searchable {
 
         JLabel lblAddress = new JLabel("Email Address:");
         lblAddress.setBounds(50, 290, 200, 25);
-        lblAddress.setFont(new Font("Poppins",Font.BOLD,25));
+        lblAddress.setFont(new Font("Poppins",Font.ROMAN_BASELINE,20));
         add(lblAddress);
         txtAddress = new JTextField();
         txtAddress.setBounds(250, 290,300,40);
@@ -240,7 +240,7 @@ public class Customers extends JPanel implements Searchable {
             JLabel background = new JLabel(new ImageIcon(Main.class.getResource("/img/firstBG.png")));
             background.setLayout(null);
             AdminOption ap = new AdminOption();
-            ap.setBounds(875, 175, 1366, 768);
+            ap.setBounds(1100, 250, 1366, 768);
             background.add(ap);
             mainFrame.setContentPane(background);
             mainFrame.setVisible(true);

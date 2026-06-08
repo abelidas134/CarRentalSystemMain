@@ -80,7 +80,7 @@ public class AdminPage extends JPanel implements ActionListener {
                 c.remove(this);
 
                 AdminOption ap = new AdminOption();
-                ap.setBounds(875, 175, 1366, 768);
+                ap.setBounds(1100, 250, 1366, 768);
                 c.add(ap);
 
                 mainFrame.revalidate();
@@ -99,7 +99,7 @@ public class AdminPage extends JPanel implements ActionListener {
             Container background = mainFrame.getContentPane();
             background.remove(this);
             Homepage hp = new Homepage();
-            hp.setBounds(775, 150, 1366, 768);  
+            hp.setBounds(975, 220, 1366, 768);  
             background.add(hp);
             background.revalidate();
             background.repaint();

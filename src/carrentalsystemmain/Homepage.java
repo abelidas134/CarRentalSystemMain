@@ -15,7 +15,7 @@ class Homepage extends JPanel implements ActionListener {
     private JButton btnCustomer;
     
     Homepage(){
-        setBounds(0,0,1000,600);
+        setBounds(975, 220, 1366, 768);
         setLayout(null);
         setOpaque(false);
         
@@ -62,7 +62,7 @@ class Homepage extends JPanel implements ActionListener {
             c.remove(this);
             
             AdminPage ap = new AdminPage();
-            ap.setBounds(875, 175, 1366, 768); 
+            ap.setBounds(1100, 250, 1366, 768); 
             c.add(ap);
             
             mainFrame.revalidate();
@@ -74,7 +74,7 @@ class Homepage extends JPanel implements ActionListener {
             c.remove(this);
 
             CustomerPage cp = new CustomerPage();
-            cp.setBounds(875, 150, 1366, 768);
+            cp.setBounds(1100, 250, 1366, 768);
             c.add(cp);
 
             mainFrame.revalidate();

@@ -68,7 +68,7 @@ public class AdminOption extends JPanel implements ActionListener{
             Container background = mainFrame.getContentPane();
             background.remove(this);
             AdminPage ap = new AdminPage();
-            ap.setBounds(875, 175, 1366, 768);
+            ap.setBounds(1100, 250, 1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();

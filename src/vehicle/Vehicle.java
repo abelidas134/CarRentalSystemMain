@@ -26,7 +26,7 @@ public class Vehicle extends JPanel{
         }
     };
     public Vehicle(){
-        setBounds(400,100,1000, 600);
+        setBounds(600,200,1000, 600);
         setLayout(null);
         setOpaque(false);
         Color darkAzure = new Color(0, 95, 115);

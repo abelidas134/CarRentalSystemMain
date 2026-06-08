@@ -10,6 +10,8 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
     JLabel lblmaintenanceTitle,lblcarModelPlatenum, lblLastMaintenanceDate, lblRepairing, lblnextService;//suggestion na may client ID tayo per account
     JTextField txtLastMaintenanceDate, txtRepairing, txtnextService;
     JButton btnback, btnUpdate;
+    JLabel lblVehicle;
+    JComboBox<String> cmbVehicle;
     
     public MaintenanceUpdate(){
         setSize(600,600);
@@ -17,24 +19,43 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        lblcarModelPlatenum = new JLabel("Nissan GTR 4567");
-        lblcarModelPlatenum.setBounds(30,40,200,50);
-        add(lblcarModelPlatenum);
+        lblVehicle = new JLabel("Vehicle:");
+        lblVehicle.setBounds(30, 90, 100, 30);
+        add(lblVehicle);
+
+        cmbVehicle = new JComboBox<>();
+
+        for (int i = 0; i < ServiceTracking.vehicleModel.getRowCount(); i++) {
+
+            String plate
+                    = ServiceTracking.vehicleModel
+                            .getValueAt(i, 1)
+                            .toString();
+
+            String vehicle
+                    = ServiceTracking.vehicleModel
+                            .getValueAt(i, 2)
+                            .toString();
+
+            cmbVehicle.addItem(vehicle + " - " + plate);
+        }
+        cmbVehicle.setBounds(210, 90, 200, 30);
+        add(cmbVehicle);
         
         lblLastMaintenanceDate = new JLabel("Last Repair Date:");
-        lblLastMaintenanceDate.setBounds(30,150,100, 30);
+        lblLastMaintenanceDate.setBounds(30, 150, 150, 30);
         add(lblLastMaintenanceDate);
         
         lblRepairing = new JLabel("Repairing:");
-        lblRepairing.setBounds(30,210,100, 30);
+        lblRepairing.setBounds(30, 210, 150, 30);
         add(lblRepairing);
         
         lblnextService = new JLabel("Next service:"); 
-        lblnextService.setBounds(30,270,200, 30);
+        lblnextService.setBounds(30, 270, 150, 30);
         add(lblnextService);
         
         txtLastMaintenanceDate = new JTextField("");
-        txtLastMaintenanceDate.setBounds(210,150,200, 30);
+        txtLastMaintenanceDate.setBounds(210, 150, 200, 30);
         add(txtLastMaintenanceDate);
         
         txtRepairing = new JTextField("");
@@ -42,7 +63,7 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
         add(txtRepairing);
         
         txtnextService = new JTextField (""); 
-        txtnextService.setBounds(210,270,200, 30);
+        txtnextService.setBounds(210, 270, 200, 30);
         add(txtnextService);
         
         btnback = new JButton("Back");
@@ -58,6 +79,8 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent j) {
+        String vehicle = cmbVehicle.getSelectedItem().toString();
+        
         if (j.getSource() == btnback) 
         {
             dispose();
@@ -69,12 +92,27 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
             String Repairing = txtRepairing.getText().trim();
             String nextService = txtnextService.getText().trim();
 
-            if (LastMaintenanceDate.isEmpty() || Repairing.isEmpty() || nextService.isEmpty()) 
+            if (LastMaintenanceDate.isEmpty()
+                   || Repairing.isEmpty()
+                   || nextService.isEmpty()) {
+               JOptionPane.showMessageDialog(null,
+                       "Please fill in all fields before updating!");
+           } else 
             {
-                JOptionPane.showMessageDialog(this, "Please fill in all fields before updating!");
-            } else 
-            {
-                JOptionPane.showMessageDialog(this, "Maintenance Updated!");
+                
+                String record
+                        = "Vehicle: " + vehicle
+                        + "\nRepair Date: " + LastMaintenanceDate
+                        + "\nWork Performed: " + Repairing
+                        + "\nNext Service: " + nextService
+                        + "\n----------------------------------------\n";
+
+                History.txtHistory.append(record);
+
+                Maintenance.maintenanceStatus.setText(
+                        vehicle + " - " + Repairing
+                );
+                JOptionPane.showMessageDialog(null, "Maintenance Updated!");
                 this.dispose();
             }   
         }
