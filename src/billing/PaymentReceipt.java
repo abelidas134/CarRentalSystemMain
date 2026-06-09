@@ -6,6 +6,7 @@ package billing;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.time.*;
 import javax.swing.*;
 import javax.swing.BorderFactory;
 
@@ -22,10 +23,11 @@ class PaymentReceipt extends JPanel implements ActionListener{
     private JButton btnBack, btnContinue;
     private String resNum, pickDeets, dropDeets, name, plate,rate,reservationNumber, customerName;
     private int daysTotal;
-    
+    private LocalDate pickDate;
+    private LocalDate dropDate;
     
     PaymentReceipt(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
-            String plate, String rate, String reservationNumber, String customerName) {
+            String plate, String rate, String reservationNumber, String customerName,LocalDate pickDate, LocalDate dropDate) {
         this.resNum = resNum;
         this.pickDeets = pickDeets;
         this.dropDeets = dropDeets;
@@ -35,6 +37,8 @@ class PaymentReceipt extends JPanel implements ActionListener{
         this.rate = rate;
         this.reservationNumber = reservationNumber;
         this.customerName = customerName;
+        this.pickDate = pickDate;
+        this.dropDate = dropDate;
         double rentalRate = Double.parseDouble(rate.replace("P", ""));
         
         setSize(600,600);
@@ -63,10 +67,6 @@ class PaymentReceipt extends JPanel implements ActionListener{
         lblPage = new JLabel ("Here are your full billing details.");
         lblPage.setBounds(200,40,500,75);
         add(lblPage);
-        
-        btnBack = new JButton ("Back");
-        btnBack.setBounds(10,520,75,30);
-        add(btnBack);
         
         btnContinue = new JButton ("Confirm");
         btnContinue.setBounds(475,520,100,30);
@@ -195,30 +195,30 @@ class PaymentReceipt extends JPanel implements ActionListener{
         lblInvoice.setBounds(0,375,600,10);
         panelMenu.add(lblInvoice);
                 
-        btnBack.addActionListener(this);
         btnContinue.addActionListener(this);
         
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==btnBack){
-//            DatesBilling b = new DatesBilling(resNum);
-//            b.setVisible(true);
+        if (e.getSource()==btnContinue){
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            DatesBilling ap = new DatesBilling(reservationNumber, rate, name, plate, customerName);
-            ap.setBounds(550, 200, 1366, 768);
-            background.add(ap);
-            background.revalidate();
-            background.repaint();
-        } else if (e.getSource()==btnContinue){
-            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            Container background = mainFrame.getContentPane();
-            background.remove(this);
-            Payment ap = new Payment( resNum, pickDeets,  dropDeets, daysTotal,  name, plate,  rate,  reservationNumber, customerName);
-            ap.setBounds(550, 200, 1366, 768);
+            Payment ap = new Payment(
+                    resNum,
+                    pickDeets,
+                    dropDeets,
+                    daysTotal,
+                    name,
+                    plate,
+                    rate,
+                    reservationNumber,
+                    customerName,
+                    pickDate,
+                    dropDate
+            );
+            ap.setBounds(800, 250, 1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();

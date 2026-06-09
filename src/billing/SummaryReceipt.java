@@ -3,6 +3,9 @@ package billing;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import carrentalsystemmain.*;
+import java.time.*;
+import prevention.*;
 
 public class SummaryReceipt extends JPanel implements ActionListener {
 
@@ -12,7 +15,8 @@ public class SummaryReceipt extends JPanel implements ActionListener {
     private String resNum, pickDeets, dropDeets, name, plate, rate,
             reservationNumber, paymentMethod, customerName;
     private int daysTotal;
-
+    private LocalDate pickDate;
+    private LocalDate dropDate;
 
     public SummaryReceipt(
             String resNum,
@@ -24,7 +28,9 @@ public class SummaryReceipt extends JPanel implements ActionListener {
             String rate,
             String reservationNumber,
             String paymentMethod,
-            String customerName) {
+            String customerName,
+            LocalDate pickDate,
+            LocalDate dropDate) {
 
         this.resNum = resNum;
         this.pickDeets = pickDeets;
@@ -36,6 +42,8 @@ public class SummaryReceipt extends JPanel implements ActionListener {
         this.reservationNumber = reservationNumber;
         this.paymentMethod = paymentMethod;
         this.customerName = customerName;
+        this.pickDate = pickDate;
+        this.dropDate = dropDate;
 
         double rentalRate = Double.parseDouble(rate.replace("P", ""));
 
@@ -53,7 +61,7 @@ public class SummaryReceipt extends JPanel implements ActionListener {
         double tax = subtotal * 0.12;
         double total = subtotal + tax;
 
-        setBounds(0, 0, 600, 600);
+        setBounds(800, 250, 600, 600);
         setLayout(null);
         setOpaque(false);
 
@@ -153,6 +161,11 @@ public class SummaryReceipt extends JPanel implements ActionListener {
                         null,
                         "Payment Successful!"
                 );
+                Prevent.addBooking(
+                        plate,
+                        pickDate,
+                        dropDate
+                );
 
             } else {
 
@@ -160,9 +173,17 @@ public class SummaryReceipt extends JPanel implements ActionListener {
                         null,
                         "Transaction Completed Successfully!"
                 );
+                Prevent.addBooking(
+                        plate,
+                        pickDate,
+                        dropDate
+                );
             }
+            
+            JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+            current.dispose();
 
-            System.exit(0);
+            carrentalsystemmain.Main.openHomepage();
         }
     }
 }

@@ -20,19 +20,23 @@ public class ResNumLog extends JPanel implements ActionListener {
     private JLabel lblPage,lblResNo;
     private JTextField txtResNo;
     private JButton btnEnter,btnBack;
-    private String reservationNumber,rate, name, plate, customerName;    
+    private String reservationNumber,rate, name, plate, customerName,details;    
     
     public ResNumLog(
             String reservationNumber,
             String rate,
             String name,
             String plate,
-            String customerName){
+            String customerName,
+            String details) {
+
         this.reservationNumber = reservationNumber;
         this.rate = rate;
         this.name = name;
         this.plate = plate;
         this.customerName = customerName;
+        this.details = details;
+    
         
         setBounds(600,100,600,600);
         setLayout(null);
@@ -53,8 +57,8 @@ public class ResNumLog extends JPanel implements ActionListener {
         txtResNo.setBounds(300,175,200,40);
         add(txtResNo);
         
-        btnEnter = new JButton ("ENTER");
-        btnEnter.setBounds(250,270,175,50);
+        btnEnter = new JButton ("Enter");
+        btnEnter.setBounds(320, 350, 120, 40);        
         btnEnter.setFont(new Font("Poppins",Font.BOLD,15));
         btnEnter.setForeground(Color.WHITE);
         btnEnter.setBackground(darkAzure);
@@ -63,13 +67,14 @@ public class ResNumLog extends JPanel implements ActionListener {
         add(btnEnter);
         
         btnBack = new JButton("Back");
-        btnBack.setBounds(200, 475, 180, 40);
+        btnBack.setBounds(180, 350, 120, 40);        
         btnBack.setFont(new Font("Poppins",Font.BOLD,15));
         btnBack.setForeground(Color.WHITE);
         btnBack.setBackground(darkAzure);
         btnBack.setOpaque(true);
         btnBack.setFocusPainted(false);
         add(btnBack);
+        
 
         btnBack.addActionListener(this);
         btnEnter.addActionListener(this);
@@ -98,7 +103,7 @@ public class ResNumLog extends JPanel implements ActionListener {
                 Container background = mainFrame.getContentPane();
                 background.remove(this);
                 DatesBilling ap = new DatesBilling(reservationNumber, rate, name, plate, customerName);
-                ap.setBounds(550, 200, 1366, 768);
+                ap.setBounds(800, 250, 1366, 768);
                 background.add(ap);
                 background.revalidate();
                 background.repaint();
@@ -109,10 +114,26 @@ public class ResNumLog extends JPanel implements ActionListener {
                         JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource()==btnBack){
-            JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
-            current.dispose();
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Container background = mainFrame.getContentPane();
 
-            FoundationFrame ff = new FoundationFrame(new Reservation(rate, name, plate));
+            background.remove(this);
+
+            ReservationDetailsFrame rdf
+                    = new ReservationDetailsFrame(
+                            details,
+                            reservationNumber,
+                            rate,
+                            name,
+                            plate,
+                            customerName
+                    );
+
+            rdf.setBounds(900, 175, 600, 600);
+
+            background.add(rdf);
+            background.revalidate();
+            background.repaint();
         }
     }
     

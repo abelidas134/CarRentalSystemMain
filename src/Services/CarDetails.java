@@ -8,7 +8,7 @@ public class CarDetails extends JFrame {
     public CarDetails (String id ,String name, String status, String rate, String plate){
         
         setTitle("Details");
-        setSize(600,600);
+        setSize(600,400);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -30,12 +30,12 @@ public class CarDetails extends JFrame {
         addRow("RATE:", rate, k, v, y, pane, h); y += gap;
         addRow("STATUS:", status, k, v, y, pane, h); y += gap;
         addRow("CONDITION:","Good", k, v, y, pane, h); y += gap;
-        addRow("LAST MAINTENANCE:", "N/A", k, v, y, pane, h); y += gap;
-        addRow("NEXT SERVICE DUE:", "N/A", k, v, y, pane, h); y += gap;
+//        addRow("LAST MAINTENANCE:", "N/A", k, v, y, pane, h); y += gap;
+//        addRow("NEXT SERVICE DUE:", "N/A", k, v, y, pane, h); y += gap;
         
                 
         JButton btnclose = new JButton("Close");
-        btnclose.setBounds(450,450,100,40);
+        btnclose.setBounds(250,300,100,40);
         
         btnclose.addActionListener(e -> dispose());
         

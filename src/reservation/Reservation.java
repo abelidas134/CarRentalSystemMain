@@ -7,88 +7,7 @@ import billing.*;
 import vehicle.*;
 import customers.*;
 
-class ReservationDetailsFrame extends JPanel {
 
-    JTextArea detailsArea;
-    String rate, name, plate, customerName;
-        
-    public ReservationDetailsFrame(
-            String details,
-            String reservationNumber,
-            String rate,
-            String name,
-            String plate,
-            String customerName) {
-            this.rate = rate;
-            this.name = name;
-            this.plate = plate;
-            this.customerName = customerName;
-            
-            
-        setBounds(400,25,600, 600);
-
-        setLayout(null);
-
-        JLabel titleLabel = new JLabel("RESERVATION DETAILS");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        titleLabel.setBounds(160, 30, 300, 30);
-
-        detailsArea = new JTextArea();
-        detailsArea.setEditable(false);
-        detailsArea.setFont(new Font("Monospaced", Font.PLAIN, 15));
-        detailsArea.setText(details);
-
-        JScrollPane scrollPane = new JScrollPane(detailsArea);
-        scrollPane.setBounds(70, 100, 450, 320);
-
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(150, 460, 120, 40);
-
-        JButton closeButton = new JButton("Check Out");
-        closeButton.setBounds(300, 460, 120, 40);
-
-        closeButton.addActionListener(e -> {
-            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            Container background = mainFrame.getContentPane();
-            background.remove(this);
-            ResNumLog ap
-                    = new ResNumLog(
-                            reservationNumber,
-                            rate,
-                            name,
-                            plate,
-                            customerName
-                    );
-            ap.setBounds(550, 200, 1366, 768);
-            background.add(ap);
-            background.revalidate();
-            background.repaint();
-        });
-        
-        backButton.addActionListener(e -> {
-                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                Container background = mainFrame.getContentPane();
-
-                background.remove(this);
-
-                Reservation reservationPanel = new Reservation(rate,name, plate);
-                reservationPanel.setBounds(450, 50, 1000, 600);
-
-                background.add(reservationPanel);
-
-                background.revalidate();
-                background.repaint();
-        
-        });
-
-        add(titleLabel);
-        add(scrollPane);
-        add(closeButton);
-        add(backButton);
-
-        setVisible(true);
-    }
-}
 
 public class Reservation extends JPanel {
 
@@ -101,7 +20,7 @@ public class Reservation extends JPanel {
         this.rate = rate;
         this.name = name;
         this.plate = plate;
-        setBounds(450,50,1000, 600);
+        setBounds(800,175,1000, 600);
 
         setLayout(null);
 
@@ -159,7 +78,7 @@ public class Reservation extends JPanel {
         
         JButton reserveButton = new JButton("Reserve");
         reserveButton.setFont(new Font("Arial", Font.BOLD, 16));
-        reserveButton.setBounds(475, 475, 180, 40);
+        reserveButton.setBounds(700, 475, 180, 40);
 
         statusLabel = new JLabel("");
         statusLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -247,7 +166,7 @@ if (address == null || address.trim().isEmpty()) {
                        this.plate,
                        this.customerName
                );
-       rdf.setBounds(600, 25, 600, 600);
+       rdf.setBounds(900, 175, 600, 600);
 
        background.add(rdf);
 
@@ -260,6 +179,6 @@ if (address == null || address.trim().isEmpty()) {
         contactField.setText("");
         licenseField.setText("");
         System.out.println("Vehicle Name = " + this.name);
-System.out.println("Customer Name = " + this.customerName);
+        System.out.println("Customer Name = " + this.customerName);
     }
 }

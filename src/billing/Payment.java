@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.*;
+import java.time.*;
 import javax.swing.*;
 import prevention.*;
 
@@ -21,9 +22,11 @@ class Payment extends JPanel implements ActionListener{
     private JButton btnCash, btnCashless,btnBack;
     private String resNum, pickDeets, dropDeets, name, plate,rate,reservationNumber, customerName;
     private int daysTotal;
+    private LocalDate pickDate;
+    private LocalDate dropDate;
     
     Payment(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
-            String plate, String rate, String reservationNumber, String customerName){
+            String plate, String rate, String reservationNumber, String customerName,LocalDate pickDate, LocalDate dropDate ){
         this.resNum = resNum;
         this.pickDeets = pickDeets;
         this.dropDeets = dropDeets;
@@ -33,11 +36,15 @@ class Payment extends JPanel implements ActionListener{
         this.rate = rate;
         this.reservationNumber = reservationNumber;
         this.customerName = customerName;
+        this.pickDate = pickDate;
+        this.dropDate = dropDate;
         double rentalRate = Double.parseDouble(rate.replace("P", ""));
         
         
         setBounds(400,100,600,600);
         setLayout(null);
+        setOpaque(false);
+        Color darkAzure = new Color(0, 95, 115);
         
         panelBill = new JPanel ();
         panelBill.setLayout(null);
@@ -66,7 +73,7 @@ class Payment extends JPanel implements ActionListener{
         panelMenu.add(btnCashless);
 
         btnBack = new JButton ("Back");
-        btnBack.setBounds(100,275,100,25);
+        btnBack.setBounds(50,350,100,25);
         panelMenu.add(btnBack);
         
         btnBack.addActionListener(this);
@@ -81,6 +88,10 @@ class Payment extends JPanel implements ActionListener{
         if (e.getSource() == btnCash) {
             JOptionPane.showMessageDialog(null,
                     "Please proceed to the cashier for cash payment.");
+            JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
+            current.dispose();
+
+            carrentalsystemmain.Main.openHomepage();
         } else if (e.getSource() == btnCashless) {
 //            CashlessPayment cp = new CashlessPayment();
 //            cp.setVisible(true);
@@ -97,9 +108,11 @@ class Payment extends JPanel implements ActionListener{
                     plate,
                     rate,
                     reservationNumber,
-                    customerName
+                    customerName,
+                    pickDate,
+                    dropDate
             );
-            ap.setBounds(550, 200, 1366, 768);
+            ap.setBounds(800, 250, 1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();
@@ -117,9 +130,11 @@ class Payment extends JPanel implements ActionListener{
                     plate,
                     rate,
                     reservationNumber,
-                    customerName
+                    customerName,
+                    pickDate,
+                    dropDate
             );
-            ap.setBounds(550, 200, 1366, 768);
+            ap.setBounds(800, 250,1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();

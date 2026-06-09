@@ -1,9 +1,11 @@
 package billing;
 
+import carrentalsystemmain.FoundationFrame;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import prevention.*;
+import reservation.Reservation;
 
 public class DatesBilling extends JPanel implements ActionListener {
     private JPanel panelBill,panelPick, panelDrop;
@@ -16,7 +18,7 @@ public class DatesBilling extends JPanel implements ActionListener {
     private Integer[] feb29 = new Integer[29];
     private Integer[] month30 = new Integer[30];
     private Integer[] month31 = new Integer[31];
-    private String monthPickStmnt, monthDropStmnt, res,reservationNumber, rate, name, plateresNum, pickDeets,  dropDeets, resNum,plate, customerName;
+    private String monthPickStmnt, monthDropStmnt, res,reservationNumber, rate, name, plateresNum, pickDeets,  dropDeets, resNum,plate, customerName,details;
     private Integer daysTotal;
     
     {
@@ -123,15 +125,14 @@ public class DatesBilling extends JPanel implements ActionListener {
         comboDayDrop.setBounds(260,110,100,25);
         panelDrop.add(comboDayDrop);
         
-        btnBack = new JButton ("Back");
-        btnBack.setBounds(10,520,75,30);
-        add(btnBack);
+//        btnBack = new JButton ("Back");
+//        btnBack.setBounds(10,520,75,30);
+//        add(btnBack);
         
         btnContinue = new JButton ("Continue");
         btnContinue.setBounds(475,520,100,30);
         add(btnContinue);
         
-        btnBack.addActionListener(this);
         btnContinue.addActionListener(this);
         comboMonthPick.addActionListener(this);
         comboMonthDrop.addActionListener(this);
@@ -230,25 +231,46 @@ public class DatesBilling extends JPanel implements ActionListener {
 
 //            PaymentReceipt op = new PaymentReceipt(res, monthPickStmnt, monthDropStmnt, (int)days);
 //            op.setVisible(true);
-            Prevent.addBooking(plate, d1, d2);
+            //Prevent.addBooking(plate, d1, d2);
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
             System.out.println("RATE = " + rate);
-            PaymentReceipt ap = new PaymentReceipt(res, monthPickStmnt, monthDropStmnt, (int)days,name,plate,rate,reservationNumber,customerName);
-            ap.setBounds(550, 200, 1366, 768);
+             PaymentReceipt ap = new PaymentReceipt(
+                     res,
+                     monthPickStmnt,
+                     monthDropStmnt,
+                     (int) days,
+                     name,
+                     plate,
+                     rate,
+                     reservationNumber,
+                     customerName,
+                     d1,
+                     d2
+             );
+            ap.setBounds(800, 250, 1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();
-        } else if (e.getSource() == btnBack) {
-            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            Container background = mainFrame.getContentPane();
-            background.remove(this);
-            ResNumLog ap = new ResNumLog(reservationNumber, rate, name,plate,customerName);
-            ap.setBounds(550, 200, 1366, 768);
-            background.add(ap);
-            background.revalidate();
-            background.repaint();
-        }
+        } 
+//        else if (e.getSource() == btnBack) {
+//             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+//             Container background = mainFrame.getContentPane();
+//             background.remove(this);
+//             ResNumLog ap
+//                     = new ResNumLog(
+//                             reservationNumber,
+//                             rate,
+//                             name,
+//                             plate,
+//                             customerName,
+//                             details
+//                     );
+//             ap.setBounds(850, 200, 1366, 768);
+//             background.add(ap);
+//             background.revalidate();
+//             background.repaint();
+//        }
     }
 }

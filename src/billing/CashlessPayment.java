@@ -2,6 +2,7 @@ package billing;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.time.*;
 import javax.swing.*;
 
 public class CashlessPayment extends JPanel implements ActionListener {
@@ -11,9 +12,11 @@ public class CashlessPayment extends JPanel implements ActionListener {
     private JButton btnCard, btnQR,btnBack;
     private String resNum, pickDeets, dropDeets, name, plate, rate, reservationNumber, customerName;
     private int daysTotal;
+    private LocalDate pickDate;
+    private LocalDate dropDate;
     
     public CashlessPayment(String resNum,String pickDeets, String dropDeets,Integer daysTotal, String name, 
-            String plate, String rate, String reservationNumber, String customerName) {
+            String plate, String rate, String reservationNumber, String customerName,LocalDate pickDate, LocalDate dropDate) {
         this.resNum = resNum;
         this.pickDeets = pickDeets;
         this.dropDeets = dropDeets;
@@ -23,6 +26,8 @@ public class CashlessPayment extends JPanel implements ActionListener {
         this.rate = rate;
         this.reservationNumber = reservationNumber;
         this.customerName = customerName;
+        this.pickDate = pickDate;
+        this.dropDate = dropDate;
         double rentalRate = Double.parseDouble(rate.replace("P", ""));
 
         setBounds(600,100,600,600);
@@ -59,7 +64,7 @@ public class CashlessPayment extends JPanel implements ActionListener {
 
         
         btnBack = new JButton ("Back");
-        btnBack.setBounds(125,300,100,25);
+        btnBack.setBounds(50,350,100,25);
         panelMenu.add(btnBack);
         
         btnBack.addActionListener(this);
@@ -94,7 +99,9 @@ public class CashlessPayment extends JPanel implements ActionListener {
                     rate,
                     reservationNumber,
                     "CARD",
-                    customerName
+                    customerName,
+                    pickDate,
+                    dropDate
             );
 
             sr.setBounds(550, 200, 1366, 768);
@@ -102,7 +109,8 @@ public class CashlessPayment extends JPanel implements ActionListener {
             background.add(sr);
             background.revalidate();
             background.repaint();
-        }else if (e.getSource() == btnQR) {
+        }
+        else if (e.getSource() == btnQR) {
 
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
@@ -119,10 +127,12 @@ public class CashlessPayment extends JPanel implements ActionListener {
                     rate,
                     reservationNumber,
                     "QR CODE",
-                    customerName
+                    customerName,
+                    pickDate,
+                    dropDate
             );
 
-            sr.setBounds(550, 200, 1366, 768);
+            sr.setBounds(800, 250, 1366, 768);
 
             background.add(sr);
             background.revalidate();
@@ -131,8 +141,20 @@ public class CashlessPayment extends JPanel implements ActionListener {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
-            Payment ap = new Payment(resNum, pickDeets, dropDeets, daysTotal, name, plate, rate, reservationNumber, customerName);
-            ap.setBounds(550, 200, 1366, 768);
+            Payment ap = new Payment(
+                    resNum,
+                    pickDeets,
+                    dropDeets,
+                    daysTotal,
+                    name,
+                    plate,
+                    rate,
+                    reservationNumber,
+                    customerName,
+                    pickDate,
+                    dropDate
+            );
+            ap.setBounds(800, 250,1366, 768);
             background.add(ap);
             background.revalidate();
             background.repaint();

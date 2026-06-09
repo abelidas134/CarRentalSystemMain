@@ -60,17 +60,17 @@ public class ServiceTracking extends JPanel {
         btnback.addActionListener(e -> {
             JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             currentFrame.dispose();
-            
+
             JFrame mainFrame = new JFrame();
             mainFrame.setSize(1366, 768);
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.setLocationRelativeTo(null);
             mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            
+
             JLabel background = new JLabel(new ImageIcon(Main.class.getResource("/img/firstBG.png")));
             background.setLayout(null);
             AdminOption ap = new AdminOption();
-            ap.setBounds(875, 175, 1366, 768);
+            ap.setBounds(1100, 250, 1366, 768);
             background.add(ap);
             mainFrame.setContentPane(background);
             mainFrame.setVisible(true);

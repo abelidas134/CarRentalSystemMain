@@ -39,7 +39,8 @@ public class Vehicle extends JPanel{
         table.setRowHeight(35);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
         table.setFont(new Font("Arial", Font.PLAIN, 14));
-        
+
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(JLabel.CENTER);
 
@@ -71,7 +72,7 @@ public class Vehicle extends JPanel{
             JLabel background = new JLabel(new ImageIcon(Main.class.getResource("/img/firstBG.png")));
             background.setLayout(null);
             CustomerPage ap = new CustomerPage();
-            ap.setBounds(875, 175, 1366, 768);
+            ap.setBounds(1100, 250, 1366, 768);
             background.add(ap);
             mainFrame.setContentPane(background);
             mainFrame.setVisible(true);
@@ -97,7 +98,7 @@ public class Vehicle extends JPanel{
                JOptionPane.showMessageDialog(this,"Please select a vehicle first.", "No Selection", JOptionPane.WARNING_MESSAGE);
                return;
            }
-           String id = (String)model.getValueAt(row, 0);
+            String id = (String)model.getValueAt(row, 0);
             String plate = (String)model.getValueAt(row, 1);
             String name = (String)model.getValueAt(row, 2);
             String status = (String)model.getValueAt(row, 3);
