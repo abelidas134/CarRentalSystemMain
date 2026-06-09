@@ -96,23 +96,34 @@ public class ServiceTracking extends JPanel {
         btnAdd.addActionListener(e -> {
 
             String id = JOptionPane.showInputDialog("Vehicle ID:");
-            String plate = JOptionPane.showInputDialog("Plate Number:");
-            String name = JOptionPane.showInputDialog("Vehicle Name:");
-            String rate = JOptionPane.showInputDialog("Rate:");
-
-            if (id == null || plate == null || name == null || rate == null) {
+            if (id == null) {
+                return;
+            }
+            if (id.trim().isEmpty()) {
                 return;
             }
 
-            if (id.trim().isEmpty()
-                    || plate.trim().isEmpty()
-                    || name.trim().isEmpty()
-                    || rate.trim().isEmpty()) {
+            String plate = JOptionPane.showInputDialog("Plate Number:");
+            if (plate == null) {
+                return;
+            }
+            if (plate.trim().isEmpty()) {
+                return;
+            }
 
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Please complete all fields."
-                );
+            String name = JOptionPane.showInputDialog("Vehicle Name:");
+            if (name == null) {
+                return;
+            }
+            if (name.trim().isEmpty()) {
+                return;
+            }
+
+            String rate = JOptionPane.showInputDialog("Rate:");
+            if (rate == null) {
+                return;
+            }
+            if (rate.trim().isEmpty()) {
                 return;
             }
 
@@ -124,10 +135,7 @@ public class ServiceTracking extends JPanel {
                 rate
             });
 
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Vehicle added successfully!"
-            );
+            JOptionPane.showMessageDialog(null, "Vehicle added successfully!");
         });
         
         btnDel.addActionListener(e -> {
