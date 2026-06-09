@@ -100,19 +100,34 @@ public class ServiceTracking extends JPanel {
             String name = JOptionPane.showInputDialog("Vehicle Name:");
             String rate = JOptionPane.showInputDialog("Rate:");
 
-            if (id != null && plate != null && name != null && rate != null) {
-
-                model.addRow(new Object[]{
-                    id,
-                    plate,
-                    name,
-                    "AVAILABLE",
-                    rate
-                });
-
-                JOptionPane.showMessageDialog(null,
-                        "Vehicle added successfully!");
+            if (id == null || plate == null || name == null || rate == null) {
+                return;
             }
+
+            if (id.trim().isEmpty()
+                    || plate.trim().isEmpty()
+                    || name.trim().isEmpty()
+                    || rate.trim().isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Please complete all fields."
+                );
+                return;
+            }
+
+            model.addRow(new Object[]{
+                id,
+                plate,
+                name,
+                "AVAILABLE",
+                rate
+            });
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Vehicle added successfully!"
+            );
         });
         
         btnDel.addActionListener(e -> {
@@ -156,6 +171,20 @@ public class ServiceTracking extends JPanel {
             if (plate != null) {
                 model.setValueAt(plate, row, 1);
             }
+            if (plate == null || name == null || rate == null) {
+                return;
+            }
+
+            if (plate.trim().isEmpty()
+                    || name.trim().isEmpty()
+                    || rate.trim().isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "All fields are required."
+                );
+                return;
+            }
 
             if (name != null) {
                 model.setValueAt(name, row, 2);
@@ -165,6 +194,9 @@ public class ServiceTracking extends JPanel {
                 model.setValueAt(rate, row, 4);
             }
 
+            model.setValueAt(plate, row, 1);
+            model.setValueAt(name, row, 2);
+            model.setValueAt(rate, row, 4);
             JOptionPane.showMessageDialog(null,
                     "Vehicle updated.");
         });
