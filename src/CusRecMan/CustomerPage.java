@@ -1,6 +1,7 @@
-    package CusRecMan;
+package CusRecMan;
 
-public class CustomerPage {  
+public class CustomerPage {
+
     private int id;
     private String name;
     private String phone;
@@ -15,14 +16,39 @@ public class CustomerPage {
         this.address = address;
     }
 
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getPhone() { return phone; }
-    public String getLicense() { return license; }
-    public String getAddress() { return address; }
+    public int getId() {
+        return id;
+    }
 
-    public void setName(String name) { this.name = name; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public void setLicense(String license) { this.license = license; }
-    public void setAddress(String address) { this.address = address; }
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
