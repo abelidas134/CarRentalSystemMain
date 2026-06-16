@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 //Updating maintenance
-public class MaintenanceUpdate extends JFrame implements ActionListener {
+public class MaintenanceUpdate extends JPanel implements ActionListener {
     JLabel lblmaintenanceTitle,lblcarModelPlatenum, lblLastMaintenanceDate, lblRepairing, lblnextService;//suggestion na may client ID tayo per account
     JTextField txtLastMaintenanceDate, txtRepairing, txtnextService;
     JButton btnback, btnUpdate;
@@ -16,8 +16,6 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
     public MaintenanceUpdate(){
         setSize(600,600);
         setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         
         lblVehicle = new JLabel("Vehicle:");
         lblVehicle.setBounds(30, 90, 100, 30);
@@ -83,7 +81,6 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
         
         if (j.getSource() == btnback) 
         {
-            dispose();
         }
        
        else if (j.getSource() == btnUpdate) 
@@ -113,7 +110,6 @@ public class MaintenanceUpdate extends JFrame implements ActionListener {
                         vehicle + " - " + Repairing
                 );
                 JOptionPane.showMessageDialog(null, "Maintenance Updated!");
-                this.dispose();
             }   
         }
     }

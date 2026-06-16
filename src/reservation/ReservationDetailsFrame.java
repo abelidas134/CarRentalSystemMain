@@ -23,7 +23,8 @@ import javax.swing.SwingUtilities;
 public class ReservationDetailsFrame extends JPanel {
 
     JTextArea detailsArea;
-    String rate, name, plate, customerName;
+    String rate, name, plate, customerName,id;
+    
         
     public ReservationDetailsFrame(
             String details,
@@ -83,7 +84,7 @@ public class ReservationDetailsFrame extends JPanel {
             JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
             current.dispose();
 
-            FoundationFrame ff = new FoundationFrame(new Reservation(rate, name, plate));
+            FoundationFrame ff = new FoundationFrame(new Reservation(rate, name, plate,id));
         
         });
 

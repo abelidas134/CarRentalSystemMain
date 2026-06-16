@@ -22,15 +22,25 @@ public class Prevent {
 
     public static boolean hasConflict(String plate, LocalDate newFrom, LocalDate newTo) {
         for (Booking b : bookings) {
-            if (b.carPlate.equals(plate)) {
-                boolean overlap = !(newTo.isBefore(b.from) || newFrom.isAfter(b.to));
-                if (overlap) return true;
+
+            if (b.carPlate.equalsIgnoreCase(plate.trim())) {
+
+                boolean overlap =
+                        !(newTo.isBefore(b.from) || newFrom.isAfter(b.to));
+
+                if (overlap) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public static void addBooking(String plate, LocalDate from, LocalDate to) {
-        bookings.add(new Booking(plate, from, to));
+        bookings.add(new Booking(
+                plate.trim().toUpperCase(),
+                from,
+                to
+        ));
     }
 }

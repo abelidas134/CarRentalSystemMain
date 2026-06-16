@@ -25,6 +25,16 @@ public class Vehicle extends JPanel{
             return false;
         }
     };
+    
+    public static void updateCarStatus(String carId, String newStatus) {
+    for (int i = 0; i < model.getRowCount(); i++) {
+        if (model.getValueAt(i, 0).equals(carId)) {
+            model.setValueAt(newStatus, i, 3);
+            break;
+        }
+    }
+}
+    
     public Vehicle(){
         setBounds(600,200,1000, 600);
         setLayout(null);
@@ -107,7 +117,7 @@ public class Vehicle extends JPanel{
             JFrame current = (JFrame) SwingUtilities.getWindowAncestor(this);
             current.dispose();
 
-            FoundationFrame ff = new FoundationFrame(new Reservation(rate, name, plate));
+            FoundationFrame ff = new FoundationFrame(new Reservation(rate, name, plate,id));
            });
        
                

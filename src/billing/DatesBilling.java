@@ -231,7 +231,11 @@ public class DatesBilling extends JPanel implements ActionListener {
 
 //            PaymentReceipt op = new PaymentReceipt(res, monthPickStmnt, monthDropStmnt, (int)days);
 //            op.setVisible(true);
-            //Prevent.addBooking(plate, d1, d2);
+             if (Prevent.hasConflict(plate, d1, d2)) {
+                 return;
+             }
+
+             Prevent.addBooking(plate, d1, d2);
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);

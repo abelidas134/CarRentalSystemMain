@@ -16,10 +16,14 @@ public class Reservation extends JPanel {
     JTextField nameField, contactField, emailField, licenseField, addressField;
     JLabel statusLabel;
     private String rate, name, plate, customerName;
-    public Reservation(String rate,String name, String plate) {
+    
+    private String carId;
+
+    public Reservation(String rate, String name, String plate, String carId) {
         this.rate = rate;
         this.name = name;
         this.plate = plate;
+        this.carId = carId;
         setBounds(800,175,1000, 600);
 
         setLayout(null);
@@ -112,39 +116,53 @@ public class Reservation extends JPanel {
         setVisible(true);
     }
 
-   public void reserveCar() {
-        String name = nameField.getText();
+    public void reserveCar() {
+        String name = nameField.getText().trim();
         this.customerName = name;
-        String contact = contactField.getText();
-        String email = emailField.getText();
-        String licensenum = licenseField.getText();
-        String address = addressField.getText();
-        
-        if (name.isEmpty() || contact.isEmpty()
-                || licensenum.isEmpty()) {
+        String contact = contactField.getText().trim();
+        String email = emailField.getText().trim();
+        String licensenum = licenseField.getText().trim();
+        String address = addressField.getText().trim();
 
+        if (name.isEmpty() || contact.isEmpty() || licensenum.isEmpty()) {
             statusLabel.setText("Please fill in the fields!");
             return;
         }
-if (email == null || email.trim().isEmpty()) {
-    email = "N/A";
-}
 
-if (address == null || address.trim().isEmpty()) {
-    address = "N/A";
-}
+        for (CustomerMethods c : Customers.customerList) {
+            if (c.getPhone().equals(contact)) {
+                JOptionPane.showMessageDialog(null,
+                        "Contact number already registered.",
+                        "Duplicate Entry", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!email.isEmpty() && c.getAddress().equals(email)) {
+                JOptionPane.showMessageDialog(null,
+                        "Email already registered.",
+                        "Duplicate Entry", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        if (email == null || email.trim().isEmpty()) {
+            email = "N/A";
+        }
+        if (address == null || address.trim().isEmpty()) {
+            address = "N/A";
+        }
+
         String reservationNumber = "CR-" + reservationCounter++;
-        
-        Customers.addCustomer(
-               reservationCounter - 1,
-               name,
-               contact,
-               licensenum,
-               address
-       );
 
-        String details =
-                "RESERVATION DETAILS\n\n"
+        Customers.addCustomer(
+                reservationCounter - 1,
+                name,
+                contact,
+                licensenum,
+                address
+        );
+
+        String details
+                = "RESERVATION DETAILS\n\n"
                 + "Reservation ID     : " + reservationNumber + "\n\n"
                 + "Customer Name      : " + name + "\n\n"
                 + "Contact Number     : " + contact + "\n\n"
@@ -153,32 +171,26 @@ if (address == null || address.trim().isEmpty()) {
                 + "Driver's License Number  : " + licensenum + "\n\n";
 
         JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-       Container background = mainFrame.getContentPane();
+        Container background = mainFrame.getContentPane();
+        background.remove(this);
 
-       background.remove(this);
-
-       ReservationDetailsFrame rdf
-               = new ReservationDetailsFrame(
-                       details,
-                       reservationNumber,
-                       this.rate,
-                       this.name,
-                       this.plate,
-                       this.customerName
-               );
-       rdf.setBounds(900, 175, 600, 600);
-
-       background.add(rdf);
-
-       background.revalidate();
-       background.repaint();
+        ReservationDetailsFrame rdf = new ReservationDetailsFrame(
+                details,
+                reservationNumber,
+                this.rate,
+                this.name,
+                this.plate,
+                this.customerName
+        );
+        rdf.setBounds(900, 175, 600, 600);
+        background.add(rdf);
+        background.revalidate();
+        background.repaint();
 
         statusLabel.setText("Reservation Successful!");
-
         nameField.setText("");
         contactField.setText("");
         licenseField.setText("");
-        System.out.println("Vehicle Name = " + this.name);
-        System.out.println("Customer Name = " + this.customerName);
+        Vehicle.updateCarStatus(carId, "NOT AVAILABLE");
     }
 }
