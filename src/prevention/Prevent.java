@@ -20,8 +20,16 @@ public class Prevent {
 
     public static List<Booking> bookings = new ArrayList<>();
 
+    
     public static boolean hasConflict(String plate, LocalDate newFrom, LocalDate newTo) {
+        System.out.println("=== CHECKING CONFLICT ===");
+        System.out.println("New Plate = " + plate);
+        System.out.println("New From = " + newFrom);
+        System.out.println("New To = " + newTo);
         for (Booking b : bookings) {
+            System.out.println("Saved Plate = " + b.carPlate);
+            System.out.println("Saved From = " + b.from);
+            System.out.println("Saved To = " + b.to);
 
             if (b.carPlate.equalsIgnoreCase(plate.trim())) {
 

@@ -234,8 +234,13 @@ public class DatesBilling extends JPanel implements ActionListener {
              if (Prevent.hasConflict(plate, d1, d2)) {
                  return;
              }
-
              Prevent.addBooking(plate, d1, d2);
+
+             System.out.println("BOOKING SAVED");
+             System.out.println("Plate = " + plate);
+             System.out.println("From = " + d1);
+             System.out.println("To = " + d2);
+             System.out.println("Total bookings = " + Prevent.bookings.size());
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             Container background = mainFrame.getContentPane();
             background.remove(this);
